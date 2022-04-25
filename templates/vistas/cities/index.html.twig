@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ciudades{% endblock %}
+
+{% block body %}
+    <a href="{{ path('cities_new',{ 'estado': estado }) }}">Crear nueva</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>City</th>
+                <th>Estado</th>
+                <th>State_code</th>
+                <th>Zip</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>County</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for city in cities %}
+            <tr>
+                <td>{{ city.id }}</td>
+                <td>{{ city.state.state }}</td>
+                <td>{{ city.city }}</td>
+                <td>{{ city.stateCode }}</td>
+                <td>{{ city.zip }}</td>
+                <td>{{ city.latitude }}</td>
+                <td>{{ city.longitude }}</td>
+                <td>{{ city.county }}</td>
+                <td>
+                    <a href="{{ path('cities_edit', {'id': city.id, 'estado': estado }) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WorkOrder{% endblock %}
+
+{% block body %}
+
+    <h1>Agregar la informacion necesaria para la work order</h1>
+
+    {{ include('work_order/_form.html.twig') }}
+    </br>
+    <button class="btn" id="btnPDF"> PDF </button>
+    <a href="{{ path('work_order_index') }}">back to list</a>
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}
+{% block js_pantalla %}
+    <script src="{{ asset('js/workOrder.js') }}" ></script>
+{% endblock %}

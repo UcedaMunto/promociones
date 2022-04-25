@@ -1,0 +1,37 @@
+<div class="card shadow mb-4">   
+    <div class="card-body">
+        <table class="table" id="listaproveedor">
+            <thead>
+                <tr>
+                    <th>Numero</th>
+                    <th>Nombre</th>
+                    <th>Telefono</th>
+                    <th>Direccion</th>
+                    <th>Codigo</th>
+                    <th>Estado</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for proveedor in proveedors %}
+                <tr>
+                    <td>{{ proveedor.id }}</td>
+                    <td>{{ proveedor.nombre }}</td>
+                    <td>{{ proveedor.telefono }}</td>
+                    <td>{{ proveedor.direccion }}</td>
+                    <td>{{ proveedor.codigo }}</td>
+                    <td>{{ proveedor.estado ? 'Activo' : 'Inactivo' }}</td>
+                    <td>
+                        <a class="mostrarProveedores"  data-toggle="modal" data-target="#proveedorInformacionModal" href="{{ path('proveedor_show', {'id': proveedor.id}) }}">+ informacion</a> || 
+                        <a class="editarProveedores" data-toggle="modal" data-target="#proveedorModal"  href="{{ path('proveedor_edit', {'proveedor': proveedor.id}) }}">Editar</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">No se encontraron datos de proveedores</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </dvi>
+</div>

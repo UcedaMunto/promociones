@@ -1,0 +1,57 @@
+{% block body %}
+    <h1>Acuerdo</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Numero</th>
+                <td>{{ acuerdo.id }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ acuerdo.descripcion }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ acuerdo.nombre }}</td>
+            </tr>
+            <tr>
+                <th>FechaVigencia</th>
+                <td>{{ acuerdo.fechaVigencia ? acuerdo.fechaVigencia|date('d-m-Y') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                <td>{{ acuerdo.estado ? 'Activo' : 'Inactivo' }}</td>                
+            </tr>
+             <tr>
+                <th>Departamentos involucrados en reunion</th>
+                    <td>
+                    {% for departamentos in dj_acuerdo_agregados %}
+                    {{ departamentos.departamentoEmpresa.nombre }} 
+                    <br/>
+                {% endfor %}
+                {#
+                {% for departamentos in acuerdo.discusionJefatura.departamentos %}
+                    {{ departamentos.departamentoEmpresa }}
+                    <br/>
+                {% endfor %}#}
+                </td>                
+            </tr>
+            {#<tr>
+                <th>Descripcion de Reunion </th>
+                <td>{{  acuerdo.discusionJefatura.descripcion }}</td>                
+            </tr>
+
+                <tr>
+                <th>Departamentos involucrados en el acuerdo </th>
+                <td>
+                 {% for acuerdoEjecucion in acuerdo.acuerdoEjecucion %}
+                    {{ acuerdoEjecucion.departamentoEmpresa }}
+                    <br/>
+                {% endfor %}
+                </td>                
+            </tr>#}
+        </tbody>
+    </table>
+
+{% endblock %}

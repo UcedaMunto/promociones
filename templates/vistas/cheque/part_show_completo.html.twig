@@ -1,0 +1,83 @@
+<div class="container-fluid px-4 " style="min-height: 1080px;">
+    <div class="row">
+        {% if mensajes['0']!="" %}
+            <div class="alert alert-danger" role="alert">
+                <strong>{{ mensajes[0] }}</strong>
+            </div>
+        {% endif %}
+        {% if mensajes['1'] !="" %}
+            <div class="alert alert-success" role="alert">
+                <strong>{{ mensajes[1] }}</strong>  : 
+                <a id="editarCheque" href="{{ path('cheque_edit', {'cheque': cheque.id}) }}">Editar</a> /
+                <a id="nuevoCheque" href="{{ path('cheque_new') }}">Nuevo cheque</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="row g-2">
+        <div class="col-6">
+            Correlativo: 
+            <div class="p-3 border bg-light">
+                <strong>{{ cheque.correlativo }} </strong>
+            </div>
+        </div>
+        <div class="col-6">
+            Monto 
+            <br>
+            <div class="p-3 border bg-light">
+                <strong> {{ cheque.monto }}</strong>
+            </div>
+        </div>
+        <div class="col-6">
+            Compañía 
+            <br>
+            <div class="p-3 border bg-light">
+                {% if cheque.movimientos|length > 0 %}
+                    <strong>{{ cheque.movimientos[0].compania.nombre }}</strong> 
+                {% else %}
+                    Aun no se ha asignado 
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-6">
+            Gruero 
+            <br>
+            <div class="p-3 border bg-light">
+                {{ cheque.gruero | default('El pago se hizo a la empresa') }}
+            </div>
+        </div>
+    </div>
+    <div class="row g-2">
+        <div class="col-6">
+            Reporte 
+            <br>
+            <div class="p-3 border bg-light">
+                <strong> {{ cheque.preFactGruaUsa.nombre | default('SD') }}</strong>
+            </div>
+        </div>
+        <div class="col-6">
+            Saldo a favor generado 
+            <br>
+            <div class="p-3 border bg-light">
+                <strong> {{ cheque.saldoFavorGenerado }} </strong>
+            </div>
+            
+        </div>
+        <div class="col-6">
+        
+            Descripción
+            <br>
+            <div class="p-3 border bg-light">
+                <strong>  {{ cheque.descripcionCheque }} </strong>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <div class="alert alert-warning" role="alert">
+        <p>OJO Una vez creado un informe tendrá 2 días para completarlo, luego dejará de ser una opción para asignar nuevos cheques</p>
+        <p>Esto con el objetivo de que un informe no pueda ser modificado una vez que se termine su periodo de ingreso de datos</p>
+
+
+    </div>
+</div>

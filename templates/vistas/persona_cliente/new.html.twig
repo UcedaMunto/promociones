@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuevo registro de cliente{% endblock %}
+
+{% block body %}
+ 
+    <a href="{{ path('persona_cliente_index') }}">back to list</a>
+    <div id="formPersonaCambio">
+    {{ include('persona_cliente/form_new.html.twig') }}
+    </div>
+        
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/personaClienteNew.js') }}" ></script>
+{% endblock %}
+
+ 

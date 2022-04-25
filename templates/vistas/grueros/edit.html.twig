@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Grueros{% endblock %}
+
+{% block body %}
+    <h1>Edit Grueros</h1>
+
+    {{ include('grueros/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('grueros_index') }}">back to list</a>
+
+    {{ include('grueros/_delete_form.html.twig') }}
+{% endblock %}

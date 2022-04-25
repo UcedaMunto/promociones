@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuevo Movimiento{% endblock %}
+
+{% block body %}
+    <h1> {{ lote  }} </h1>
+    <div class="alert alert-warning" role="alert">
+        <p>
+            - Si el costo de storage y otros costos aun no está definido entonces coloque 0, la persona encargada de pagar los cheques podrá actualizar estos valores <br>
+            - Se le pide de favor ingresar la ciudad de origen según con está en la factura(solo si es factura de IAA O COPART)
+        </p>
+    </div>
+    <div class="col-md-12">
+        <div "card-body">
+            {% if mensajes['0']!="" %}
+                <div class="alert alert-danger" role="alert">
+                    <strong>{{ mensajes[0] }}</strong>  
+                </div>
+            {% endif %}
+            <strong>
+                <div>Favor llenar los datos de costos y Fecha de recogida, son necesarios para un Tracking detallado y la parte contable</div>
+            </strong> 
+            {{ form_start(form , { 'attr': {'autocomplete': 'off'}} ) }}
+            <div class="form-row">
+
+                <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                    <label class="small mb-1" > Fecha contrato </label>
+                    {{ form_widget(form.fechaContrato) }}
+                    {{ form_errors(form.fechaContrato)}}
+                </div>
+                <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                    <label class="small mb-1" > Fecha recogida </label>
+                    {{ form_widget(form.fechaRecogida)}}
+                    {{ form_errors(form.fechaRecogida)}}
+                </div>
+                <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                    <label class="small mb-1" > Fecha entrega </label>
+                    {{ form_widget(form.fechaEntrega)}}
+                    {{ form_errors(form.fechaEntrega)}}
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-6	col-md-3 col-lg-3">
+                    <label class="small mb-1" >Descripcion </label>
+                    {{ form_widget(form.descripcion)}}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label class="small mb-1" >Origen(según factura de iaa o copart)</label>
+                    {{ form_widget(form.ciudadOrigen)}}
+                    {{ form_errors(form.ciudadOrigen)}}
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="small mb-1" >Destino </label>
+                    {{ form_widget(form.ciudadDestino)}}
+                    {{ form_errors(form.ciudadDestino)}}
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="small mb-1" > Estado? </label>
+                    {{ form_widget(form.estado)}}
+                    {{ form_errors(form.estado)}}
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="small mb-1" >Compañía </label>
+                    {{ form_widget(form.compania)}}
+                    {{ form_errors(form.compania)}}
+                </div>
+                
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label class="small mb-1" > Costo </label>
+                    {{ form_widget(form.grua) }}
+                    {{ form_errors(form.grua)}}
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="small mb-1" >Storage </label>
+                    {{ form_widget(form.storage)}}
+                    {{ form_errors(form.storage)}}
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="small mb-1" >Otros costos</label>
+                    {{ form_widget(form.otrosCostosGrua)}}
+                    {{ form_errors(form.otrosCostosGrua)}}
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="small mb-1" >link Central Dispatch</label>
+                    {{ form_widget(form.linkCentralDispatch)}}
+                    {{ form_errors(form.linkCentralDispatch)}}
+                </div>
+            </div>
+         
+            <div class="col-md-12">
+                    <div class="form-group col-md-4">
+                    </div>
+                    <div class="form-group col-md-4">
+                            <button type="submit" class="btn btn-primary btn-block"> {{ button_label|default('Guardar') }} </button>                 
+                    </div>
+                    
+                </div>
+            
+                            
+             {{ form_end(form) }}
+        </div>
+    </div>
+
+    <a href="{{ path('movimiento_index') }}">back to list</a>
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

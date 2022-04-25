@@ -1,0 +1,212 @@
+<div class="card-header">
+</div>
+<style> 
+.resaltarComentario{
+  padding: 10px;
+  background: #a0e9e9;
+  border-radius: 15px;
+  margin: 5px;
+}
+.validado{
+  background-color:#5be44f;
+}
+.novalidado{
+  background-color:#ea6060;
+}
+.valotro{
+  background-color:#a7ee9f;
+}
+</style>
+<div class="form-row col-md-12 alert alert-warning" >
+    <p>Este informe es sobre un solo reporte, cada linea mostrada es una grua, en verde está lo pagado</p>
+</div>
+<table class="table" id='tabla_datos_pago'>
+    <thead>
+        <tr>
+            <th>Lote</th>
+            <th>anio</th>
+            <th>marca</th>
+            <th>modelo</th>
+            <th>grua</th>
+            <th>storage</th>
+            <th>otros(grua doble)</th>
+            <th>yarda</th>
+            <th>Compañía</th>
+            <th>Datos de cheque grua</th>
+            <th>Datos de cheque storage</th>
+            <th>Datos de cheque otros</th>
+        </tr>
+    </thead>
+    <tbody><!-- es importante que se marca en verde solo cuando el pago en la bandera pertenece al informe que se esta mostrando analizar la consulta para ver como se conforma --> 
+        {% for dato in datos %}
+            <tr>
+                <td>{{ dato.lote }}</td>
+                <td>{{ dato.anio | default('SD') }}</td>
+                <td>{{ dato.marca | default('SD') }}</td>
+                <td>{{ dato.modelo | default('SD') }}</td>
+                <td {% if dato.confirmacionPagoGruaIdReport     == informeId %} 
+                        class="{% if dato.movimiento in dato.validacion_gruas_a %}validado{% else %}novalidado {% endif %}"
+                    {% else %}
+                        {% if dato.confirmacionPagoGruaIdReport | length >0 %}  class="valotro" {% endif %} 
+                    {% endif %}>
+                    {% if dato.confirmacionPagoGruaIdReport     == informeId %} 
+                        <select name="opcionesCeldaChequeMovimiento" class="opciones_cheque" data-validados="{{ dato.validacion_gruas|join(', ') }}" >
+                            <option value=0 selected>{{ dato.grua | default(0) }}</option>
+                            <option value=1 data-tipo=1 data-id={{ dato.g | default('') }} 
+                                data-movimiento={{ dato.movimiento }}>Ver</option>
+                            <option value=2 data-tipo=1 data-id={{ dato.g | default('') }} 
+                                data-movimiento={{ dato.movimiento }}>Validar</option>
+                            <option value=3 data-tipo=1 data-id={{ dato.g | default('') }} 
+                                data-movimiento={{ dato.movimiento }}>No cobrado</option>
+                        </select>
+                    {% else %}
+                        {{ dato.grua | default(0) }}
+                    {% endif %}
+                </td>
+                <td {% if dato.confirmacionPagoStorageIdReport  == informeId %} 
+                    class="{% if dato.movimiento in dato.validacion_storage_a   %}validado{% else %}novalidado{% endif %}" {% else %}
+                            {% if dato.confirmacionPagoStorageIdReport | length >0 %}  class="valotro" {% endif %} 
+                            {% endif %}>
+                    {% if dato.confirmacionPagoStorageIdReport  == informeId %} 
+                        <select name="opcionesCeldaChequeMovimiento" class="opciones_cheque" data-validados="{{ dato.validacion_storage|join(', ') }}" >
+                            <option value=0 selected>{{ dato.storage | default(0) }}</option>
+                            <option value=1 data-tipo=2 data-id={{ dato.s | default('') }} 
+                                data-movimiento={{ dato.movimiento }}>Ver</option>
+                            <option value=2 data-tipo=2 data-id={{ dato.s | default('') }} 
+                                data-movimiento={{ dato.movimiento }}>Validar</option>
+                            <option value=3 data-tipo=4 data-id={{ dato.s | default('') }}
+                                data-movimiento={{ dato.movimiento }}>No cobrado</option>
+                        </select>
+                    {% else %}
+                        {{ dato.storage | default(0) }}
+                    {% endif %}
+                    
+                </td>
+                <td {% if dato.confirmacionPagoOtrosIdReport    == informeId %} 
+                    class="{% if dato.movimiento in dato.validacion_otros_a %}validado{% else %}novalidado{% endif %}" {% else %}
+                        {% if dato.confirmacionPagoOtrosIdReport | length >0 %}  class="valotro" {% endif %} 
+                    {% endif %}>
+                    {% if dato.confirmacionPagoOtrosIdReport  == informeId %} 
+                        <select name="opcionesCeldaChequeMovimiento" class="opciones_cheque" data-validados="{{ dato.validacion_otros|join(', ') }}" >
+                            <option value=0 selected>{{ dato.otros_costos_grua | default(0) }}</option>
+                            <option value=1 data-tipo=3 data-id={{ dato.o | default('') }} 
+                                data-movimiento={{ dato.movimiento }}>Ver</option>
+                            <option value=2 data-tipo=3 data-id={{ dato.o | default('') }} 
+                                data-movimiento={{ dato.movimiento }}>Validar</option>
+                            <option value=3 data-tipo=3 data-id={{ dato.o | default('') }} 
+                                data-movimiento={{ dato.movimiento }}>No cobrado</option>
+                            
+                        </select>
+                    {% else %}
+                        {{ dato.otros_costos_grua | default(0) }}
+                    {% endif %}
+                </td>
+                <td>{{ dato.yarda | default('SD') }}</td>
+                <td>{{ dato.compania | default('SD') }}</td>
+                <td>{{ dato.infoCheques1 }}</td>
+                <td>{{ dato.infoCheques2 }}</td>
+                <td>{{ dato.infoCheques3 }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="form-row col-md-12 alert alert-warning" >
+    <p>
+        - Estos datos son de pagos extra que se dan en casos muy MUY ESPECIALES. <br>
+        - También cheques que por error no fueron asignados a pagos de grua, storage u otros <strong>(verificar y corregir si es el caso para evitar pagos dobles) </strong> <br>
+        - Si aparece ERROR informatica debe revisa y rectificar el error, puede ser un cheque normal no asignado o un cheque especial sin movimiento asignado<br>
+        - Este tipo de pagos deben de ser bien verificados y comentariados en la descripcion para evitar fugas de dinero
+    </p>
+</div>
+<table class="table" id='tabla_datos_pago_extras'>
+    <thead>
+        <tr>
+            <th>idMov</th>
+            <th>Gruero</th>
+            <th>Compañía</th>
+            <th>Correlativo</th>
+            <th>Descripción</th>
+            <th>Monto</th>
+            <th>Saldo a favor</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for dato in datosChequesExtra %}
+            <tr>
+                <td>{{ dato.movimiento| default('ERROR') }}</td>
+                <td>{{ dato.gruero| default('SD') }}</td>
+                <td>{{ dato.compania| default('SD') }}</td>
+                <td>{{ dato.correlativo | default('SD') }}</td>
+                <td>{{ dato.descripcion_cheque | default('SD') }}</td>
+                <td>
+                    <a href='{{ path('cheques_show', {'id': dato.id}) }}' target="_blank"> 
+                        {{ dato.monto | default('SD') }}
+                    </a>   
+                </td>
+                <td>{{ dato.saldo_favor_generado }}</td>
+                <td class="{% if dato.validacion_cheque_especial == 1 %}validado{% else %}novalidado{% endif %}">
+                    <select name="opcionesCeldaChequeMovimiento" class="opciones_cheque">
+                        <option value=0 selected>{{ dato.correlativo | default(0) }}</option>
+                        <option value=1 data-tipo=4 data-id='{{ dato.id }}'  
+                            data-movimiento='{{ dato.movimiento }}'>Ver</option>
+                        <option value=2 data-tipo=4 data-id='{{ dato.id }}'  
+                            data-movimiento='{{ dato.movimiento }}'>Validar</option>
+                        <option value=4 data-id='{{ dato.id }}'  
+                            data-movimiento='{{ dato.movimiento }}'>No cobrado</option>
+                    </select>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="alert alert-warning" role="alert">
+    <p>
+        <div class="row"  style="background-color: 
+        {% if - datosCalculados['sumaTotalCheques'] + datosCalculados['gruas'] + datosCalculados['storage'] + datosCalculados['otrosCostos'] + datosCalculados['sumaSaldoFavor']  %}
+            #ff6a6a;
+        {% else %}
+            #50d15f
+        {% endif %}
+        ">
+            <div class="col-md-12"> <h4>Resumen (total pagado contra las deudas saldadas idealmente este debe ser color verde con valor final cero )<h4> </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" st> 
+            <strong>   $ {{ datosCalculados['sumaTotalCheques'] }} VS 
+                $ {{ datosCalculados['gruas'] + datosCalculados['storage'] + datosCalculados['otrosCostos'] + datosCalculados['pagosExtraordinarios'] }}
+                =
+                $   {{ datosCalculados['sumaTotalCheques']  - 
+                     ( datosCalculados['gruas'] + datosCalculados['storage'] + datosCalculados['otrosCostos'] + datosCalculados['pagosExtraordinarios'] )
+                    }}
+            </strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12"> <h4>Desgloce 1<h4> </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6"> 
+                Total pagado: <strong> $ {{ datosCalculados['sumaTotalCheques'] }} </strong>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"> 
+                Deudas saldadas: <strong> $ {{ datosCalculados['gruas'] + datosCalculados['storage'] + datosCalculados['otrosCostos'] + datosCalculados['pagosExtraordinarios'] }}</strong>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"> 
+                Saldo a favor:<strong> $ {{ datosCalculados['sumaSaldoFavor'] }} </strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12"> <h4>Desgloce 2<h4> </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3"> 
+                Total de gruas:<strong> $ {{ datosCalculados['gruas'] }} </strong>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3"> 
+                Total storage:<strong> $ {{ datosCalculados['storage'] }} </strong>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3"> 
+                Total otros costos:<strong> $ {{ datosCalculados['otrosCostos'] }} </strong>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3"> 
+                Cargos extraordinarios:<strong> $ {{ datosCalculados['pagosExtraordinarios'] }} </strong>
+            </div>
+        </div>
+    </p>
+</div>

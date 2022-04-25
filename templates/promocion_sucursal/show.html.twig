@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PromocionSucursal{% endblock %}
+
+{% block body %}
+    <h1>PromocionSucursal</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ promocion_sucursal.id }}</td>
+            </tr>
+            <tr>
+                <th>Activo</th>
+                <td>{{ promocion_sucursal.activo ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('promocion_sucursal_index') }}">back to list</a>
+
+    <a href="{{ path('promocion_sucursal_edit', {'id': promocion_sucursal.id}) }}">edit</a>
+
+    {{ include('promocion_sucursal/_delete_form.html.twig') }}
+{% endblock %}

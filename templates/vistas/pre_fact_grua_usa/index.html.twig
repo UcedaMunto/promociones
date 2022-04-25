@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista de informes validación 1{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('pre_fact_grua_usa_new') }}">Nuevo cheque</a>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Creacion</th>
+                <th>actions</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for pre_fact_grua_usa in pre_fact_grua_usas %}
+            <tr>
+                <td>{{ pre_fact_grua_usa.id }}</td>
+                <td>{{ pre_fact_grua_usa.nombre }}</td>
+                <td>{{ pre_fact_grua_usa.creacion ? pre_fact_grua_usa.creacion|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('pre_fact_grua_usa_show', {'id': pre_fact_grua_usa.id}) }}">show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

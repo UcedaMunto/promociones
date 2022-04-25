@@ -1,0 +1,49 @@
+<div class="card shadow mb-4">   
+    <div class="card-body">
+        <table class="table" id="listaReunion">
+            <thead>
+                <tr>
+                    <th>Número</th>
+                    <th>Titulo</th>
+                    <th>Fecha creacion</th>
+                    <th>Descripción</th>
+                    <th>Departamentos</th>
+                    <th>Informacion</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for discusion_jefatura in discusion_jefaturas %}
+                <tr>
+                    <td>{{ discusion_jefatura.id }}</td>
+                    <td>{{ discusion_jefatura.titulo }}                </td>
+                    <td>{{ discusion_jefatura.fecha ? discusion_jefatura.fecha|date('d-m-Y') : '' }}</td>
+                    <td>{{ discusion_jefatura.descripcion }}</td>
+                    <td>
+                            {% for departamentos in prueba_funcion_a.verdepartamentos(discusion_jefatura.id)  %}
+                                {{ departamentos.departamentoEmpresa.nombre }} 
+                                <br/>
+                            {% endfor %}
+                        
+                    </td>                    
+                    <td>
+                        <a  class="mostrarDiscusiones"   href="{{ path('discusion_jefatura_show', {'id': discusion_jefatura.id}) }}"  data-toggle="modal" data-target="#mostarInfoDJ">Ver informacion</a>
+                        <a  class="editarDiscusiones"    href="{{ path('discusion_jefatura_edit', {'discusionJefatura': discusion_jefatura.id}) }}"  data-toggle="modal" data-target="#editarInfoDJ"  >Editar </a> 
+
+                    </td> 
+                    <td>
+
+                        <a class="finalizarDiscusionJ" href="{{ path('lista_estado_discusion', {'discusionJefatura': discusion_jefatura.id, 'estadoDJ': '2'}   ) }}" data-toggle="modal" data-target="#mFinalizarDJ">Finalizar</a> ---
+                        <a class="bloquearDiscusionJ" href="{{ path('lista_estado_discusion', {'discusionJefatura': discusion_jefatura.id, 'estadoDJ': '3'}   ) }}" data-toggle="modal" data-target="#mFinalizarDJ">Bloquear</a>
+                    </td>
+                </tr>
+                    {% else %}
+                <tr>
+                    <td colspan="4">No se encuentran discusiones de jefaturas</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+

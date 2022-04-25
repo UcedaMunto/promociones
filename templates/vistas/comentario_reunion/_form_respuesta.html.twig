@@ -1,0 +1,22 @@
+{% if mensajes['0']!="" %}
+            <div class="alert alert-danger" role="alert">
+                <strong>{{ mensajes[0] }}</strong>  
+            </div>
+{% endif %}
+
+    {{ form_start(form_respuesta, { 'attr': {'id': 'form_respuesta'}}   ) }}
+
+        
+            <div class="form-row">
+                    
+                        <label class="small mb-1" > comentario: </label>
+                        {{ form_widget(form_respuesta.mensaje) }}
+                        {{ form_errors(form_respuesta.mensaje) }} 
+            </div>
+
+  
+            <button class="btn" id="btnComentRespuesta" >{{ button_label|default('Guardar') }}</button>
+
+
+        
+    {{ form_end(form_respuesta) }}

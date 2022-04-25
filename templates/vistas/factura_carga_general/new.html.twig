@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}factura carga general{% endblock %}
+
+{% block body %}
+    <h1>Agregar informacion </h1>
+
+    {{ include('factura_carga_general/_form.html.twig') }}
+
+    <a href="{{ path('factura_carga_general_index') }}">back to list</a>
+{% endblock %}
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

@@ -1,0 +1,165 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Cuadricula{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('cuadricula_index') }}">Lista de cuadriculas</a>
+    {% if mensajes['0']!="" %}
+        <div class="alert alert-danger" role="alert">
+            <strong>{{ mensajes[0] }}</strong>  
+        </div>
+    {% endif %}
+    
+    <div class="card shadow-lg border-0 rounded-lg mt-1">
+        <div class="card-header justify-content-center">
+            <h1>Editando Cuadricula</h1>
+            <center><img src="{{ logo }}" height="75px"></img> </center>
+        </div>
+            <div class="card-body">
+                {{ form_start(form) }}
+                    {% set i = 0 %}
+                    {% set j = 0 %}
+                    {% for child in form %}
+                        {% if i == 0 %}
+                            <div class="form-row seccionForm">
+                        {% endif %}
+                        
+                        {% if child.vars.name != '_token' and  child.vars.name !='envioContenedors' and child.vars.name !='cuadricula__token'
+                            and child.vars.name !='envios' %}
+                            <div class="form-group col-md-3"> 
+                                {{ form_label(child) }} <br>
+                                {{ form_widget(child) }}
+                                {{ form_errors(child) }}
+                            </div>
+                        {% else %}
+
+                            {% if i == 500 %}
+                                </div>
+                            {% endif %}
+
+                            {% if child.vars.name =='envios' %}
+                                </div>
+                                {% set i = -500 %}
+                                    <div class="tab-content" id="myTabContent">
+                                        
+                                        <table class="table table-hover" style="font-size: smaller;">
+                                            <tr>
+                                                <th width="100px" >Envio</th>
+                                                <th width="130px">Lote</th>
+                                                <th width="130px">KG - LBr</th>
+                                                <th width="300px">Vehículo</th>
+                                                <th width="200px">Tipo y Cilindraje(Debe llenar ambas opciones)</th>
+                                                <th width="130px">Bultos</th>
+                                                <th width="130px">Valor FOB</th>
+                                                
+                                            </tr>
+                                            {% for childd in child %}
+                                                <tr class="contenidoTabla">
+                                                        <th scope="col">
+                                                            {{ form_widget(childd.id) }}
+                                                            {{ form_errors(childd.id) }}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {{ form_widget(childd.detalleCompra.lote) }}
+                                                            {{ form_errors(childd.detalleCompra.lote) }}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {{ form_widget(childd.detalleCompra.pesoKilogramos) }}
+                                                            {{ form_errors(childd.detalleCompra.pesoKilogramos) }}
+                                                            {{ form_widget(childd.detalleCompra.pesoLibras) }}
+                                                            {{ form_errors(childd.detalleCompra.pesoLibras) }}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {{ form_widget(childd.detalleCompra.comboAuto) }}
+                                                            {{ form_errors(childd.detalleCompra.comboAuto) }}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {{ form_widget(childd.NPTipoVehiculo) }}
+                                                            {{ form_errors(childd.NPTipoVehiculo) }}
+                                                        
+                                                            {{ form_widget(childd.cilindrage) }}
+                                                            {{ form_errors(childd.cilindrage) }}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {{ form_widget(childd.pkgs) }}
+                                                            {{ form_errors(childd.pkgs) }}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {{ form_widget(childd.valorFob) }}
+                                                            {{ form_errors(childd.valorFob) }}
+                                                        </th>
+                                                </tr>
+                                            {% endfor %}
+                                        </table>
+                                    </div>
+                            {% endif %}
+                        
+                        {% endif %}
+
+                        
+
+                        {% if i == 3 %}
+                            </div>
+                            {% set i = 0 %}
+                        {% else %}
+                            {% set i = i + 1 %}
+                        {% endif %}
+                        {% set j = j + 1 %}
+                    {% endfor %}
+
+                    
+
+                    <button class="btn">{{ button_label|default('Save') }}</button>
+                {{ form_end(form) }}  
+
+                <strong><h2>Refacciones<h2></strong>
+                <table style="width: 100%;" id="tabla_refacciones_cuadricula">
+                    
+                    <thead>
+                        <tr>
+                            <th><strong>Cantidad</strong></th>
+                            <th><strong>Peso</strong></th>
+                            <th><strong>Nun. factura</strong></th>
+                            <th><strong>Descripción</strong></th>
+                            <th><strong>Embalaje</strong></th>
+                            <th><strong>Vehículo</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for refaccion in refacciones %}
+                            <tr>
+                                <td>
+                                    {{ refaccion.cantidad }}
+                                </td>
+                                <td>
+                                    {{ refaccion.peso }}
+                                </td>
+                                <td>
+                                    {{ refaccion.numeroFactura }}
+                                </td>
+                                <td>
+                                    {{ refaccion.descripcion }}
+                                </td>
+                                <td>
+                                    {{ refaccion.tipoEmbalaje.nombre }}
+                                </td>
+                                <td>
+                                    {{ refaccion.autoRecipiente.detalleCompra.vin | default('NE') }}
+                                </td>
+                            </tr>
+                        {% endfor %}  
+                    </tbody>
+                </table>
+            </div>    
+    </div>
+
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}
+
+{% block js_pantalla %}
+    <script src="{{ asset('js/cuadriculaNewEdit.js') }}" ></script>
+{% endblock %}

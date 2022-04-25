@@ -1,0 +1,3 @@
+$("persona_cliente_tipoCliente").change(function(){
+    alert("Handled"); // alert is not fired up ...
+});

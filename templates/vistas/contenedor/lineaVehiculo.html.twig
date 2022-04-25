@@ -1,0 +1,55 @@
+    <td colspan='15' id="contenedor">       
+    {{ form_start(envioC, {'attr': {'id': "movimiento_"~ datos.id }}) }}    
+     {{ form_errors(envioC) }}  
+     <table>
+     <tr> 
+<td  title="VIN: {{ datos.vin }}" class='ides'>
+                   {{ datos.lote }}
+                </td>
+                <td class="datosbasicos" >
+                    {{ datos.vehiculo}} {{ datos.submodelo }}
+                </td>
+                <td class="datosbasicos" >
+                    {{ datos.envio.detalleCompra.zonaSucursal.nombre|default('No existe')  }}
+                </td>    
+                <td class="cantidades" > 
+                   {{ datos.envio.totalGrua | default(0) }}
+                </td>
+                <td class="cantidades" > 
+                  {{ form_widget(envioC.envio.costoFlete, {'id': 'costoFlete'~  datos.id  }) }}                    
+                </td>
+                <td class="cantidades" > 
+                  {{ form_widget(envioC.notariaCosto, {'id': 'notariaCosto'~  datos.id}) }}
+                </td>
+                <td class="cantidades" > 
+                  {{ datos.envio.totalStorage | default(0) }}
+                </td>
+                <td class="cantidades" > 
+                  {{ datos.envio.totalOtrosGrua | default(0) }}   
+                </td>
+                <td class="cantidades" > 
+                  {{ datos.envio.totalOtrosGruaEspecial | default(0) }} 
+                </td>
+                <td class="cantidades" > 
+                  {{ form_widget(envioC.envio.GruaPrecio, {'id': 'GruaPrecio'~  datos.id }) }}
+                </td>
+                <td class="cantidades" > 
+                  {{ form_widget(envioC.envio.precioFlete, {'id': 'precioFlete'~ datos.id }) }}
+                </td>
+                <td class="cantidades" > 
+                  {{ form_widget(envioC.notaria, {'id': 'notaria'~ datos.id }) }}
+                </td>
+                <td class="cantidades" > 
+                  {{ form_widget(envioC.storage, {'id': 'storage'~ datos.id }) }}
+                </td>
+                <td class="cantidades" > 
+                  {{ form_widget(envioC.otros, {'id': 'otros'~ datos.id }) }}
+                </td>            
+                <td width="70px" > 
+                     <button class="btn btn-primary btn-block botona" id="{{datos.id}}" > {{ button_label|default('Editar') }} </button>
+                </td>                 
+                 {{ form_end(envioC) }} 
+                </tr>
+              </table>
+           </td>                
+                         

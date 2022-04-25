@@ -1,0 +1,34 @@
+
+{% if mensajes['0']!="" %}
+            <div class="alert alert-danger" role="alert">
+                <strong>{{ mensajes[0] }}</strong>  
+            </div>
+{% endif %}
+
+{{ form_start(form_edit_discusion, { 'attr' : { 'id':'form_discusion_edit'}}) }}
+
+
+
+        {#aqui la lista de departamentos ya selecionados#}
+   
+        
+
+        
+        <label class="small mb-1" > Departamentos que estan involucrados: </label></br>
+                {% for departamentos in discusion_departamento_agregados  %}
+                        {{ departamentos.departamentoEmpresa.nombre }} - 
+                {% endfor %} 
+        
+        <div class="col-sm-36" ><BR/>
+        {{ form_widget(form_edit_discusion) }}
+                
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center;">
+        <button class="btn" id="btnEditarDiscusion" >{{ button_label|default('Guardar') }}</button>   
+        </div>         
+{{ form_end(form_edit_discusion) }}
+    
+
+
+
+

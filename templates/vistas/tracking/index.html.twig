@@ -1,0 +1,336 @@
+
+{% extends 'baseTracking.html.twig' %}
+
+{% block body %}
+
+<div>
+    <div class="container">
+        <h4>Tracking Inbakcar</h4>
+        {{ form_start(form, { 'method': 'POST'} ) }}
+            <div class="row">
+                <div class="col-xxl-4 col-xl-3 mb-4">
+                    Filtro por vin o por lote
+                </div>
+                <div class="col-xxl-4 col-xl-3 mb-4">
+                    {{ form_widget(form.vin) }}
+                </div>
+                <div class="col-xxl-4 col-xl-3 mb-4">
+                    {{ form_widget(form.lote) }}
+                </div>
+                <div class="col-xxl-4 col-xl-3 mb-4">
+                    <button type="submit" id="formTrack" class="btn btn-primary btn-block"> {{ button_label|default('Buscar') }} </button>
+                </div>
+            </div>
+        {{ form_end(form) }}
+    </div>
+    <div class="container col-md-12">
+        <h3 id="datosAuto" class="centrar"></h3>
+    </div>
+</div>
+
+<div> 
+
+    <div class="centrar">
+        <button type="button" id="verMas3" class="btn btn-info">Ver más detalles</button>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="main-timeline7">
+                    <div class="timeline">
+                        <div class="timeline-icon"><i class="fa fa-list-ul"></i></div>
+                        <span class="year" id="fecha3_1"> </span>
+                        <div class="timeline-content">
+                            <h5 class="title">Ingeso de datos</h5>
+                            <p class="description" id="desc1E3">
+
+                            </p>
+                            <p class="description movercorrec3 intangible" id="desc_prob_c_1">
+
+                            </p>
+                        </div>
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline-icon">
+                            <i class=""> 
+                                <svg xmlns="http://www.w3.org/2000/svg" id="Capa_1" enable-background="new 0 0 50 50" height="512" viewBox="0 0 512 512" width="512" style="max-height: 70px;max-width: 50px;margin-top: 5px;">
+                                    <path d="m511.27 250.462-41.798-87.678c-5.632-11.824-17.738-19.465-30.842-19.465h-17.86c-4.143 0-7.5 3.358-7.5 7.5s3.357 7.5 7.5 7.5h17.86c7.351 0 14.141 4.284 17.3 10.917l.979 2.054h-56.556c-7.172 0-13.006 5.834-13.006 13.005v6.171c0 15.292 8.5 29.032 22.183 35.86l38.246 19.084c5.527 2.758 11.715 4.216 17.893 4.216h28.587l2.745 5.759v13.682h-17.219c-8.007 0-14.521 6.514-14.521 14.521v55.281h-12.545c-4.597-16.653-19.871-28.922-37.966-28.922s-33.37 12.269-37.967 28.922h-12.544c0-32.754.002-161.45.002-180.551h21.529c4.143 0 7.5-3.358 7.5-7.5s-3.357-7.5-7.5-7.5h-21.53v-12.545c0-4.142-3.357-7.5-7.5-7.5s-7.5 3.358-7.5 7.5v20.045l-.001 106.564h-78.235c1.782-2.895 3.102-6.101 3.871-9.514h29.616c5.516 0 10.736-2.675 13.966-7.157l10.636-14.768c5.458-7.599 3.921-18.007-3.496-23.695l-32.526-24.958c-6.5-4.994-14.181-8.127-22.224-9.171l-27.543-23.626c-11.144-9.553-25.353-15.062-40.015-15.513l-15.457-.47c-40.713-1.246-81.462 10.922-114.824 34.287l-28.92 8.887c-4.271 1.307-7.871 4.349-9.875 8.346-2.005 3.999-2.29 8.708-.778 12.923l11.599 32.268c4.864 13.545 17.8 22.645 32.188 22.645h8.414c.769 3.413 2.088 6.619 3.87 9.514h-77.006c-6.893 0-12.5 5.607-12.5 12.5v22.087c0 6.893 5.607 12.5 12.5 12.5h17.43v10.689c0 4.137 1.415 8.199 3.99 11.448l16.162 20.322c3.51 4.411 8.758 6.94 14.398 6.94h7.978c2.256 19.591 18.935 34.855 39.12 34.855s36.863-15.265 39.12-34.855h11.658c2.256 19.591 18.935 34.855 39.121 34.855 20.185 0 36.863-15.265 39.12-34.855h45.414c4.143 0 7.5-3.358 7.5-7.5s-3.357-7.5-7.5-7.5h-46.567c-4.597-16.653-19.871-28.922-37.966-28.922s-33.37 12.269-37.967 28.922h-13.966c-4.597-16.653-19.871-28.922-37.966-28.922s-33.369 12.269-37.966 28.922h-9.133c-1.044 0-2.014-.467-2.66-1.279l-16.153-20.311c-.476-.6-.737-1.353-.737-2.121v-10.689h304.309v34.401l-28.229.001c-4.143 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5c10.444 0 44.15-.002 54.619-.002 2.256 19.591 18.935 34.855 39.121 34.855 20.185 0 36.863-15.265 39.12-34.855 1.924 0-9.471 0 39.733.001 10.145 0 18.398-8.251 18.398-18.394v-58.909-22.874c-.001-1.117-.25-2.219-.731-3.228zm-108.923-59.995v-4.176h16.413v27.878l-2.533-1.264c-8.562-4.272-13.88-12.869-13.88-22.438zm63.321 44.16c-3.865 0-7.736-.912-11.195-2.638l-20.713-10.335v-35.363h30.3l23.043 48.336zm-264.191 90.321c13.448 0 24.389 10.941 24.389 24.389s-10.94 24.389-24.389 24.389-24.39-10.941-24.39-24.389 10.941-24.389 24.39-24.389zm-89.899 0c13.448 0 24.389 10.941 24.389 24.389s-10.94 24.389-24.389 24.389-24.389-10.941-24.389-24.389 10.941-24.389 24.389-24.389zm35.343-77.078h66.664c.769 3.413 2.088 6.619 3.87 9.514h-74.404c1.782-2.895 3.102-6.101 3.87-9.514zm80.891-6.905c0-9.053 7.365-16.418 16.418-16.418 9.054 0 16.419 7.365 16.419 16.418s-7.365 16.418-16.419 16.418c-9.053.001-16.418-7.364-16.418-16.418zm89.102-23.778-2.144 2.977c-.736.035-1.472.064-2.209.064-13.986 0-22.547-5.932-22.547-9.162 0-2.201 4.283-5.979 12.101-7.926l14.351 11.011c.951.729 1.144 2.066.448 3.036zm-129.542-73.681 15.457.47c11.25.346 22.156 4.575 30.708 11.906l14.896 12.778-37.715 2.344c-3.675.233-7.36-.098-10.959-.98l-45.851-11.201c-11.12-2.715-22.483-4.046-33.835-4.024 21.392-8.076 44.337-12.003 67.299-11.293zm-128.225 76.647-11.597-32.264c-.272-.763.134-1.616.934-1.86l30.067-9.24c.049-.015.097-.029.146-.045l4.505-1.385c21.789-6.69 45.008-7.369 67.149-1.964l45.842 11.198c5.07 1.244 10.274 1.71 15.464 1.382l51.311-3.189c1.362-.083 2.721-.074 4.069.019.073.007.146.009.219.014 6.038.458 11.84 2.653 16.68 6.371l4.277 3.281c-8.23 4.427-13.197 11.098-13.197 18.594 0 9.86 8.273 17.982 20.825 21.804h-21.254c-3.58-13.413-15.831-23.323-30.356-23.323s-26.775 9.91-30.355 23.323h-67.242c-3.58-13.413-15.83-23.323-30.355-23.323s-26.775 9.91-30.355 23.323h-8.704c-8.077.001-15.34-5.109-18.073-12.716zm40.712 20.812c0-9.053 7.365-16.418 16.418-16.418s16.418 7.365 16.418 16.418-7.365 16.418-16.418 16.418-16.418-7.364-16.418-16.418zm-84.859 48.506v-17.087h334.239v17.087c-23.402 0-318.806 0-334.239 0zm482-5.403v16.74h-16.74v-16.74zm-82.251 89.658c-13.448 0-24.39-10.941-24.39-24.389s10.941-24.389 24.39-24.389 24.389 10.941 24.389 24.389-10.941 24.389-24.389 24.389zm81.983-36.929c-.517 1.218-1.726 2.074-3.132 2.074h-13.341v-23.063h16.741v19.669c0 .468-.095.914-.268 1.32z"></path>
+                                </svg>
+                            </i>
+                        </div>
+                        <span class="year" id="fecha3_2"> </span>
+                        <div class="timeline-content">
+                            <h5 class="title">En camino a yarda</h5>
+                            <p class="description" id="desc2E3">
+                                
+                            </p>
+                            <p class="description movercorrec3 intangible" id="desc_prob_c_2">
+
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline-icon">
+                            <i class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" style="margin-top: 20%;">
+                                    <path d="M 24 0 C 10.75109 0 0 10.7511 0 24 C 0 37.2489 10.75109 48 24 48 C 37.248912 48 48 37.2489 48 24 C 48 10.7511 37.248912 0 24 0 z M 24 1 C 36.708472 1 47 11.2916 47 24 C 47 36.7085 36.708472 47 24 47 C 11.29153 47 1 36.7085 1 24 C 1 11.2916 11.29153 1 24 1 z M 10.5 11.728516 C 9.67765 11.728516 9 12.406116 9 13.228516 L 9 15.228516 C 9 16.050816 9.67765 16.728516 10.5 16.728516 L 11 16.728516 L 11 37 L 12 37 L 12 22.728516 L 36 22.728516 L 36 37 L 37 37 L 37 16.728516 L 37.5 16.728516 C 38.322351 16.728516 39.000001 16.050816 39 15.228516 L 39 13.228516 C 39 12.406116 38.322351 11.728516 37.5 11.728516 L 10.5 11.728516 z M 10.5 12.728516 L 37.5 12.728516 C 37.785648 12.728516 38 12.942816 38 13.228516 L 38 15.228516 C 38 15.514116 37.785648 15.728516 37.5 15.728516 L 37 15.728516 L 11 15.728516 L 10.5 15.728516 C 10.21435 15.728516 10 15.514116 10 15.228516 L 10 13.228516 C 10 12.942816 10.21435 12.728516 10.5 12.728516 z M 12 16.728516 L 36 16.728516 L 36 17.728516 L 12 17.728516 L 12 16.728516 z M 12 18.728516 L 36 18.728516 L 36 19.728516 L 12 19.728516 L 12 18.728516 z M 12 20.728516 L 36 20.728516 L 36 21.728516 L 12 21.728516 L 12 20.728516 z M 22.160156 26.728516 C 21.782836 26.728516 21.428599 26.718509 21.037109 26.849609 C 20.645629 26.980109 20.271141 27.240781 19.837891 27.675781 L 17.701172 29.78125 L 14.251953 30.732422 C 13.948823 30.816422 13.648496 30.96745 13.410156 31.21875 C 13.171806 31.47005 13.011719 31.832875 13.011719 32.234375 L 13.011719 33.121094 L 13.011719 33.341797 L 13.011719 34.21875 C 13.011719 35.01065 13.583316 35.738281 14.384766 35.738281 L 16.134766 35.738281 C 16.422036 36.476281 17.15401 37 18 37 C 18.84597 37 19.579928 36.476381 19.867188 35.738281 L 28.130859 35.728516 C 28.415396 36.471716 29.150295 37 30 37 C 30.845312 37 31.579453 36.477334 31.867188 35.740234 L 33.613281 35.740234 C 34.414738 35.740234 34.988281 35.012603 34.988281 34.220703 L 34.988281 33.369141 L 34.988281 33.09375 L 34.988281 31.240234 C 34.988281 30.448334 34.416886 29.712503 33.609375 29.720703 L 32.041016 29.720703 L 29.734375 27.607422 C 29.187267 27.035822 28.517482 26.730469 27.8125 26.730469 L 22.160156 26.730469 L 22.160156 26.728516 z M 22.160156 27.730469 L 24 27.730469 L 24 29.208984 C 24 29.534484 23.79003 29.728516 23.625 29.728516 L 19.177734 29.728516 L 20.544922 28.382812 L 20.546875 28.382812 C 20.920075 28.008112 21.152776 27.867681 21.353516 27.800781 C 21.554256 27.733781 21.778376 27.730469 22.160156 27.730469 z M 25 27.730469 L 26 27.730469 L 26 29.208984 C 26 30.000784 26.57159 30.728516 27.373047 30.728516 L 31.818359 30.728516 L 31.818359 30.71875 L 33.617188 30.71875 L 33.619141 30.71875 C 33.778165 30.71875 33.988281 30.912681 33.988281 31.238281 L 33.988281 32.726562 L 33.5 32.726562 C 32.823839 32.716563 32.823839 33.736062 33.5 33.726562 L 33.988281 33.726562 L 33.988281 34.21875 C 33.988281 34.54435 33.778409 34.738281 33.613281 34.738281 L 31.966797 34.738281 C 31.806582 33.815981 30.977332 33.117188 30 33.117188 C 29.026681 33.117188 28.200205 33.809962 28.035156 34.726562 L 19.966797 34.736328 C 19.805857 33.814828 18.97667 33.117188 18 33.117188 C 17.02327 33.117188 16.194133 33.815028 16.033203 34.736328 L 14.384766 34.736328 C 14.219656 34.736328 14.011719 34.542397 14.011719 34.216797 L 14.011719 33.726562 L 14.505859 33.726562 C 15.182019 33.736562 15.182019 32.716962 14.505859 32.726562 L 14.011719 32.726562 L 14.011719 32.232422 C 14.011719 32.075122 14.054219 31.991297 14.136719 31.904297 C 14.219219 31.817297 14.355928 31.737959 14.517578 31.693359 L 18.082031 30.710938 L 18.082031 30.726562 L 23.625 30.726562 C 24.42644 30.726562 25 29.998831 25 29.207031 L 25 27.730469 z M 27 27.730469 L 27.8125 27.730469 C 28.254389 27.730469 28.607783 27.876728 29.011719 28.298828 L 29.023438 28.310547 L 30.570312 29.728516 L 27.373047 29.728516 C 27.207919 29.728516 27.000001 29.534484 27 29.208984 L 27 27.730469 z M 23 31.728516 C 22.32384 31.718516 22.32384 32.738016 23 32.728516 L 24 32.728516 C 24.67616 32.738516 24.67616 31.718916 24 31.728516 L 23 31.728516 z M 26.505859 31.728516 C 25.829698 31.718516 25.829698 32.738016 26.505859 32.728516 L 27.505859 32.728516 C 28.18202 32.738516 28.18202 31.718916 27.505859 31.728516 L 26.505859 31.728516 z M 18 34.119141 C 18.57054 34.119141 19 34.544247 19 35.060547 C 19 35.576447 18.57062 36 18 36 C 17.42923 36 17 35.576447 17 35.060547 C 17 34.544247 17.42931 34.119141 18 34.119141 z M 30 34.119141 C 30.570534 34.119141 31 34.544247 31 35.060547 C 31 35.576447 30.570612 36 30 36 C 29.429229 36 29 35.576447 29 35.060547 C 29 34.544247 29.42931 34.119141 30 34.119141 z "></path>
+                                </svg>
+                            </i>
+                        </div>
+                        <span class="year" id="fecha3_3"> </span>
+                        <div class="timeline-content">
+                            <h5 class="title">En Yarda</h5>
+                            <p class="description" id="desc3E3">
+                                
+                            </p>
+                            <p class="description movercorrec3 intangible" id="desc_prob_c_3">
+
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="timeline-icon">
+                            <i class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" width="50px" height="50px" viewBox="0 0 32 32" version="1.1" style="margin-top: 16;">
+                                    <defs></defs>
+                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                        <g id="icon-137-document-certificate" sketch:type="MSArtboardGroup" fill="#000000">
+                                            <path d="M22,24.9494914 L22,26 L24.0000398,26 C24.5523026,26 25,25.5550537 25,25.0066023 L25,8 L20.9979131,8 C19.8944962,8 19,7.11344516 19,5.99408095 L19,1 L8.9955775,1 C8.44573523,1 8,1.45526288 8,1.99545703 L8,25.004543 C8,25.5543187 8.45470893,26 8.9999602,26 L17,26 L17,26 L17,24.9494914 C16.3814065,24.3182229 16,23.4536526 16,22.5 C16,20.5670033 17.5670033,19 19.5,19 C21.4329967,19 23,20.5670033 23,22.5 C23,23.4536526 22.6185935,24.3182229 22,24.9494914 L22,24.9494914 L22,24.9494914 Z M18,25.6631845 L18,29.5999756 L19.5,28.1000061 L21,29.5999756 L21,25.6631845 C20.5453723,25.8791545 20.0367987,26 19.5,26 C18.9632013,26 18.4546277,25.8791545 18,25.6631845 L18,25.6631845 L18,25.6631845 Z M22,27 L24.0025781,27 C25.1057238,27 26,26.1017876 26,25.0092049 L26,7 L26,7 L20,0 L9.00276013,0 C7.89666625,0 7,0.898338318 7,2.00732994 L7,24.9926701 C7,26.1012878 7.89092539,27 8.99742191,27 L17,27 L17,32 L19.5,29.5 L22,32 L22,27 L22,27 L22,27 Z M20,1.5 L20,5.99121523 C20,6.54835167 20.4506511,7 20.9967388,7 L24.6999512,7 L20,1.5 L20,1.5 Z M10,7 L10,8 L17,8 L17,7 L10,7 L10,7 Z M10,4 L10,5 L17,5 L17,4 L10,4 L10,4 Z M10,10 L10,11 L23,11 L23,10 L10,10 L10,10 Z M10,13 L10,14 L23,14 L23,13 L10,13 L10,13 Z M10,16 L10,17 L23,17 L23,16 L10,16 L10,16 Z M19.5,25 C20.8807119,25 22,23.8807119 22,22.5 C22,21.1192881 20.8807119,20 19.5,20 C18.1192881,20 17,21.1192881 17,22.5 C17,23.8807119 18.1192881,25 19.5,25 L19.5,25 Z" id="document-certificate" sketch:type="MSShapeGroup"></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </i>
+                        </div>
+                        <span class="year" id="fecha3_4"> </span>
+                        <div class="timeline-content">
+                            <h5 class="title">Documentación</h5>
+                            <p class="description" id="desc4E3">
+                                
+                            </p>
+                            <p class="description movercorrec3 intangible" id="desc_prob_c_4">
+
+                            </p>
+                        </div>
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline-icon">
+                            <i class=""> 
+                                <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="50px" viewBox="0 0 24 24" width="50px" style="margin-top: 14px;">
+                                    <path d="m5.5 5.177-4.947 1.349c-.326.089-.553.386-.553.724v10.5c0 .338.227.635.553.724l4.947 1.349z"></path>
+                                    <path d="m23.316 6.503-16.316-1.44v14.874l16.316-1.44c.387-.034.684-.358.684-.747v-10.5c0-.389-.297-.713-.684-.747zm-12.816 9.747c0 .414-.336.75-.75.75s-.75-.336-.75-.75v-7.5c0-.414.336-.75.75-.75s.75.336.75.75zm4-.5c0 .414-.336.75-.75.75s-.75-.336-.75-.75v-6.5c0-.414.336-.75.75-.75s.75.336.75.75zm4-.5c0 .414-.336.75-.75.75s-.75-.336-.75-.75v-5.5c0-.414.336-.75.75-.75s.75.336.75.75zm3.5-.25c0 .414-.336.75-.75.75s-.75-.336-.75-.75v-4.75c0-.414.336-.75.75-.75s.75.336.75.75z"></path>
+                                </svg>
+                            </i>
+                        </div>
+                        <span class="year" id="fecha3_5"> </span>
+                        <div class="timeline-content">
+                            <h5 class="title">Cargado en contenedor</h5>
+                            <p class="description" id="desc5E3">
+                                
+                            </p>
+                            <p class="description movercorrec3 intangible" id="desc_prob_c_5">
+
+                            </p>
+                        </div>
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline-icon">
+                            <i class=""> 
+                                <svg xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="0 -76 480.00148 480" width="50px" style="margin-top: 14px;">
+                                    <path d="m472 176h-24v-48h16c3.910156 0 7.246094-2.824219 7.890625-6.679688l8-48c.386719-2.320312-.265625-4.691406-1.785156-6.488281-1.519531-1.792969-3.75-2.832031-6.105469-2.832031h-24v-32c0-4.417969-3.582031-8-8-8h-16v-16c0-4.417969-3.582031-8-8-8s-8 3.582031-8 8v16h-16c-4.417969 0-8 3.582031-8 8v32h-24c-2.351562 0-4.582031 1.039062-6.101562 2.832031-1.519532 1.796875-2.171876 4.167969-1.785157 6.488281l8 48c.644531 3.855469 3.980469 6.679688 7.886719 6.679688h16v102.113281l-4.941406 9.886719h-11.058594v-88c0-4.417969-3.582031-8-8-8h-224c-4.417969 0-8 3.582031-8 8v85.863281l-15.664062-12.183593c-1.402344-1.085938-3.125-1.679688-4.902344-1.679688h-11.433594v-152h128v36c0 11.046875 8.957031 20 20 20 11.046875 0 20-8.953125 20-20v-12c0-4.417969-3.582031-8-8-8s-8 3.582031-8 8v12c0 2.210938-1.789062 4-4 4-2.207031 0-4-1.789062-4-4v-36h8c4.417969 0 8-3.582031 8-8v-32c.003906-4.289062-3.375-7.820312-7.664062-8l-192-8c-2.179688-.089844-4.300782.710938-5.875 2.222656-1.574219 1.507813-2.460938 3.597656-2.460938 5.777344v200h-40c-2.824219 0-5.4375 1.488281-6.878906 3.917969-1.441406 2.425781-1.496094 5.4375-.144532 7.914062l48 88c1.402344 2.570313 4.097657 4.167969 7.023438 4.167969h400c3.867188 0 7.179688-2.761719 7.875-6.566406l16-88c0-.226563-.050781-.441406 0-.664063.046875-.226562.125-.496093.125-.769531v-48c0-4.417969-3.582031-8-8-8zm-8 16v32h-16v-32zm-64 16h32v16h-32zm0-168h32v24h-32zm-30.550781 40h93.105469l-5.328126 32h-82.449218zm62.550781 48v64h-32v-64zm-288 80h95.738281l.207031 32h-95.945312zm111.945312 32-.207031-32h96.261719v32zm96.054688-48h-96.367188l-.207031-32h96.574219zm-112.582031-32 .214843 32h-95.632812v-32zm.582031-120.328125v16.328125h-176v-23.664062zm-176 32.328125h16v152h-16zm40.679688 168 18.402343 14.320312c1.40625 1.09375 3.136719 1.683594 4.917969 1.679688h256c3.046875.015625 5.839844-1.699219 7.203125-4.421875l5.742187-11.578125h65.457032l-5.839844 32.121094c-.199219 0-.367188-.121094-.578125-.121094h-415.984375c-.324219.042969-.644531.109375-.957031.191406l-17.5625-32.191406zm-43.925782 72-13.097656-24h406.035156l-4.363281 24zm0 0"></path>
+                                </svg>
+                            </i>
+                        </div>
+                        <span class="year" id="fecha3_6"> </span>
+                        <div class="timeline-content">
+                            <h5 class="title">Zarpe</h5>
+                            <p class="description" id="desc6E3">
+                                
+                            </p>
+                            <p class="description movercorrec3 intangible" id="desc_prob_c_6">
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="main-timeline">
+                    <a  class="timeline">
+                        <div class="timeline-icon"><i class="fa fa-list-ul"></i></div>
+                        <div class="timeline-content margextra">
+                            <div class="bloqueTitu"> 
+                                <h3 class="title" id="titulo1">Ingreso de datos</h3> <hr />
+                                <p class="bloqueFecha" id="fecha_1" > (9 de junio)</p>
+                                <p class="bloqueFecha" id="verDetalles1_p1" title="Ver contratiempos o problemas"> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="iconoColor" viewBox="0 0 24 24" heigth="25px" width="25px">
+                                        <defs>
+                                        <style>.cls-1{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style></defs><title>8.add</title><g id="_8.add" data-name="8.add"><circle class="cls-1" cx="12" cy="12" r="11"></circle><line class="cls-1" x1="12" y1="6" x2="12" y2="18"></line><line class="cls-1" x1="18" y1="12" x2="6" y2="12">
+                                        </line></g>
+                                    </svg>
+                                </p>
+                            </div>
+                        
+                            <p class="description" id="desc1">
+                                - Ingreso de información del auto y el cliente al sistema Inbakcar. Iniciamos la logistica para mover el vehículos a la yarda.
+                                <strong>Obligatorio para continuar: Factura a cero</strong>
+                            </p>
+                            <div class="description"  >
+                                <p id="desc_prob_a_1" class="intangible problemasDesc">
+                                    
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                    <a  class="timeline">
+                        <div class="timeline-icon">
+                            <i class="fas fa-route"></i>
+                        </div>
+                        <div class="timeline-content margextra">
+                            <div class="bloqueTitu"> 
+                                <h3 class="title" id="titulo2">En camino a yarda</h3>
+                                <p class="bloqueFecha" id="fecha_2"> (15 de junio)</p>
+                                <p class="bloqueFecha" id="verDetalles1_p2" title="Ver contratiempos o problemas"> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="iconoColor" viewBox="0 0 24 24" heigth="25px" width="25px">
+                                        <defs>
+                                        <style>.cls-1{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style></defs><title>8.add</title><g id="_8.add" data-name="8.add"><circle class="cls-1" cx="12" cy="12" r="11"></circle><line class="cls-1" x1="12" y1="6" x2="12" y2="18"></line><line class="cls-1" x1="18" y1="12" x2="6" y2="12">
+                                        </line></g>
+                                    </svg>
+                                </p>
+                            </div>
+
+
+                            <p class="description" id="desc2" >Su auto se está movilizando a la yarda, usando uno o varios servicios de gruas. Este paso puede demorarse por sucesos climáticos</p>
+                            <div class="description"  >
+                                <p id="desc_prob_a_2" class="intangible problemasDesc">
+                                    
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                    <a  class="timeline">
+                        <div class="timeline-icon">
+                            <i class="fas fa-teeth"></i>
+                        </div>
+                        <div class="timeline-content margextra">
+                            <div class="bloqueTitu"> 
+                                <h3 class="title" id="titulo3">En Yarda</h3>
+                                <p class="bloqueFecha" id="fecha_3"> (26 de junio)</p>
+                                <p class="bloqueFecha" id="verDetalles1_p3" title="Ver contratiempos o problemas"> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="iconoColor" viewBox="0 0 24 24" heigth="25px" width="25px">
+                                        <defs>
+                                        <style>.cls-1{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style></defs><title>8.add</title><g id="_8.add" data-name="8.add"><circle class="cls-1" cx="12" cy="12" r="11"></circle><line class="cls-1" x1="12" y1="6" x2="12" y2="18"></line><line class="cls-1" x1="18" y1="12" x2="6" y2="12">
+                                        </line></g>
+                                    </svg>
+                                </p>
+                            </div>
+                            <p class="description" id="desc3">
+                                Su auto se ha movido a un almecen mientras espera se le asigna un contenedor<strong> Obligatorio para continuar: titulo del vehículo o tramitarlo</strong>
+                            </p>
+                            <div class="description"  >
+                                <p id="desc_prob_a_3" class="intangible problemasDesc">
+                                    
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                    <a  class="timeline">
+                        <div class="timeline-icon">
+                            <i class="fas fa-paste"></i>
+                        </div>
+                        <div class="timeline-content margextra" id="titulo4">
+                            <div class="bloqueTitu"> 
+                                <h3 class="title" >Documentación</h3>
+                                <p class="bloqueFecha" id="fecha_4"> (30 de junio)</p>
+                                <p class="bloqueFecha" id="verDetalles1_p4" title="Ver contratiempos o problemas"> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="iconoColor" viewBox="0 0 24 24" heigth="25px" width="25px">
+                                        <defs>
+                                        <style>.cls-1{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style></defs><title>8.add</title><g id="_8.add" data-name="8.add"><circle class="cls-1" cx="12" cy="12" r="11"></circle><line class="cls-1" x1="12" y1="6" x2="12" y2="18"></line><line class="cls-1" x1="18" y1="12" x2="6" y2="12">
+                                        </line></g>
+                                    </svg>
+                                </p>
+                            </div>
+                            <p class="description" id="desc4">
+                                Recolectamos la documentación de su auto, título, fotos de yarda, preparamos la documentación del contenedor en el que se traerá 
+                            </p>
+                            <div class="description"  >
+                                <p id="desc_prob_a_4" class="intangible problemasDesc">
+                                    
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                    <a  class="timeline">
+                        <div class="timeline-icon">
+                            <i class="far fa-object-group"></i>
+                        </div>
+                        <div class="timeline-content margextra">
+                            <div class="bloqueTitu"> 
+                                <h3 class="title" id="titulo5">Cargado en contenedor</h3>
+                                <p class="bloqueFecha" id="fecha_5"> (30 de junio)</p>
+                                <p class="bloqueFecha" id="verDetalles1_p5" title="Ver contratiempos o problemas"> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="iconoColor" viewBox="0 0 24 24" heigth="25px" width="25px">
+                                        <defs>
+                                        <style>.cls-1{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style></defs><title>8.add</title><g id="_8.add" data-name="8.add"><circle class="cls-1" cx="12" cy="12" r="11"></circle><line class="cls-1" x1="12" y1="6" x2="12" y2="18"></line><line class="cls-1" x1="18" y1="12" x2="6" y2="12">
+                                        </line></g>
+                                    </svg>
+                                </p>
+                            </div>
+                            <p class="description" id="desc5">
+                            
+                            </p>
+                            <div class="description"  >
+                                <p id="desc_prob_a_5" class="intangible problemasDesc">
+                                    
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                    <a  class="timeline">
+                        <div class="timeline-icon">
+                            <i class="fas fa-ship"></i>
+                        </div>
+                        <div class="timeline-content margextra" id="titulo6">
+                            <div class="bloqueTitu"> 
+                                <h3 class="title" >Zarpe</h3>
+                                <p class="bloqueFecha" id="fecha_6"> (30 de junio)</p>
+                                <p class="bloqueFecha" id="verDetalles1_p6" title="Ver contratiempos o problemas"> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="iconoColor" viewBox="0 0 24 24" heigth="25px" width="25px">
+                                        <defs>
+                                        <style>.cls-1{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style></defs><title>8.add</title><g id="_8.add" data-name="8.add"><circle class="cls-1" cx="12" cy="12" r="11"></circle><line class="cls-1" x1="12" y1="6" x2="12" y2="18"></line><line class="cls-1" x1="18" y1="12" x2="6" y2="12">
+                                        </line></g>
+                                    </svg>
+                                </p>
+                            </div>
+
+
+                            <p class="description" id="desc6">
+                                El contenedor con su auto se ha cargado en un barco y esta camino hacia la aduana xxx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </p>
+                            <div class="description" >
+                                <p  id="desc_prob_a_6" class="intangible problemasDesc">
+                                    
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+</div>
+  
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuevo puerto{% endblock %}
+
+{% block body %}
+<link href="{{ asset('css/pivotTable/pivot.css') }}"  rel="stylesheet" />
+<script src="{{ asset('js/pivotTable/pivot.js') }}" crossorigin="anonymous"></script>
+    <h1>Informacion del nuevo puerto </h1>
+    
+        {{ include('puertos/_form.html.twig') }}
+<br><hr></hr>
+    <a href="{{ path('puertos_index') }}" style="text-align:right" >Regresas a la lista de puertos</a>
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}
+
+{% block js_pantalla %}
+    <script src="{{ asset('js/puerto.js') }}" ></script>
+{% endblock %}
+

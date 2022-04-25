@@ -1,0 +1,41 @@
+{{ form_start(form) }}
+
+<div class="FormularioPuerto">
+    <div class="form-row">
+        <div class="form-group col-xs-48 col-sm-18 col-md-12 col-lg-12">
+            <label class="medium mb-1" > Nombre del puerto: </label>
+            {{ form_widget(form.nombre) }}
+            {{ form_errors(form.nombre) }}   
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-xs-48 col-sm-18 col-md-12 col-lg-12">
+            <label class="medium mb-1" > Tipo de uso del puerto: </label>
+            {{ form_widget(form.tiposUsos) }}
+            {{ form_errors(form.tiposUsos) }}  
+        </div>
+        <div class="form-group col-xs-48 col-sm-18 col-md-12 col-lg-12">
+            <label class="medium mb-1" > Tipo de puerto - ubicacion: </label>
+            {{ form_widget(form.tipoPuerto) }}
+            {{ form_errors(form.tipoPuerto) }}  
+        </div>
+    </div>
+    <div class="form-row">
+        <div id="ciudad" class="form-group col-md-4"  >
+            <label class="medium mb-1" > Ciduad: </label>
+            {{ form_widget(form.ciudad) }}
+            {{ form_errors(form.ciudad) }}  
+        </div>
+        <div id="departamento" class="form-group col-md-4 " >
+            <label class="medium mb-1" > Departamento: </label>
+            {{ form_widget(form.departamento) }}
+            {{ form_errors(form.departamento) }}  
+        </div>
+    </div>
+        {{ form_widget(form) }} 
+    
+</div>
+
+
+    <button class="btn">{{ button_label|default('Guardar') }}</button>
+{{ form_end(form) }}

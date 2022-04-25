@@ -1,0 +1,241 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Discusión de Jefaturas{% endblock %}
+
+{% block body %}
+
+<link href="{{ asset('css/pivotTable/pivot.css') }}"  rel="stylesheet" />
+<script src="{{ asset('js/pivotTable/pivot.js') }}" crossorigin="anonymous"></script>
+
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a class="nav-link active " id="paso0-tab" data-toggle="tab" href="#paso0" role="tab" aria-controls="paso0" aria-selected="true">Inicio reunión</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link " id="paso1-tab" data-toggle="tab" href="#paso1" role="tab" aria-controls="paso1" aria-selected="true">Reuinones</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="paso2-tab" data-toggle="tab" href="#paso2" role="tab" aria-controls="paso2" aria-selected="false">Comentarios</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="paso3-tab" data-toggle="tab" href="#paso3" role="tab" aria-controls="paso3" aria-selected="false">Nuevos Acuerdos</a>
+  </li>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+    {#*******************Ventanas modal **********************#}
+            {#********Ventana modal ver informacion de la reunion ******** #}
+            <div class="modal fade" id="mostarInfoDJ" tabindex="-1" role="dialog"      aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Informacion de la Discusion</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="infoDJ" class="formularioLista">
+                                {{ include('discusion_jefatura/show.html.twig') }}  
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="float:right">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            {#********Ventana modal editar informacion de la reunion ******** #}
+            <div class="modal fade" id="editarInfoDJ" tabindex="-1" role="dialog"      aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Editar - informacion de la Discusion</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="editDJ" class="formularioLista">
+                            {{ include('discusion_jefatura/edit.html.twig') }} 
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="float:right">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div> 
+            {#*************Ventana modal finalizar reunion********************#}
+            <div class="modal fade" id="mFinalizarDJ" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="finalizadoModalLabel">Finalizar </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="finDiscusionJ">
+                            <button type="button" id="btnSaveAccionDJ"class="btn btn-secondary" >Aceptar</button>                              
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" style="float:right">Cancelar</button>  
+                        </div>
+                    </div>
+                </div>
+            </div>   
+
+
+    {##############Inicion de reunion#########################}
+        <div class="tab-pane fade show active" id="paso0" role="tabpanel" aria-labelledby="paso0-tab">
+            <div class="alert alert-warning" role="alert">
+                <p>Debe seleccionar a las jefaturas que estaran presente en la reunion<br>
+            </div>
+            <div id="NuevaReunion" class="formularioLista" align="center">
+                {{ include('discusion_jefatura/_form.html.twig') }} 
+            </div>
+            <hr></hr><hr></hr>
+            <div id="listaReunionUltimo" class="formularioReunion" align="center">
+                <div class="card shadow mb-4">
+                {{ include('discusion_jefatura/lista_discuciones.html.twig')}}
+                </div>
+            </div>
+        </div>
+
+    {##############Lista de reuniones#########################}
+        <div class="tab-pane fade" id="paso1" role="tabpanel" aria-labelledby="paso1-tab">
+            <div class="alert alert-warning" role="alert" >
+                <p>Lista de todas las reuniones.</p>
+                <select id="selectReunionBuscar" name="reunionBuscar" class="myselect selectized" href="{{ path('lista_reunion_todos')}} "  >
+                    <option value="none" selected disabled hidden >
+                        Seleccione una opcion </option>
+                    <option value="5">5</option>
+                    <option value="10">10 </option>
+                    <option value="20">20</option>
+                </select>
+
+            </div> 
+            <div id="listaReunionAll" class="formularioReunion" align="center"> 
+                {{ include('discusion_jefatura/lista_discuciones_all.html.twig') }} 
+            </div> 
+             
+        </div>
+    {##############comentarios#########################}
+        <div class="tab-pane fade" id="paso2" role="tabpanel" aria-labelledby="paso2-tab">
+            <div class="alert alert-warning" role="alert" data-ruta_comentarios="{{rutaListaReuniones}}">
+                <p>Comentarios de la reunion para la realizacion de acuerdos para los distintos departamentos.</br>Seleccione la reunión a participar </p>
+                
+                {{ form_start(formListaReuniones) }}
+                    {{ form_widget(formListaReuniones.discusionJefatura, {attr:{ 'data-ruta_lista_comentarios': rutaListaReuniones }} ) }}
+                    {{ form_errors(formListaReuniones.discusionJefatura) }}
+                {{ form_end(formListaReuniones) }}
+
+                <button class="btn" id="btnAgregarComentReu" data-acuerdos_a="{{url_acuerdos_a}}" data-toggle="modal" data-target="#respuestaModal"  >{{ button_label|default('Agregar comentario principal') }}</button>
+            </div>
+            <!--{#ventana modal comentario #}
+                <div class="modal fade" id="comentariotaModal" tabindex="-1" role="dialog"      aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Escriba el comentario</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="comentreu" class="formularioLista">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>                
+                </div -->
+            {#ventana modal comentarios y respuestas #}
+                <div class="modal fade" id="respuestaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Escriba el comentario</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                                
+                            </div>
+                            <div class="modal-body">
+                                <div id="comentrespuesta" class="formularioLista">
+                                    {{ include('comentario_reunion/new_respuesta.html.twig') }}
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="float:right">Cancelar</button>  
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+
+                <div id="comentlits" class="formularioLista">
+                    {{ include('discusion_jefatura/lista_comentario.html.twig') }}  
+                </div>
+
+        </div>
+    {##############Acuerdos#########################}
+        <div class="tab-pane fade" id="paso3" role="tabpanel" aria-labelledby="paso3-tab">
+            <div class="alert alert-warning" role="alert">
+                <p>Creacion de los acuerdos.<br>
+                
+            </div>
+            
+            <div id="acuerdo" class="formularioLista">
+                {{ include('acuerdo/new.html.twig') }}  
+            </div>
+            {#********Ventana modal ver informacion del acuerdo ******** #}
+            <div class="modal fade" id="mostarInfoAcuerdo" tabindex="-1" role="dialog"      aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Informacion del acuerdo</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="infoAcuerdo" class="formularioLista">
+                                {{ include('acuerdo/show.html.twig') }} 
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="float:right">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            {#********Ventana modal editar informacion del acuerdo ******** #}
+            <div class="modal fade" id="editarInfoAcuerdo" tabindex="-1" role="dialog"      aria-labelledby="editAModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editAModalLabel">Editar acuerdo</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="editarAcuerdo" class="formularioLista">
+                                {{ include('acuerdo/edit.html.twig') }} 
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="float:right">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+
+
+            <div id="ListaAcuerdo" class="formularioLista">
+                {{ include('acuerdo/lista_acuerdos.html.twig') }}  
+            </div>
+        </div>
+
+</div>
+    
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}
+
+{% block js_pantalla %}
+    <script src="{{ asset('js/acuerdosJefaturaIndex.js') }}" ></script>
+{% endblock %}

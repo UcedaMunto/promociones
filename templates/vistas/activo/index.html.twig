@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Activo index{% endblock %}
+
+{% block body %}
+    <h1>Activo index</h1>
+
+    <table class="table" id="tabla_activos">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CodigoBarra</th>
+                <th>Descripcion</th>
+                <th>Costo</th>
+                <th>Estado</th>
+                <th>Departamento</th>
+                <th>Responsable</th>
+                <th>Tipo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for activo in activos %}
+            <tr>
+                <td>{{ activo.id }}</td>
+                <td>{{ activo.codigoBarra }}</td>
+                <td>{{ activo.descripcion }}</td>
+                <td>{{ activo.costo }}</td>
+                <td>{{ activo.estado.nombre }}</td>
+                <td>{{ activo.departamento.nombre| default('N/D') }}</td>
+                <td>{{ activo.responsable.usuario| default('N/D') }}</td>
+                <td>{{ activo.tipo.nombre }}</td>
+                <td>
+                    <a href="{{ path('activo_show', {'id': activo.id}) }}">show</a>
+                    <a href="{{ path('activo_edit', {'id': activo.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('activo_new') }}"><i class="fa fa-plus" style="font-size:36px"></i></a>
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista de puertos {% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" />
+
+<a  class="btn btn-primary" href="{{ path('puertos_new') }}">
+    <span class="material-icons-outlined">note_add  </span>
+    Agregar nuevo puerto
+</a>
+
+<div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table" id="tabla_puertos">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>TipoPuerto</th>
+                       
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for puerto in puertos %}
+                    <tr>
+                        <td>{{ puerto.id }}</td>
+                        <td>{{ puerto.nombre }}</td>
+                        <td>{{ puerto.tipoPuerto }}</td>
+                        <td>
+                            <a href="{{ path('puertos_show', {'id': puerto.id}) }}">+ informacion</a> ||
+                            <a href="{{ path('puertos_edit', {'id': puerto.id}) }}">Editar</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4">No se encontraron puertos</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+</div>
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}
+

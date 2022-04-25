@@ -1,0 +1,417 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Contenedor{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="{{ asset('css/tablaContenedores.css') }}">
+
+<div id="avisoerror"> </div>
+
+
+
+    <div class="card-body">
+        <h1>Contenedor - DockReceipt</h1> 
+        <a href="{{ path('contenedor_index') }}">Lista de docksreceipt</a> /
+        <a href="{{ path('contenedor_edit', {'id': contenedor.id}) }}">Editar este contenedor</a>/
+
+    <a href="{{ path('contenedor_add_vehiculo', {'id': contenedor.id}) }}">Add auto</a> /
+    <a href="{{ path('contenedor_add_refaccion', {'id': contenedor.id}) }}">Add refacción</a>/
+    <a href="{{ path('comentarios_new_contenedor', {'contenedor': contenedor.id}) }}">Comentario</a> <br>
+    Al imprimir se bloquea el contenedor para cualquier cambio, incluido adición de refacciones y autos
+    <strong><a href="{{ path('contenedor_dockreceipt_excel', {'contenedor': contenedor.id}) }}">Imprimir y bloquear  </a></strong>
+
+    
+    <div class="collapse show">
+            <div class="card-body">
+             <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <th>Booking:</th>
+                        <label>{{ contenedor.booking }}</label>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <th>Codigo:</th>
+                        <label>{{ contenedor.codigo }}</label>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <th>Cupos:</th>
+                        <label>{{ contenedor.cupos }}</label>
+                    </div>
+                  
+                    <div class="form-group col-md-3">
+                        <th>Aduana:</th>
+                        <label>{{ envio.aduana.nombre }}</label>
+                    </div>
+             </div>
+             <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <th>Yarda:</th>
+                        <label>{{ envio.flete.yarda.nombre }}</label>
+                    </div>
+                      <div class="form-group col-md-3">
+                        <th>Puerto Salida:</th>
+                        <label>{{ envio.flete.yarda.puerto.nombre }}</label>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <th>Fecha embarcacion:</th>
+                        <label>{{ contenedor.fechaEnbarcacion ? contenedor.fechaEnbarcacion|date('d-m-Y') : ' ' }}</label>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <th>Fecha Zarpe:</th>
+                        <label>{{ contenedor.fechaZarpe ? contenedor.fechaZarpe|date('d-m-Y') : ' ' }}</label>
+                    </div>                   
+             </div>
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                        <th>Fecha Arribo:</th>
+                        <label>{{ contenedor.fechaArribo ? contenedor.fechaArribo|date('d-m-Y') : ' ' }}</label>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <th>Fecha Track:</th>                        
+                        <label>
+                        {% set ftrack = 'Sin fecha' %}
+                        {% if contenedor.cuadricula != null %}
+                        {% set ftrack = contenedor.cuadricula.fechaTrack %}
+                        {% endif %}
+                        {{ ftrack != 'Sin fecha' ? ftrack|date('d-m-Y') : ' Sin fecha ' }}                        
+                        </label>
+                    </div>
+                     <div  class="form-group col-md-6">
+                        <th>Descripcion:</th>
+                        <label>{{ contenedor.descripcion }}</label>
+                    </div>                    
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                        <th>Cobros:</th>
+                        {% set tpago = 0 %}
+                    {% for tota in totales %}                    
+                    <label>{% set tpago = tota.totalPFlete+tota.totalPgrua+tota.totalPBl+tota.totalStorage+tota.totalNotaria+tota.totalOtros %}
+                            {{ tpago|number_format( 2, '.', ', ') }}
+                    </label>   
+                    {% endfor %}
+                        
+                    </div>
+                    <div class="form-group col-md-3">
+                        <th>Costos:</th>
+                        {% set tcosto = 0 %}
+                    {% for costo in cobros  %}
+                        <label>{% set tcosto = costo.totalCflete+costo.totalCGrua+costo.totalCNotaria+costo.totalCOtros+costo.totalCDescarga+costo.totalCDocumentos+costo.totalCEPago+costo.totalCOC+costo.totalCBl+costo.totalCComision+costo.totalCCYarda+costo.totalCTerrestre+costo.totalCYarda+costo.totalOCFlete %}
+                                {{tcosto|number_format(2, '.', ', ')}}
+                        </label>
+                        {% endfor %}
+                    </div>
+                     <div  class="form-group col-md-3">
+                        <th>Utilidad:</th>
+                        {% set tutil = tpago-tcosto %}
+                        <label>{{ tutil|number_format(2, '.', ', ') }}</label>
+                    </div>       
+                      <div  class="form-group col-md-3">
+                        <th>Vta. por vehiculo:</th>
+                        {% set xvehixulo = tutil/contenedor.cupos %}
+                        <label>{{ xvehixulo|number_format(2, '.', ', ') }}</label>
+                    </div>                 
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                    <th > <font color="blue" > Descarga cancelada: </th>                                   
+                    <label>{{ contenedor.cancelado }}  </label>  </font>                                           
+                    </div>
+                    <div class="form-group col-md-3">
+                        <th> <font color="blue" > Editado:</th>                       
+                        <label> {{ contenedor.editado }} </label>  </font>                      
+                    </div>
+                     <div  class="form-group col-md-3">
+                        <th> <font color="blue" > Valido:</th>                       
+                        <label>{{ contenedor.valido }}</label> </font>
+                    </div>       
+                      <div  class="form-group col-md-3">
+                        <th> <font color="blue" > Descargado:</th>                        
+                        <label> {{ contenedor.descargado }} </label> </font>
+                    </div>                 
+            </div>
+            
+
+            </div>   
+    </div>       
+    
+    <br/>
+    <h1 class="resaltarComentario"> Autos en contenedor</h1>
+    <table class="table table-hover"  id="autos_contenedor">
+        <thead class='thead-dark' >
+        <tr><th colspan=3 width="1000px" > DATOS </th><th colspan=6 width="680px" > COSTOS </th><th colspan=5 width="680px" > COBROS </th><th colspan=5 width="95px" > OPCION </th>
+            <tr>                
+                <th  scope="col" class='ides' >Lote</th>                
+                <th  scope="col" class='datosbasicos' >Vehículo</th>
+                <th  scope="col" class='datosbasicos' >Ciudad</th>
+                <th  scope="col" class="cantidades" >Grua</th>
+                <th  scope="col" class="cantidades">Flete</th>
+                <th  scope="col" class="cantidades">Notaria</th>
+                <th  scope="col" class="cantidades">Storage</th>
+                <th  scope="col" class="cantidades">OtrosG</th>
+                <th  scope="col" class="cantidades">OtrosGE</th>
+                <th  scope="col" class="cantidades">Grua</th>
+                <th  scope="col" class="cantidades">Flete</th>
+                <th  scope="col" class="cantidades">Notaria</th>
+                <th  scope="col" class="cantidades">Storage</th>
+                <th  scope="col" class="cantidades" >Otros</th>
+                <th width="70px" scope="col" >-</th>
+               
+            </tr>
+        </thead>
+        <tbody >
+        {% set counter = 0 %}
+    {% for formVehiculo in formEnvioConte %} 
+    
+     <tr class="table-light" id = 'regis{{ids[counter]}}' > 
+     <td colspan='15' id='contenedor' > 
+      {{ form_start(formVehiculo, {'attr': {'id': "movimiento_"~ ids[counter] }}) }}    
+                    {{ form_errors(formVehiculo) }}
+     <table>
+     <tr>                
+                <td title="VIN: {{ contenedor.envioContenedors[counter].vin }}" class="ides" >                     
+                    {{ contenedor.envioContenedors[counter].lote }}
+                </td>
+                <td class="datosbasicos" >
+                    {{ contenedor.envioContenedors[counter].vehiculo}} {{ contenedor.envioContenedors[counter].submodelo }}
+                </td>
+                <td class="datosbasicos" >
+                    {{ contenedor.envioContenedors[counter].envio.detalleCompra.zonaSucursal.nombre|default('No existe')  }}
+                </td>                                             
+               
+                <td class="cantidades" > 
+                    {{ contenedor.envioContenedors[counter].envio.totalGrua | default(0) }}
+                </td>
+                <td class="cantidades" > 
+                    {{ form_widget(formVehiculo.envio.costoFlete, {'id': 'costoFlete'~  ids[counter]  }) }}                     
+                </td>
+                <td class="cantidades" > 
+                    {{ form_widget(formVehiculo.notariaCosto, {'id': 'notariaCosto'~  ids[counter]}) }}
+                </td>
+                <td class="cantidades" > 
+                    {{ contenedor.envioContenedors[counter].envio.totalStorage | default(0) }}
+                </td>
+                <td class="cantidades" > 
+                    {{ contenedor.envioContenedors[counter].envio.totalOtrosGrua | default(0) }}   
+                </td>
+                <td class="cantidades" > 
+                    {{ contenedor.envioContenedors[counter].envio.totalOtrosGruaEspecial | default(0) }}   
+                </td>
+                <td class="cantidades" > 
+                    {{ form_widget(formVehiculo.envio.GruaPrecio, {'id': 'GruaPrecio'~  ids[counter] }) }}
+                </td>
+                <td class="cantidades" > 
+                    {{ form_widget(formVehiculo.envio.precioFlete, {'id': 'precioFlete'~ ids[counter] }) }}
+                </td>
+                <td class="cantidades" > 
+                    {{ form_widget(formVehiculo.notaria, {'id': 'notaria'~ ids[counter] }) }}
+                </td>
+                <td class="cantidades" > 
+                    {{ form_widget(formVehiculo.storage, {'id': 'storage'~ ids[counter] }) }}
+                </td>
+                <td class="cantidades" > 
+                    {{ form_widget(formVehiculo.otros, {'id': 'otros'~ ids[counter] }) }}
+                </td> 
+            
+                <td > 
+                    <button class="btn btn-primary btn-block botona" id="{{ids[counter]}}" > {{ button_label|default('Editar') }} </button>                    
+                </td>                  
+             
+              {% set counter = counter + 1  %} 
+              {{ form_end(formVehiculo) }}
+              </tr>
+              </table>
+           </td>  
+        </tr >          
+        {% endfor %}  
+        </tbody>
+    </table>   
+
+<!-- Inicializo variables -->
+{% set cantidad = 0  %}
+{% set peso = 0 %}
+{% set refId = '' %}
+{% set refFac = '' %}
+{% set descripcion = '' %}
+{% set embalaje = ''  %}
+{% set identificador = '' %}
+{% set modelo = '' %}
+{% set marca = '' %}
+{% set clienteId = '' %}
+{% set cliente ='' %}
+
+<!-- Lleno las variables con los datos de refacciones necesarios -->
+{% for refaccion in contenedor.refacciones %}
+{% set cantidad = refaccion.cantidad %}
+{% set peso = refaccion.peso %}
+{% set refId = refaccion.id %}
+{% set refFac = refaccion.numeroFactura %}
+{% set descripcion = refaccion.descripcion %}
+{% set embalaje = refaccion.tipoEmbalaje.nombre %}
+{% set identificador = refaccion.autoRecipiente.detalleCompra.identificador| default('NE') %}
+{% set modelo = refaccion.autoRecipiente.detalleCompra.modelo.nombre| default('NE') %}
+{% set marca = refaccion.autoRecipiente.detalleCompra.modelo.marca.nombre| default('NE') %}
+{% set clienteId = refaccion.cliente.id %}
+{% set cliente = refaccion.cliente.cliente %}
+{% endfor %}
+
+{% if (cantidad > 0) %}
+    <h1 class="resaltarComentario">  Repuestos </h1>
+    <table class="table" id="refacciones_contenedor">
+        <thead  class='thead-dark' >
+            <tr>
+                <th widtd="100px" scope="col">Cantidad</th>
+                <th width="100px" scope="col">Peso</th>
+                <th width="200px" scope="col">Factura</th>
+                <th width="400px" scope="col">Desc</th>
+                <th width="100px" scope="col">Embalaje</th>
+                <th width="300px" scope="col">Vehículo (Lote o vin,Modelo,Marca)</th>
+                <th width="200px" scope="col">Cliente</th>
+            </tr>
+        </thead>
+        {% set counter = 0 %}
+        <tbody>
+            
+                <tr class='table-light' >
+                    <td >
+                        {{ cantidad }}
+                    </td>
+                    <td >
+                        {{ peso }}
+                    </td>
+                    <td >
+                        <a href="{{ path('refacciones_show', { 'id':refId }) }}">{{ refFac }}</a>
+                    </td>
+                    <td >
+                        {{ descripcion }}
+                    </td>
+                    <td >
+                        {{ embalaje }}
+                    </td>
+                    <td >
+                        {{ identificador }}
+                        {{ modelo }}
+                        {{ marca }}
+                    </td>
+                    <td >
+                        <a href="{{ path('datos_persona_show', {'id': clienteId | default(0) }) }}">  {{ cliente| default('NE')  }} </a>
+                    
+                    </td>
+                </tr>        
+            
+        </tbody>
+    </table>
+{% endif %}
+
+
+   
+   <br/> <br/>
+
+    <main>     
+            <h1 class="resaltarComentario"> COMENTARIOS <h1>
+            <div class="col-md-12">
+                <div class="card-footer p-4 p-lg-3 border-top-0">        
+                <div class="small mb-0">
+                    <div>Ojo: Marcar un comentario como resuelto significa que el problema ya fue solventado y ya no debe aparecer en la alertas 
+                    de nadie y ya no necesita seguimiento</div>
+                    <div>Ojo: Marcar un comentario como NO resuelto significa que el problema no se logró solventar ó que se designó a uno o varios responsables para que se le de seguimiento</div>
+                </div>
+            </div>
+                {% for comentario in comentarios %}
+                    {% if comentario.respuestas is null %}
+                        <div class="card shadow mb-4">
+                            <a href="#collapseCardExample{{ comentario.id }}" class="d-block card-header py-3  {% if comentario.estado.id == 1 or comentario.estado.id == 8 %}collapsed{%  endif %}" data-toggle="collapse" 
+                                role="button" aria-expanded="{% if comentario.estado.id == 1 or comentario.estado.id == 8 %}false{%  else %}true{%  endif %}" aria-controls="collapseCardExample{{ comentario.id }}">
+                                <h6 class="m-0 font-weight-bold {% if comentario.estado.id == 1 %}text-success{%  elseif comentario.estado.id == 8 %}text-finish{%  else %}text-warning{%  endif %}"> {{ comentario.autor.usuario }} 
+                                - {{ comentario.fechaCreacion is empty ? "" : comentario.fechaCreacion|date("Y-m-d H:i:s") }}
+                                - {{ comentario.etiquetas }}
+                                - ESTADO:{{ comentario.estado.nombre }}
+                                - TITULO:{{ comentario.titulo }} 
+                                </h6>
+                            </a>
+                            
+                            <div class="{% if comentario.estado.id == 1  or comentario.estado.id == 8 %}collapse{%  else %}collapse show{%  endif %}" id="collapseCardExample{{ comentario.id }}" style="">
+                                <div class="card-body">
+                                    <a href="{{ path('agenda_revision_new', {'comentario': comentario.id }) }}" class="btn btn-success btn-icon-split float-right">
+                                        <span class="icon text-white-50">
+                                        <i class="fas fa-user-secret fa-lg"></i>
+                                        </span>
+                                        <span class="text">Programar revisión</span>
+                                    </a>
+                                    <a href="{{ path('comentarios_contenedor_resolver', {'contenedor': contenedor.id ,'id': comentario.id }) }}" class="btn btn-danger btn-icon-split float-right">
+                                        <span class="icon text-white-50">
+                                            <svg class="svg-inline--fa fa-trash fa-w-14" aria-hidden="true" 
+                                            focusable="false" data-prefix="fas" data-icon="trash" role="img" 
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor"
+                                            d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg><!-- <i class="fas fa-trash"></i> Font Awesome fontawesome.com -->
+                                        </span>
+                                        <span class="text">Marcar resuelto</span>
+                                    </a>
+                                    <a href="{{ path('comentarios_no_resuelto_contenedor', {'contenedor': contenedor.id ,'id': comentario.id }) }}" class="btn btn-warning btn-icon-split float-right">
+                                        <span class="icon text-white-50">
+                                            <svg class="svg-inline--fa fa-trash fa-w-14" aria-hidden="true" 
+                                            focusable="false" data-prefix="fas" data-icon="trash" role="img" 
+                                            xmlns="http://www.w3.org/2000/svg" 
+                                            viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor"
+                                            d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg><!-- <i class="fas fa-trash"></i> Font Awesome fontawesome.com -->
+                                        </span>
+                                        <span class="text">No se logró resolver</span>
+                                    </a>
+                                    <p>{{ comentario.mensaje }}</p>
+                                    <a href="{{ path('comentarios_new_respuesta_contenedor', {'contenedor': contenedor.id ,'comentarioBase': comentario.id }) }}">Responder</a>
+                                    {{ _self.recursiveComentario(comentario, comentarios, contenedor) }}
+                                </div>
+                            </div>
+                        </div>   
+                    {% endif %}
+                {% else %}
+                        <p>
+                            Sin comentarios
+                        </p>
+                {% endfor %}
+        </div>
+        {% macro recursiveComentario(comentarioActual, comentarios, contenedor) %}
+            {% for comentarioN2 in comentarios %}      
+                {% if comentarioN2.respuestas is not null %}
+                    {% if comentarioN2.respuestas.id == comentarioActual.id %}
+                        <div class="card shadow mb-4">
+                            <a href="#collapseCardExample{{ comentarioN2.id }}" class="d-block card-header py-3" data-toggle="collapse" 
+                                role="button" aria-expanded="true" aria-controls="collapseCardExample{{ comentarioN2.id }}">
+                                <h6 class="m-0 font-weight-bold text-primary">{{ comentarioN2.autor.usuario }} 
+                                - {{ comentarioN2.fechaCreacion is empty ? "" : comentarioN2.fechaCreacion|date("Y-m-d H:i:s") }}
+                                - {{ comentarioN2.etiquetas }}
+                                </h6>
+                            </a>
+                            
+                            <div class="collapse show" id="collapseCardExample{{ comentarioN2.id }}" style="">
+                                <div class="card-body">
+                                    <a href="{{ path('agenda_revision_new', {'comentario': comentarioN2.id }) }}" class="btn btn-success btn-icon-split float-right">
+                                        <span class="icon text-white-50">
+                                        <i class="fas fa-user-secret fa-lg"></i>
+                                        </span>
+                                        <span class="text">Programar revisión</span>
+                                    </a>
+                                    <p>{{ comentarioN2.mensaje }}</p>
+                                    <a href="{{ path('comentarios_new_respuesta_contenedor', {'contenedor': contenedor.id ,'comentarioBase': comentarioN2.id }) }}">Responder</a>
+                                    {{ _self.recursiveComentario(comentarioN2, comentarios, contenedor ) }}
+                                </div>
+                            </div>
+                        {%  endif %}
+                    {%  endif %}
+                {% endfor %}
+            {% endmacro %}
+            </div>
+
+        </main>
+    </div>
+</div>
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}
+
+{% block js_pantalla %}
+    <script src="{{ asset('js/editarConte.js') }}" ></script>
+{% endblock %}

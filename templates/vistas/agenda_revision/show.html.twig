@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AgendaRevision{% endblock %}
+
+{% block body %}
+    <h1>AgendaRevision</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ agenda_revision.id }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ agenda_revision.descripcion }}</td>
+            </tr>
+            <tr>
+                <th>DuracionRecordatorio</th>
+                <td>{{ agenda_revision.duracionRecordatorio }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('agenda_revision_index') }}">back to list</a>
+
+    <a href="{{ path('agenda_revision_edit', {'id': agenda_revision.id}) }}">edit</a>
+{% endblock %}

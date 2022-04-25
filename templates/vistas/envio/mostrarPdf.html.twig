@@ -1,0 +1,11 @@
+  {% if envio.detalleCompra.compra.facturas is not null %}
+                        {% if extensionFactura == 1  %}
+                            <img src="{{rutaFactura}}/{{ envio.detalleCompra.compra.facturas }}">
+                        {% elseif extensionFactura == 2 %}
+                            <embed src="{{rutaFactura}}/{{ envio.detalleCompra.compra.facturas }}" type="application/pdf" width="100%" height="600px" />
+                        {% else %}
+                            <a href="{{rutaFactura}}/{{ envio.detalleCompra.compra.facturas }}" download="factura{{envio.identificador}}">Descargar</a>
+                        {% endif %}
+                    {% else %}
+                        <p>No se ha subido</p> 
+                    {% endif %}

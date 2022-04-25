@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BitacoraSistema{% endblock %}
+
+{% block body %}
+    <h1>BitacoraSistema</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ bitacora_sistema.id }}</td>
+            </tr>
+            <tr>
+                <th>Fecha</th>
+                <td>{{ bitacora_sistema.fecha ? bitacora_sistema.fecha|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Usuario</th>
+                <td>{{ bitacora_sistema.usuario }}</td>
+            </tr>
+            <tr>
+                <th>Datos Ingresados</th>
+                <td>{{ dump(parametros) }}</td>
+            </tr>
+            <tr>
+                <th>Ruta</th>
+                <td>{{ bitacora_sistema.ruta }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ bitacora_sistema.descripcion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('bitacora_sistema_index') }}">back to list</a>
+
+{% endblock %}

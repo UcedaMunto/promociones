@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Email</title>
+        <style>
+            body{
+                background-color: #e1e1e1;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            .container{
+            max-width: 680px;
+            width: 100%;
+            margin: auto;
+            }
+
+            main{
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                color: #555555; 
+            }
+
+            .body h2{
+                font-weight: 300;
+                color: #464646;
+            }
+
+            .logo{
+                width: 150px;
+                padding: 5px 5px;
+            }
+
+            .header-img{
+                max-width: 100% !important;
+                height: auto !important;
+                width: 100%;
+            }
+
+            a{
+                text-decoration: underline; 
+                color: #0c99d5; 
+            }
+
+
+            .body{
+                padding: 20px;
+                background-color: white;
+                font-family: Geneva, Tahoma, Verdana, sans-serif; 
+                font-size: 16px; 
+                line-height: 22px; 
+                color: #555555; 
+            }
+
+            button{
+                background-color: #0c99d5;
+                border: none;
+                color: white;
+                border-radius: 2px;
+                height: 50px;
+                max-width: 250px;
+            padding: 0px 30px;
+                font-weight: 500;
+                font-family: Geneva, Tahoma, Verdana, sans-serif; 
+                font-size: 16px;
+                margin: 10px 0px 30px 0px;
+            }
+
+            footer{
+                padding-top: 50px;
+                font-family: Geneva, Tahoma, Verdana, sans-serif; 
+                font-size: 14px; 
+                line-height: 18px; 
+                color: #738597;
+                text-align: center;
+            }
+
+            footer img{
+                width: 100px;
+                margin: 24px 0px;
+            }
+
+            .col {
+                display: table-cell;
+                width: 50%;
+                margin-right: 0px;
+            }
+
+
+    </style>
+</head>
+<body>
+    <main class="container">
+        <div class="logo container">
+                <img src="https://inbakcar.net/images/logo_dark.png" class="logo">
+                
+        </div>
+        <div class="body container">
+            <h2>{{ titulo }}</h2>
+            {% set contador = 0 %}
+            {% set contador2 = 0 %}
+            <div class="col">
+            <ul>
+                {% for key, dato in datos %}
+                    {% if dato.timestamp is defined %}
+                        <li>{{ key }}:{{ dato|date('m/d/Y') }}</li>
+                    {% else %}
+                        <li>{{ key }}: {{ dato|e }}</li>
+                    {% endif %}
+                    {% set contador = contador + 1 %}
+                    {% if contador == 3 %} 
+                        </ul> </div>
+                        {% if contador2 == 1 %} 
+                            <br></br>
+                        {% endif %}
+                        <div class="col"><ul>
+
+                        {% set contador = 0 %}
+                        {% set contador2 = contador2 + 1 %} 
+                    {% endif %}
+                    
+                {% endfor %}
+            </ul>
+            </div>
+            <a href="https://inbakcar.net/tracking.html/{{ identificador }}"><button>Ver Tracking</button></a>
+        </div>
+
+    </main>
+
+    <footer class="container">
+        <p>Gracias por elegirnos!</p>
+        <p>
+            {{ descripcion }}
+        </p>
+        <p>Si tienes una cuenta: <a href="https://www.inbakcar.net/INBAKCAR/login.php">Login</a></p>
+        <p>Tracking de vehículos: <a href="https://inbakcar.net/tracking.html">Ir a tracking</a></p>
+        <p>Autos en venta: <a href="https://inbakcar.net/inventory-1.html">Ir a inventario</a></p>
+        <img src="https://www.inbakcar.net/images/logo.png">
+        <div>
+            <a href="https://inbakcar.net/">Inbakcar.net</a> <span>|</span> <a href="https://www.facebook.com/INBAKCAR" >En facebook</a>
+            <p>Avenida calle sisimiles #2942 Colonia Miramonte San Salvador, El Salvador.</p>
+
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,37 @@
+
+
+{% block body %}
+
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Numero</th>
+                <td>{{ proveedor.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ proveedor.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Telefono</th>
+                <td>{{ proveedor.telefono }}</td>
+            </tr>
+            <tr>
+                <th>Direccion</th>
+                <td>{{ proveedor.direccion }}</td>
+            </tr>
+            <tr>
+                <th>Codigo</th>
+                <td>{{ proveedor.codigo }}</td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                <td>{{ proveedor.estado ? 'Activo' : 'Inactivo' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar establecimiento{% endblock %}
+
+{% block body %}
+
+    {{ include('promo_establecimiento/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('promo_establecimiento_index') }}">back to list</a>
+
+    {{ include('promo_establecimiento/_delete_form.html.twig') }}
+{% endblock %}

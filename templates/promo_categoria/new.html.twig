@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crear Categoria{% endblock %}
+
+{% block body %}
+
+    {{ include('promo_categoria/_form.html.twig') }}
+
+    <a href="{{ path('promo_categoria_index') }}">back to list</a>
+{% endblock %}

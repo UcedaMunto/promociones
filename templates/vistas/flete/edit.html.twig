@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Flete{% endblock %}
+
+{% block body %}
+<div class="col-md-12">
+    <a href="{{ path('flete_index') }}">Regresar a la lista</a>
+    <div class="card shadow-lg border-0 rounded-lg mt-1">
+        <div class="card-header justify-content-center"></div>
+        <div class="card-body">
+ 
+
+            {{ form_start(form , { 'attr': {'id': 'envio_dato'} } )}}
+                <div class="form-row">
+                    <div class="form-group col-md-4">                  
+                        <label class="small mb-1" >Precio de venta</label>
+                        {{ form_widget(form.precioVenta) }}
+                        {{ form_errors(form.precioVenta) }}                     
+                    </div>
+                    <div class="form-group col-md-4">                
+                        <label class="small mb-1" >Costo</label>
+                        {{ form_widget(form.costo) }}
+                        {{ form_errors(form.costo) }}                                  
+                    </div>
+                    <div class="form-group col-md-4">                           
+                        <label class="small mb-1" >Tipo Flete</label>
+                        {{ form_widget(form.tipo) }}
+                        {{ form_errors(form.tipo) }}        
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div id="dealer" class="form-group col-md-4">                        
+                        <label class="small mb-1" >Yarda</label>
+                        {{ form_widget(form.yarda) }}
+                        {{ form_errors(form.yarda) }}                            
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                            <button type="submit" id='envio' class="btn btn-primary btn-block"> {{ button_label|default('Guardar') }} </button>                 
+                    </div>
+                </div>
+               
+            {{ form_end(form) }}
+        
+        <div class="card-footer text-center">
+            
+        </div>
+    </div>
+</div>
+   
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}
+
+

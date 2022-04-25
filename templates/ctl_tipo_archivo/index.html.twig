@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CtlTipoArchivo index{% endblock %}
+
+{% block body %}
+    <h1>CtlTipoArchivo index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctl_tipo_archivo in ctl_tipo_archivos %}
+            <tr>
+                <td>{{ ctl_tipo_archivo.id }}</td>
+                <td>{{ ctl_tipo_archivo.nombre }}</td>
+                <td>
+                    <a href="{{ path('ctl_tipo_archivo_show', {'id': ctl_tipo_archivo.id}) }}">show</a>
+                    <a href="{{ path('ctl_tipo_archivo_edit', {'id': ctl_tipo_archivo.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('ctl_tipo_archivo_new') }}"><i class="fa fa-plus" style="font-size:36px"></i></a>
+{% endblock %}

@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ordenes de movimiento(ùltimos 4 meses por defecto)  {% if yarda is defined %} YARDA: {{ yarda }} {% endif %} {% endblock %}
+
+{% block body %}
+    <div class="col-xl-12 col-lg-12">
+        <div id="filtroFecha" class="intangible">
+            {{ form_start(form, { 'method': 'POST'} ) }}
+                <div class="row">
+                    <div class="col-xxl-4 col-xl-3 mb-4">
+                        Filtrar por fechas:
+                    </div>
+                    <div class="col-xxl-4 col-xl-3 mb-4">
+                        {{ form_widget(form.fechaInicial) }}
+                    </div>
+                    <div class="col-xxl-4 col-xl-3 mb-4">
+                        {{ form_widget(form.fechaFinal) }}
+                    </div>
+                    <div class="col-xxl-4 col-xl-3 mb-4">
+                        <button type="submit" class="btn btn-primary btn-block"> {{ button_label|default('filtrar') }} </button>
+                    </div>
+                </div>
+            {{ form_end(form) }}
+        </div>
+         
+        <div class="card shadow mb-4">
+            
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+             
+                <div>
+                    Visibles: 
+                    <a class="toggle-vis" role="button" data-column="0">Correlativo</a> -
+                    <a class="toggle-vis" role="button" data-column="1">Nombre</a> -
+                    <a class="toggle-vis" role="button" data-column="2">Estado</a> -
+                    <a class="toggle-vis" role="button" data-column="3">Lote</a> -
+                    <a class="toggle-vis" role="button" data-column="4">Vin</a> -
+                    <a class="toggle-vis" role="button" data-column="5">Acciones</a>
+                </div>
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" x-placement="bottom-end" style="position: absolute; transform: translate3d(-159px, 19px, 0px); top: 0px; left: 0px; will-change: transform;">
+                        <div class="dropdown-header">Acciones</div>
+                            <a class="dropdown-item" href="{{ path('envio_new') }}">+ Orden</a>
+                            <a class="dropdown-item" href="{{ path('contenedor_new') }}">+ contenedor</a>
+                        <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" id="filtroFechaButton">Filtrar por fecha</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <table class="table" id="tabla_envios">
+                    <thead>
+                        <tr>
+                            <th>Correlativo</th>
+                            <th>Nombre</th>
+                            <th>Estado</th>
+                            <th>Lote</th>
+                            <th>Vin</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for envio in envios %}
+                        <tr>
+                            <td>{{ envio.id }}</td>
+                            <td>{{ envio.flete.yarda.nombre | default('Grua interna') }}</td>
+                            <td>{{ envio.detalleCompra.compra.compraEstado }}</td>
+                            <td >{{ envio.detalleCompra.lote}}</td>
+                            <td>{{ envio.detalleCompra.vin}}</td>  
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Acciones
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="{{ path('envio_show', {'id': envio.id}) }}">Vehiculo</a>-
+                                            <a class="dropdown-item" href="{{ path('envio_edit', {'id': envio.id}) }}">editar</a>-
+                                            <a class="dropdown-item" href="{{ path('persona_cliente_show', {'id': envio.getClienteFinal[1] }) }}" >Cliente final</a>-
+                                            <a class="dropdown-item" href="{{ path('comentarios_new', {'envio': envio.id }) }}" >+Comentario</a>-
+                                            <a class="dropdown-item" href="{{ path('envio_new_movimiento', {'envio': envio.id}) }}">Movimiento</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            <div>
+        </div>
+
+        <p class="nota">Nota, esta pantalla cambia los estados de los vehículos en el track hacia el estados: 
+        <br>2: Recogidos en subasta 
+        <br>4: llegados a yarda 
+        <br>El estado solo cambiará cuando el auto aun este en un estado inferior, es decir si el auto ya esta en estado 5 esta pantalla no tendrá ningun efecto sobre el</p>
+        
+
+        <div class="alert alert-danger intangible"  id="msjErrorExt" role="alert" >
+            <strong id="msjError"> </strong>
+        </div> 
+        <div class="alert alert-success intangible"  id="msjErroroExt" role="alert">
+            <strong id="msjExito"> </strong> 
+        </div>
+
+
+        {{ form_start(MultiSelectCars, { 'method': 'POST', 'attr':{ 'id':'formularioLista'} } ) }}
+            <div class="col-md-12">
+                <div class="form-row">
+                    <div class="col-md-4">
+                        {{ form_widget(MultiSelectCars.lista) }}
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" id="aYarda" class="btn btn-primary btn-block"> {{ button_label|default('Marcar como llegados a yarda') }} </button>
+                        <button type="submit" id="enGrua" class="btn btn-primary btn-block"> {{ button_label|default('Marcar como en grua') }} </button>
+                    </div>
+                </div>
+            </div>
+        {{ form_end(MultiSelectCars) }}
+                
+    </div>
+
+{% endblock %}
+
+
+
+{% block js_pantalla %}
+    <script src="{{ asset('js/envioIndexUpdateTrack.js') }}" ></script>
+{% endblock %}

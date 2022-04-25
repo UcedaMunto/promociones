@@ -1,0 +1,124 @@
+{{ form_start(form) }}
+
+<div class="FormularioWorkOrder">
+    <div class="form-row">
+        <div class="form-group col-xs-48 col-sm-18 col-md-12 col-lg-12">
+        <label class="small mb-1" > Information provider: </label>
+            {{ form_widget(form.proveedor)}}
+            {{ form_errors(form.proveedor) }}  
+        </div>
+    </div> 
+    <div class="form-row">
+        {{ include('work_order/infoProveedor.html.twig') }}
+    </div>
+    <div class="form-row">
+        <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
+        <label class="small mb-1" > Contact in warehouse: </label>
+            {{ form_widget(form.contactoBodega)}}
+            {{ form_errors(form.contactoBodega) }}  
+        </div>
+        <div class="form-group col-xs-36 col-sm-18 col-md-9 col-lg-9">
+        <label class="small mb-1" > Address of the warehouse for pick up : </label>
+            {{ form_widget(form.direccionBodega)}}
+            {{ form_errors(form.direccionBodega) }}  
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-xs-16 col-sm-6 col-md-4 col-lg-4">
+        <label class="small mb-1" > Order date: </label>
+            {{ form_widget(form.diaOrden)}}
+            {{ form_errors(form.diaOrden) }}  
+        </div>
+        <div class="form-group col-xs-16 col-sm-6 col-md-4 col-lg-4">
+        <label class="small mb-1" > Pick up date: </label>
+            {{ form_widget(form.diaRetiro)}}
+            {{ form_errors(form.diaRetiro) }}  
+        </div>
+        <div class="form-group col-xs-16 col-sm-6 col-md-4 col-lg-4">
+        <label class="small mb-1" > Pick up hour: </label>
+            {{ form_widget(form.horaRetiro, {'type': 'time'} )}}
+            {{ form_errors(form.horaRetiro) }}  
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-xs-48 col-sm-18 col-md-12 col-lg-12">
+        <label class="small mb-1" > Work description: </label>
+            {{ form_widget(form.descripcionOrden)}}
+            {{ form_errors(form.descripcionOrden) }}        
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-xs-48 col-sm-18 col-md-12 col-lg-12">
+        <label class="small mb-1" > Additional comments: </label>
+            {{ form_widget(form.comentarioExtra)}}
+            {{ form_errors(form.comentarioExtra) }}        
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-xs-16 col-sm-6 col-md-4 col-lg-4">
+        <label class="small mb-1" > Container tipe: </label>
+            {{ form_widget(form.tipoContenedor)}}
+            {{ form_errors(form.tipoContenedor) }}     
+        </div>
+        <div class="form-group col-xs-16 col-sm-6 col-md-4 col-lg-4">
+        <label class="small mb-1" > Empty container: </label>
+            {{ form_widget(form.retiroContenedorVacio)}}
+            {{ form_errors(form.retiroContenedorVacio) }}     
+        </div>
+        <div class="form-group col-xs-16 col-sm-6 col-md-4 col-lg-4">
+        <label class="small mb-1" > Return equip delivery terminal: </label>
+            {{ form_widget(form.puertoCarga)}}
+            {{ form_errors(form.puertoCarga) }}     
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-xs-24 col-sm-12 col-md-6 col-lg-6">
+        <label class="small mb-1" > Shipping line: </label>
+            {{ form_widget(form.booking.shippingLine)}}
+            {{ form_errors(form.booking.shippingLine) }}    
+        </div>
+        <div class="form-group col-xs-24 col-sm-12 col-md-6 col-lg-6">
+        <label class="small mb-1" > Booking number: </label>
+            {{ form_widget(form.booking.numero)}}
+            {{ form_errors(form.booking.numero) }}    
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-xs-48 col-sm-18 col-md-12 col-lg-12">
+            <label class="small mb-1" > Additional comments: </label>
+            {{ form_widget(form.infoEmpresa)}}
+            {{ form_errors(form.infoEmpresa) }}        
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-xs-24 col-sm-12 col-md-6 col-lg-6">
+        <label class="small mb-1" > Work authorized by: </label>
+            {{ form_widget(form.personaAutoriza)}}
+            {{ form_errors(form.personaAutoriza) }}    
+        </div>
+        <div class="form-group col-xs-24 col-sm-12 col-md-6 col-lg-6">
+        <label class="small mb-1" > Signature: </label>
+            {{ form_widget(form.cargoPersona)}}
+            {{ form_errors(form.cargoPersona) }}    
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-xs-24 col-sm-12 col-md-6 col-lg-6">
+        <label class="small mb-1" > Commodity: </label>
+            {{ form_widget(form.cargaTipo)}}
+            {{ form_errors(form.cargaTipo) }}    
+        </div>
+
+    </div>
+    
+
+
+
+</div>  
+
+
+
+    {{ form_widget(form) }}
+
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

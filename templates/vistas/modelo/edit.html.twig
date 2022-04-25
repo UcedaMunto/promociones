@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Modelo{% endblock %}
+
+{% block body %}
+    <h1>Editar Modelo</h1>
+    <a href="{{ path('modelo_index') }}">Regresar a lista</a>
+    <div class="d-flex justify-content-center bd-highlight mb-3">
+
+        <div class="col-md-4">
+            
+            {{ include('modelo/_form.html.twig', {'button_label': 'Update'}) }}
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

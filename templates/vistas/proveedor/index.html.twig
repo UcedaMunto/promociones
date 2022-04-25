@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Proveedor{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" />
+    <h1>Lista de proveedores </h1>
+{#<a  class="btn btn-primary" href="{{ path('proveedor_new') }}">
+    <span class="material-icons-outlined">note_add  </span>
+    Agregar nuevo proveedor
+</a>#}
+<button  class="btn btn-primary" id="agregarProveedor" data-toggle="modal" data-target="#proveedorModal" href="{{ path('proveedor_new') }}">
+    <span class="material-icons-outlined">note_add  </span>
+    Agregar nuevo proveedor
+</button>
+<div>
+    {#ventana modal proveedor #}
+    <div class="modal fade" id="proveedorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Informacion del proveedor</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="proveedorDiv" class="formularioLista">
+                        {{ include('proveedor/_form.html.twig') }}
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="float:right">Cancelar</button>      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#ventana modal proveedor mostrar informacion#}
+    <div class="modal fade" id="proveedorInformacionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Informacion del proveedor</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="proveedorDivInfo" class="formularioLista">
+                        {{ include('proveedor/show.html.twig') }}
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="float:right">Cancelar</button>      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {# Lista proveedor #}
+    <div id="listadoProveedores">
+            {{ include('proveedor/lista_proveedor.html.twig')}}
+    </div>
+</div> 
+
+{% endblock %}
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}
+{% block js_pantalla %}
+    <script src="{{ asset('js/proveedorIndex.js') }}" ></script>
+{% endblock %}

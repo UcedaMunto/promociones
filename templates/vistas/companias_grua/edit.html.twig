@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit CompaniasGrua{% endblock %}
+
+{% block body %}
+    <h1>Edit CompaniasGrua</h1>
+
+    {{ include('companias_grua/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('companias_grua_index') }}">back to list</a>
+
+{% endblock %}

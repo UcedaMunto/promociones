@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CrearCtlTipoAviso{% endblock %}
+
+{% block body %}
+    <h1>Create new CtlTipoAviso</h1>
+
+    {{ include('ctl_tipo_aviso/_form.html.twig') }}
+
+    <a href="{{ path('ctl_tipo_aviso_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CompaniasGrua index{% endblock %}
+
+{% block body %}
+    <a href="{{ path('companias_grua_new') }}"><i class="fa fa-plus" style="font-size:36px"></i></a>
+    <h1>Lista de compañías de gruas y pago de storage</h1> 
+    <p>puede editar los datos o crear nuevas compañias, si una campañia cambia de nombre no lo edite, cree una nueva</p>
+    
+    <table class="table" id="tabla_companias_grua">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Direccion</th>
+                <th>Telefono</th>
+                <th>NumMiembro</th>
+                <th>Telefono2</th>
+                <th>NombreContacto</th>
+                <th>Email</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for companias_grua in companias_gruas %}
+            <tr>
+                <td>{{ companias_grua.id }}</td>
+                <td>{{ companias_grua.nombre }}</td>
+                <td>{{ companias_grua.direccion }}</td>
+                <td>{{ companias_grua.telefono }}</td>
+                <td>{{ companias_grua.numMiembro }}</td>
+                <td>{{ companias_grua.telefono2 }}</td>
+                <td>{{ companias_grua.nombreContacto }}</td>
+                <td>{{ companias_grua.email }}</td>
+                <td>
+                    <a href="{{ path('companias_grua_show', {'id': companias_grua.id}) }}">show</a>
+                    <a href="{{ path('companias_grua_edit', {'id': companias_grua.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js')}}"> </script>
+{% endblock %}

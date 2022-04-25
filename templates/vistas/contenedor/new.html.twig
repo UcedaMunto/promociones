@@ -1,0 +1,307 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuevo DockReceipt{% endblock %}
+
+{% block body %}
+    <a href="{{ path('contenedor_index') }}">Lista de contenedores</a>
+    <div class="form-row col-md-12 alert alert-warning padding05"> 
+        Ojo los requisitos para que los autos aparezcan en la lista de selección son:<br>
+        1-  Autos con vin.
+        2-  y deben tienen que tener el titulo en (si)
+        3-  y deben estar en estado 4 o 5 (en yarda o fotos de yarda)
+    </div>
+    <div class="card shadow-lg border-0 rounded-lg mt-1">
+        <div class="card-header justify-content-center"></div>
+        <div class="card-body">
+            {% if mensajes['0']!="" %}
+                <div class="alert alert-danger" role="alert">
+                    <strong>{{ mensajes[0] }}</strong>  
+                </div>
+            {% endif %}
+            {{ form_start(form) }}
+                <div class="form-row seccionForm">
+                    <div class="form-group col-md-4 navbar-form pull-left">                             
+                        <label class="small mb-1" >Forwarder Licencia</label>
+                        {{ form_widget(form.dockreceipt.forwarderLicencia) }}
+                        {{ form_errors(form.dockreceipt.forwarderLicencia) }}                                  
+                    </div>
+                    <div class="form-group col-md-4">                             
+                        <label class="small mb-1" >Naviera</label>
+                        {{ form_widget(form.dockreceipt.naviera) }}
+                        {{ form_errors(form.dockreceipt.naviera) }}                                  
+                    </div>
+                    <div class="form-group col-md-4">                             
+                        <label class="small mb-1" >Consignatario</label>
+                        {{ form_widget(form.consignatario) }}
+                        {{ form_errors(form.consignatario) }}                                  
+                    </div>
+                </div>
+
+                <div class="form-row ">
+                    <div class="form-group col-md-3">                             
+                        <label class="small mb-1" >Pier or AirPort</label>
+                        {{ form_widget(form.dockreceipt.pier) }}
+                        {{ form_errors(form.dockreceipt.pier) }}                                  
+                    </div>
+                    <div class="form-group col-md-3">                             
+                        <label class="small mb-1" >Puerto de descarga</label>
+                        {{ form_widget(form.dockreceipt.puertoDescarga) }}
+                        {{ form_errors(form.dockreceipt.puertoDescarga) }}                                
+                    </div>
+
+                    <div class="form-group col-md-3">  
+                        <label class="small mb-1" >Carrier(vapor)</label>
+                        {{ form_widget(form.dockreceipt.carrier) }}
+                        {{ form_errors(form.dockreceipt.carrier) }}                                  
+                    </div>
+                    <div class="form-group col-md-3">                             
+                        <label class="small mb-1" >Viaje</label>
+                        {{ form_widget(form.viaje) }}
+                        {{ form_errors(form.viaje) }}                           
+                    </div>
+                </div>
+
+                <div class="form-row seccionForm">
+                    <div class="form-group col-md-4">                             
+                        <label class="small mb-1" >Tipo contenedor</label>
+                        {{ form_widget(form.tipoContenedor) }}
+                        {{ form_errors(form.tipoContenedor) }}                                  
+                    </div>
+                    <div class="form-group col-md-4">                             
+                        <label class="small mb-1" >BILL OF LADING NUMBER</label>
+                        {{ form_widget(form.dockreceipt.bill) }}
+                        {{ form_errors(form.dockreceipt.bill) }}                                  
+                    </div>
+                    <div class="form-group col-md-4">                             
+                            <label class="small mb-1" >ONWARD INLAND ROUTING / ADUANA</label>
+                            {{ form_widget(form.dockreceipt.onward) }}
+                            {{ form_errors(form.dockreceipt.onward) }}                                  
+                        </div>
+                </div>
+
+                <div class="form-row ">
+                    <div class="form-group col-md-3">                             
+                        <label class="small mb-1" >COUNTRY OF ORIGIN</label>
+                        {{ form_widget(form.paisOrigen) }}
+                        {{ form_errors(form.paisOrigen) }}                                  
+                    </div>
+                    <div class="form-group col-md-3">                             
+                        <label class="small mb-1" >PORT OF LOADING</label>
+                        {{ form_widget(form.dockreceipt.portLoading) }}
+                        {{ form_errors(form.dockreceipt.portLoading) }}                                  
+                    </div>
+                    <div class="form-group col-md-3">                             
+                        <label class="small mb-1" >BOOKING</label>
+                        {{ form_widget(form.booking) }}
+                        {{ form_errors(form.booking) }}                                  
+                    </div>
+                    <div class="form-group col-md-3">                             
+                        <label class="small mb-1" >CONTENEDOR (código)</label>
+                        {{ form_widget(form.codigo) }}
+                        {{ form_errors(form.codigo) }}                                  
+                    </div>
+                </div>
+
+                <div class="form-row seccionForm">
+                    <div class="form-group col-md-4">
+                        <label class="small mb-1" >seal</label>
+                        {{ form_widget(form.dockreceipt.seal) }}
+                        {{ form_errors(form.dockreceipt.seal) }}                   
+                        <label class="small mb-1" >Fecha enbarcación</label>
+                        {{ form_widget(form.fechaEnbarcacion) }}
+                        {{ form_errors(form.fechaEnbarcacion) }}                                      
+                        <label class="small mb-1" >Fecha arribo</label>
+                        {{ form_widget(form.fechaArribo) }}
+                        {{ form_errors(form.fechaArribo) }}                                  
+                            
+                    </div>
+                    
+                    <div class="form-group col-md-4">
+                        <label class="small mb-1" >EXPORT INSTRUCTIONS</label>
+                        {{ form_widget(form.dockreceipt.instructions) }}
+                        {{ form_errors(form.dockreceipt.instructions) }}
+                                                    
+                    </div>
+                    <div class="form-group col-md-4">                             
+                        <label class="small mb-1" >pesoKg</label>
+                        {{ form_widget(form.dockreceipt.pesoKg) }}
+                        {{ form_errors(form.dockreceipt.pesoKg) }}
+                        <label class="small mb-1" >Total peso:</label>
+                        <label class="small mb-1" id="capacidadPeso"></label>  
+                        <label class="small mb-1" >capacidadKg</label>
+                        {{ form_widget(form.dockreceipt.capacidadKg) }}
+                        {{ form_errors(form.dockreceipt.capacidadKg) }}                             
+                    </div>  
+                </div>
+                <div class="form-row"> 
+                    <p><strong>El siguiente listado de autos son los que estan en estado 5, pero debe verificarse cada auto principalmente el título en caso de errores en logistica</strong></p>                             
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">                             
+                        <label class="small mb-1" >Yarda partida</label>
+                        {{ form_widget(form.yarda) }}
+                        {{ form_errors(form.yarda) }}                                  
+                    </div>
+                    <!--div class="form-group col-md-3">                             
+                        <label class="small mb-1" >Puerto destino</label>
+                        {{ form_widget(form.puerto) }}
+                        {{ form_errors(form.puerto) }}                                  
+                    </div-->
+                    <div class="form-group col-md-4">                             
+                        <label class="small mb-1" >Aduana destino</label>
+                        {{ form_widget(form.aduana) }}
+                        {{ form_errors(form.aduana) }}
+                    </div>
+                    <div class="form-group col-md-4">                             
+                        <label class="small mb-1" >Vehículos(lote o vin - modelo - fecha creación)</label></br>
+                        {{ form_widget(form.listaAutos) }}
+                        {{ form_errors(form.listaAutos) }}                                  
+                    </div>
+                </div>
+
+                <p>La cantidad de piezas a ingresar es máximo 9, si necesita agregar más soporte debe configurar la variable de entorno 'LIMITE_DE_UNIDADES_ENCONTENDOR' </p>
+                <p>IMPERATIVO: primero se ingresan todos los vehículos, luego las refacciones</p>
+                
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+                            Autos 
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+                            Refacciones
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <table class="table table-hover">
+                            <tr>
+                                <th width="100px" >Correlativo</th>
+                                <th width="150px">Lote</th>
+                                <th width="210px">VIN</th>
+                                <th width="200px">Vehículo</th>
+                                <th width="150px">Sub modelo</th>
+                                <th width="100px">Peso</th>
+                                <th width="130px">AES</th>
+                                <th width="100px">Color</th>
+                            </tr>
+                            {% for envioConte in form.envioContenedors %}
+                                <tr class="">
+                                    <th scope="col">
+                                        {{ form_widget(envioConte.envio) }}
+                                        {{ form_errors(envioConte.envio) }}
+                                    </th>
+                                    <th scope="col">
+                                        {{ form_widget(envioConte.lote) }}
+                                        {{ form_errors(envioConte.lote) }}
+                                    </th>
+                                    <th scope="col">
+                                        {{ form_widget(envioConte.vin) }}
+                                        {{ form_errors(envioConte.vin) }}
+                                    </th>
+                                    <th scope="col">
+                                        {{ form_widget(envioConte.vehiculo) }}
+                                        {{ form_errors(envioConte.vehiculo) }}
+                                    </th>
+                                    <th scope="col">
+                                        {{ form_widget(envioConte.submodelo) }}
+                                        {{ form_errors(envioConte.submodelo) }}
+                                    </th>
+                                    <th scope="col"> 
+                                        {{ form_widget(envioConte.peso) }}
+                                        {{ form_errors(envioConte.peso) }}
+                                    </th>
+                                    <th scope="col">
+                                        {{ form_widget(envioConte.aes) }}
+                                        {{ form_errors(envioConte.aes) }}
+                                    </th>
+                                    <th scope="col">
+                                        {{ form_widget(envioConte.color) }}
+                                        {{ form_errors(envioConte.color) }}
+                                    </th>
+                                </tr>        
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <p>NOTA: cada refacción ingresada debe tener completamente llena su linea</p>
+                        <table class="table table-hover">
+                            <tr>
+                                <th width="125px" >Cantidad</th>
+                                <th width="125px">Peso KG</th>
+                                <th width="210px">Factura</th>
+                                <th width="225px">Desc</th>
+                                <th width="200px">BL</th>
+                                <th width="125px">Precio</th>
+                                <th width="150px">Embalaje</th>
+                                <th width="200px">Vehículo</th>
+                                <th width="200px">Cliente</th>
+                            </tr>
+                            {% set counter = 0 %}
+                            {% for refaccion in form.refacciones %}
+                                <tr class="">
+                                    <th scope="col">
+                                        {{ form_widget(refaccion.cantidad) }}
+                                        {{ form_errors(refaccion.cantidad) }}
+                                    </th>
+                                    <th scope="col">
+                                        {{ form_widget(refaccion.peso) }}
+                                        {{ form_errors(refaccion.peso) }}
+                                    </th>
+                                    <th scope="col">
+                                        {{ form_widget(refaccion.numeroFactura) }}
+                                        {{ form_errors(refaccion.numeroFactura) }}
+                                    </th>
+                                    <th scope="col">
+                                        {{ form_widget(refaccion.descripcion) }}
+                                        {{ form_errors(refaccion.descripcion) }}
+                                    </th>
+                                    <th scope="col">
+                                        {{ form_widget(refaccion.blCosto) }}
+                                        {{ form_errors(refaccion.blCosto) }}
+                                    </th>
+                                    <th scope="col">
+                                        {{ form_widget(refaccion.precio) }}
+                                        {{ form_errors(refaccion.precio) }}
+                                    </th>
+                                    <th scope="col">
+                                        {{ form_widget(refaccion.tipoEmbalaje) }}
+                                        {{ form_errors(refaccion.tipoEmbalaje) }}
+                                    </th>
+                                    <th scope="col" id="comboRefac{{counter}}" >
+                                        {{ form_widget(refaccion.autoRecipiente) }}
+                                        {{ form_errors(refaccion.autoRecipiente) }}
+                                    </th>
+                                    <th scope="col" id="cliente{{counter}}" >
+                                        {% set counter = counter + 1 %}
+                                        {{ form_widget(refaccion.cliente) }}
+                                        {{ form_errors(refaccion.cliente) }}
+                                    </th>
+                                </tr>        
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+                <button class="btn">{{ button_label|default('Save') }}</button>
+            {{ form_end(form) }}
+                  
+        </div>
+        <div class="card-footer text-center">
+        </div>
+    </div>
+
+
+
+   
+
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}
+
+{% block js_pantalla %}
+    <script src="{{ asset('js/newContenedorDockreceipt.js') }}" ></script>
+{% endblock %}

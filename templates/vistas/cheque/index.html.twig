@@ -1,0 +1,51 @@
+
+{% extends ajax ? "baseBlancoAjax.html.twig" : "base.html.twig" %}
+{% block title %} 
+    {{ titulo }}
+{% endblock %}
+{% block body %}
+    <table id="tabla_cheques_index" class='table'  >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Correlativo</th>
+                <th>Monto</th>
+                <th>Fecha Creacion </th>
+                <th>Factura </th>
+                <th>Saldo </th>
+                <th>Descripcion </th>
+                <th> Opciones </th>            
+            </tr>
+        </thead>
+        <tbody>
+        {% for cheque in cheques %}
+            <tr>            
+                <td>{{ cheque['id'] }}</td>
+                <td>{{ cheque['correlativo']  }}</td>
+                <td>{{ cheque['monto']}} </td>
+                <td>{{ cheque['creacion']|date("Y-m-d")}} </td>
+                <td>{{ cheque['nombre']}} </td>
+                <td>{{ cheque['saldoFavorGenerado']}} </td>
+                <td>{{ cheque['descripcionCheque']}} </td>
+                <td> <a class='edicheque' href="{{ path('cheque_edit', {'cheque': cheque['id'] }) }}" >Editar</a> </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br/>
+    <br/>
+    <br/>
+    <div id='editform' class='card shadow mb-4' style='padding-left: 50px' > </div>
+
+{% endblock %}
+{% block js_pantalla %}
+    {% if ajax %}
+
+    {% else %}
+        <script src="{{ asset('js/indexCheques.js') }}" ></script>
+    {% endif %}
+{% endblock %}

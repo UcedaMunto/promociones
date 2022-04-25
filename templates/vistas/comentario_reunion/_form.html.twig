@@ -1,0 +1,37 @@
+{% if mensajes['0']!="" %}
+            <div class="alert alert-danger" role="alert">
+                <strong>{{ mensajes[0] }}</strong>  
+            </div>
+{% endif %}
+
+
+    {{ form_start(form_coment, { 'attr': {'id': 'form_comentario'}}   ) }}
+
+        <div class="FormularioReunion">
+            {#<div class="form-row">
+                <div class="form-group col-xs-48 col-sm-24 col-md-18 col-lg-18">
+                <label class="small mb-1" > Discucion jefatura: </label>
+                {{ form_widget(form_coment.discusionJefatura) }}
+                {{ form_errors(form_coment.discusionJefatura) }} 
+                </div>
+            </div>#}
+            <div class="form-row">
+                    
+                        <label class="small mb-1" > Titlo: </label>
+                        {{ form_widget(form_coment.tituloComent) }}
+                        {{ form_errors(form_coment.tituloComent) }} 
+            </div>  
+            <div class="form-row">
+                    
+                        <label class="small mb-1" > comentario: </label>
+                        {{ form_widget(form_coment.mensaje) }}
+                        {{ form_errors(form_coment.mensaje) }} 
+            </div>
+
+  
+            <button class="btn" id="btnComentReu" >{{ button_label|default('Enviar') }}</button>
+        </div>
+
+        
+    {{ form_end(form_coment) }}
+   

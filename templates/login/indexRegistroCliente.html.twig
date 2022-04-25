@@ -1,0 +1,61 @@
+{# app/Resources/views/blog/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}REGISTRE SU USUARIO Y PASS{% endblock %}
+
+{% block body %}
+
+
+
+
+
+<div class="row justify-content-center">
+    <div class="col-lg-5">
+        <!-- Basic login form-->
+        <div class="card shadow-lg border-0 rounded-lg mt-5">
+            <div class="card-header justify-content-center"><h3 class="font-weight-light my-4">Registro</h3></div>
+            <div class="card-body">
+            {% if bandera['0'] != "" %}
+                <ul>
+                  <div class="alert alert-danger" role="alert">{{ bandera['0'] }} </div>
+                </ul>
+            {% endif %}
+                <!-- Login form-->
+                {{ form_start(form) }}
+                    <!-- Form Group (email address)-->
+                    <div class="form-group">
+                        <label class="small mb-1" for="inputEmailAddress">Email o usuario</label>
+                        {{ form_widget(form.user) }}
+                    </div>
+                    <!-- Form Group (password)-->
+                    <div class="form-group">
+                        <label class="small mb-1" for="inputPassword">Password</label>
+                        {{ form_widget(form.pass) }}
+                    </div>
+                    <div class="form-group">
+                        <label class="small mb-1" for="inputEmailAddress" >Codigo de registro</label>
+                        {{ form_widget(form.token) }}
+                    </div>
+                    <!-- Form Group (remember password checkbox)-->
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox">
+                            <label class="custom-control-label" for="rememberPasswordCheck">Recordar contraseña?</label>
+                        </div>
+                    </div>
+                    {{ form_widget(form.enviar) }}
+                {{ form_end(form) }}
+            </div>
+            <div class="card-footer text-center">
+                <div class="small"> </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

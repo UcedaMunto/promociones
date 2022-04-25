@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{% if bandera is defined  %}
+    {% if bandera == 'paso1' and tituloPagina !='Editar Representante' %}
+Nuevo registro de Representante
+{% elseif bandera == 'paso1' and tituloPagina =='Editar Representante' %}
+Editar Representante
+{% elseif bandera == 'paso2' and tituloPagina =='Editar Empresa' %}
+Editar Empresa
+{% else %}    
+Nuevo registro de Empresa
+{% endif %}    
+{% endif %}
+{% endblock %}    
+
+{% block body %}
+ 
+    <a href="{{ path('persona_cliente_index') }}">back to list</a>
+    <div id="formPersonaCambio">    
+    
+    {% if bandera is defined  %}
+    {% if bandera == 'paso1' %}
+    {{ include('persona_cliente/form_new.html.twig') }}
+    {% else %}
+    {{ include('persona_cliente/form_newEmp.html.twig') }}
+    {% endif %}    
+    {% endif %}
+
+    </div>
+
+
+    {% if tituloPagina=='Editar Empresa' %}
+
+<div class="col-md-12">
+                <h1 class="resaltarComentario"> Documentos <h1>
+                {% set counter = 0 %}
+                {% for archivo in archivos %}
+                    {% if counter < 2 %}
+                    
+                    {% if archivo != null %}
+                        {% if extensionesDoc[counter] == 2  %}
+                            <img src="{{rutaDoc}}/{{ archivo }}">
+                        {% elseif extensionesDoc[counter] == 1 %}
+                            <embed src="{{rutaDoc}}/{{ archivo }}" type="application/pdf" width="100%" height="600px" />
+                        {% else %}
+                            <a href="{{rutaDoc}}/{{ archivo }}" download="factura{{ archivo }}">Descargar</a>
+                        {% endif %}
+                    {% else %}
+                        <p>No se ha subido el documento {{ counter+1 }} </p> 
+                    {% endif %}
+                    {% else %}
+                        {% if archivo != null %} 
+                       <center> <h3> LOGO </h3>                      
+                        <img src="{{rutaPerfil}}/{{ archivo }}" class='col-md-4' > </center> 
+                        {% else %}
+                         <p> No se ha subido el logo </p>      
+                        {% endif %}                   
+                    {% endif %}
+                    {% set counter = counter + 1 %}
+                {% endfor %}
+                  
+            </div>
+
+{% endif %}
+
+
+
+{% if tituloPagina=='Editar Representante' %}
+    
+<div class="col-md-12">
+                <h1 class="resaltarComentario"> Documentos <h1>
+                {% set counter = 0 %}
+                {% for archivo in archivos %}
+                                        
+                    {% if archivo != null %}
+                        {% if extensionesDoc[counter] == 2  %}
+                            <img src="{{rutaDoc}}/{{ archivo }}">
+                        {% elseif extensionesDoc[counter] == 1 %}
+                            <embed src="{{rutaDoc}}/{{ archivo }}" type="application/pdf" width="100%" height="600px" />
+                        {% else %}
+                            <a href="{{rutaDoc}}/{{ archivo }}" download="factura{{ archivo }}">Descargar</a>
+                        {% endif %}
+                    {% else %}
+                        <p>No se ha subido el documento {{ counter+1 }} </p> 
+                    {% endif %}
+                   
+                    {% set counter = counter + 1 %}
+                {% endfor %}
+                  
+            </div>
+    
+{% endif %}
+
+        
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/personaClienteNew.js') }}" ></script>
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DatosPersona{% endblock %}
+
+{% block body %}
+    <h1>DatosPersona</h1>
+
+    <table class="table" >
+        <tbody>
+           
+           
+           
+            <tr>                                       
+                <th>Id</th>
+                <td>{{ datos_persona.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ datos_persona.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Dui</th>
+                <td>{{ datos_persona.dui }}</td>
+            </tr>
+            <tr>
+                <th>Nit</th>
+                <td>{{ datos_persona.nit }}</td>
+            </tr>
+            <tr>
+                <th>Direccion</th>
+                <td>{{ datos_persona.direccion }}</td>
+            </tr>
+            <tr>
+                <th>Telefono</th>
+                <td>{{ datos_persona.telefono }}</td>
+            </tr>
+            <tr>
+                <th>Celular</th>
+                <td>{{ datos_persona.celular }}</td>
+            </tr>
+            <tr>
+                <th>FechaNacimiento</th>
+                <td>{{ datos_persona.fechaNacimiento ? datos_persona.fechaNacimiento|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Correo1</th>
+                <td>{{ datos_persona.correo1 }}</td>
+            </tr>
+            <tr>
+                <th>Correo2</th>
+                <td>{{ datos_persona.correo2 }}</td>
+            </tr>
+            <tr>
+                <th>Apellido</th>
+                <td>{{ datos_persona.apellido }}</td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                <td>{{ datos_persona.estado }}</td>
+            </tr>
+            <tr>
+                <th>Foto</th>
+                <td>{{ datos_persona.foto }}</td>
+            </tr>
+            <tr>
+                <th>Pasaporte</th>
+                <td>{{ datos_persona.pasaporte }}</td>
+            </tr>
+            <tr>
+                <th>Giro</th>
+                <td>{{ datos_persona.giro }}</td>
+            </tr>
+            <tr>
+                <th>Ncr</th>
+                <td>{{ datos_persona.ncr }}</td>
+            </tr>
+            <tr>
+                <th>Documentos</th>
+                <td>{{ datos_persona.documentos }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('datos_persona_index') }}">back to list</a>
+
+    <a href="{{ path('datos_persona_edit', {'id': datos_persona.id}) }}"  target="_blank">edit</a>
+{% endblock %}
+
+

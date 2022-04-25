@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crear nueva yarda{% endblock %}
+
+{% block body %}
+
+   
+
+    <a href="{{ path('yardas_index') }}">Lista de yardas</a>
+
+        <div class="d-flex justify-content-center bd-highlight mb-3">
+        <div class="col-md-4">
+            {{ include('yardas/_form.html.twig') }}
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Activo{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="{{ asset('css/ligthbox/lightbox.css') }}">
+<script src="{{ asset('js/lightbox/lightbox-plus-jquery.js') }} "></script>
+
+<script>
+    lightbox.option({
+      'resizeDuration': 200,
+      'wrapAround': true
+    })
+</script>
+<div class="col-md-12">
+    <!-- Basic registration form-->
+    <div class="card shadow-lg border-0 rounded-lg mt-1">
+        <div class="card-header justify-content-center"></div>
+
+    <div class="card-body">
+
+        {% if mensajes['0']!="" %}
+            <div class="alert alert-danger" role="alert">
+                <strong>{{ mensajes[0] }}</strong>  
+            </div>
+        {% endif %}
+       
+        {{ form_start(form) }}
+            <div class="form-row">
+                <div id="dealer" class="form-group col-md-4">                        
+                    <label class="small mb-1" >Codigo de Barra</label>
+                    {{ form_widget(form.codigoBarra) }}
+                    {{ form_errors(form.codigoBarra) }}                            
+                </div>
+                <div  id="importador" class="form-group col-md-4">                        
+                    <label class="small mb-1" >Descripcion</label>
+                    {{ form_widget(form.descripcion) }}
+                    {{ form_errors(form.descripcion) }}                                     
+                </div>
+                <div id="subimportador" class="form-group col-md-4">
+                    <label class="small mb-1" >Costo</label>
+                    {{ form_widget(form.costo) }}
+                    {{ form_errors(form.costo) }}                                     
+                </div>
+            </div>
+            <div class="form-row">
+                <div id="dealer" class="form-group col-md-4">                        
+                    <label class="small mb-1" >Tipo activo</label>
+                    {{ form_widget(form.tipo) }}
+                    {{ form_errors(form.tipo) }}                            
+                </div>
+                <div  id="importador" class="form-group col-md-4">                        
+                    <label class="small mb-1" >Estado</label>
+                    {{ form_widget(form.estado) }}
+                    {{ form_errors(form.estado) }}                                     
+                </div>
+                <div id="subimportador" class="form-group col-md-4">
+                    <label class="small mb-1" >Persona responsable</label>
+                    {{ form_widget(form.responsable) }}
+                    {{ form_errors(form.responsable) }}                                     
+                </div>
+            </div>
+            <div class="form-row">
+                <div id="dealer" class="form-group col-md-4">                        
+                    <label class="small mb-1" >Departamento</label>
+                    {{ form_widget(form.departamento) }}
+                    {{ form_errors(form.departamento) }}                            
+                </div>
+            </div>
+            {{ include('activo/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ form_end(form) }}
+
+    
+
+    <a href="{{ path('activo_index') }}">back to list</a>
+    <div id='fotosactivos' class='row' >{{rutaActivo}}</div>
+
+    
+</div>
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}
+{% block js_pantalla %}
+    <script src="{{ asset('js/activoShow.js') }}" ></script>
+{% endblock %}

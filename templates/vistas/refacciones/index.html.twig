@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Refacciones{% endblock %}
+
+{% block body %}
+    <table class="table" id="tabla_refacciones">
+        <thead>
+            <tr>
+                <th>Correlativo</th>
+                <th>Actions</th>
+                <th>Cantidad</th>
+                <th>Peso</th>
+                <th>NumeroFactura</th>
+                <th>Precio</th>
+                <th>Costo</th>
+                <th>BL</th>
+                <th>Cliente</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        {% for refaccione in refacciones %}
+            <tr>
+               
+                <td>{{ refaccione.id }}</td>
+                <td>
+                    <a href="{{ path('refacciones_show', {'id': refaccione.id}) }}">show</a>
+                </td>
+                <td>{{ refaccione.cantidad }}</td>
+                <td>{{ refaccione.peso }}</td>
+                <td>{{ refaccione.numeroFactura }}</td>
+                <td>{{ refaccione.precio }}</td>
+                <td>{{ refaccione.Costo }}</td>
+                <td>{{ refaccione.BL }}</td>
+                <td>{{ refaccione.Cliente.nombre|default('SD') }} - {{ refaccione.Cliente.dui|default('SD') }} - {{ refaccione.Cliente.nit|default('SD') }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}
+
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js')}}"> </script>
+{% endblock %}
+
+

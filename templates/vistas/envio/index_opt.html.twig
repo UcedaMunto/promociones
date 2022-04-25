@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ordenes de movimiento(últimos 4 meses por defecto)  {% if yarda is defined %} YARDA: {{ yarda }} {% endif %} {% endblock %}
+
+{% block body %}
+    <div class="form-row col-md-12 alert alert-warning padding05"> 
+        Un movimiento se registra hasta que el gruero ya va en camino con el carro o si ya está en la subasta recogiéndolo, en caso de haber grua falsa también se agrega pero solo con los costos que implicó para la empresa
+    </div>
+    <div class="col-xl-12 col-lg-12">
+        <div id="filtroFecha" class="intangible">
+            {{ form_start(form, { 'method': 'POST'} ) }}
+                <div class="row">
+                    <div class="col-xxl-4 col-xl-3 mb-4">
+                        Filtrar por fechas:
+                    </div>
+                    <div class="col-xxl-4 col-xl-3 mb-4">
+                        {{ form_widget(form.fechaInicial) }}
+                    </div>
+                    <div class="col-xxl-4 col-xl-3 mb-4">
+                        {{ form_widget(form.fechaFinal) }}
+                    </div>
+                    <div class="col-xxl-4 col-xl-3 mb-4">
+                        <button type="submit" class="btn btn-primary btn-block"> {{ button_label|default('filtrar') }} </button>
+                    </div>
+                </div>
+            {{ form_end(form) }}
+        </div>
+         
+        <div class="card shadow mb-4">
+            
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+             
+                <div>
+                    Visibles: 
+                    <a class="toggle-vis" role="button" data-column="0">Correlativo ID</a>
+                </div>
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" x-placement="bottom-end" style="position: absolute; transform: translate3d(-159px, 19px, 0px); top: 0px; left: 0px; will-change: transform;">
+                        <div class="dropdown-header">Acciones</div>
+                            <a class="dropdown-item" href="{{ path('envio_new') }}">+ Orden</a>
+                            <a class="dropdown-item" href="{{ path('contenedor_new') }}">+ contenedor</a>
+                        <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" id="filtroFechaButton">Filtrar por fecha</a>
+                            <a class="dropdown-item trackcomp1" title="Ingreso de datos al sistema">ESTADO 1</a>
+                            <a class="dropdown-item trackcomp2" title="Recogida - en camino a yarda">ESTADO 2</a>
+                            <a class="dropdown-item trackcomp3" title="Fotos de grua - (subida por app)">ESTADO 3</a>
+                            <a class="dropdown-item trackcomp4" title="Inventario de yarda">ESTADO 4</a>
+                            <a class="dropdown-item trackcomp5" title="Fotos de yarda y título">ESTADO 5</a>
+                            <a class="dropdown-item trackcomp6" title="En Dockreceipt">ESTADO 6</a>
+                            <a class="dropdown-item trackcomp7" title="Enbarcado">ESTADO 7</a>
+                            <a class="dropdown-item trackcomp8" title="En puerto - arribó">ESTADO 8</a>
+                            <a class="dropdown-item trackcomp9" title="En aduana">ESTADO 9</a>
+                            <a class="dropdown-item trackcomp10" title="Descargado">ESTADO 10</a>
+                            <a class="dropdown-item trackcomp11" title="Cobrado">ESTADO 11</a>
+                            <a class="dropdown-item trackcomp20">Grua interna</a>
+                           
+                    </div>
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <table class="table" id="tabla_envios">
+                    <thead>
+                        <tr>
+                            <th>envio_id</th>
+                            <th>detalle_compra_id</th>
+                            <th>compra_id</th>
+                             
+                        </tr>
+                    </thead>
+                    <tbody>
+              
+                    </tbody>
+                </table>
+            <div>
+        </div>
+
+        <!--a class="btn btn-outline-primary" href="{{ path('envio_new') }}">+ orden de movimiento</a-->
+        
+        <!--a class="btn btn-outline-warning" href="">+ orden de movimiento</a-->
+                
+    </div>
+
+{% endblock %}
+
+{% block js_pantalla %}
+    <script src="{{ asset('js/envioIndex.js') }}" ></script>
+{% endblock %}

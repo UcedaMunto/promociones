@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DepartamentoAcuerdoEjecucion index{% endblock %}
+
+{% block body %}
+    <h1>DepartamentoAcuerdoEjecucion index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for departamento_acuerdo_ejecucion in departamento_acuerdo_ejecucions %}
+            <tr>
+                <td>{{ departamento_acuerdo_ejecucion.id }}</td>
+                <td>
+                    <a href="{{ path('departamento_acuerdo_ejecucion_show', {'id': departamento_acuerdo_ejecucion.id}) }}">show</a>
+                    <a href="{{ path('departamento_acuerdo_ejecucion_edit', {'id': departamento_acuerdo_ejecucion.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('departamento_acuerdo_ejecucion_new') }}"><i class="fa fa-plus" style="font-size:36px"></i></a>
+{% endblock %}

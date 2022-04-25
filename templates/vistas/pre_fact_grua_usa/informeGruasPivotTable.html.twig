@@ -1,0 +1,34 @@
+<div class="card-header">
+    <h3 class="text-center font-weight-light my-4">Reporte de pagos con cheques de gruas storage (<strong>{{reporte}}</strong>)</h3>
+</div>
+<h4>Este informe es sobre un solo reporte, cada linea mostrada es una grua, en verde está lo pagado</h4>
+<table class="table" id='tabla_datos_pago_pivot'>
+    <thead>
+        <tr>
+            <th>Correlativo - cheque</th>
+            <th>Tipo de pago</th>
+            <th>Monto</th>
+            <th>Yarda</th>
+            <th>Costo</th>
+            <th>Lote</th>
+            <th>Vin</th>
+        </tr>
+    </thead>
+    <tbody><!-- es importante que se marca en verde solo cuando el pago en la bandera pertenece al informe que se esta mostrando analizar la consulta para ver como se conforma --> 
+        {% for dato in datos %}
+            <tr>
+                <td>{{ dato.correlativo }}</td>
+                <td>{{ dato.tipo }}</td>
+                <td>{{ dato.monto }}</td>
+                <td>{{ dato.yarda }}</td>
+                <td>{{ dato.costo }}</td>
+                <td>{{ dato.lote }}</td>
+                <td>{{ dato.vin | default('SD') }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+ <div id="output">
+ 
+ </div>

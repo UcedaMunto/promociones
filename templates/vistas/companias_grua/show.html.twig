@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CompaniasGrua{% endblock %}
+
+{% block body %}
+    <h1>CompaniasGrua</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ companias_grua.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ companias_grua.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Direccion</th>
+                <td>{{ companias_grua.direccion }}</td>
+            </tr>
+            <tr>
+                <th>Telefono</th>
+                <td>{{ companias_grua.telefono }}</td>
+            </tr>
+            <tr>
+                <th>NumMiembro</th>
+                <td>{{ companias_grua.numMiembro }}</td>
+            </tr>
+            <tr>
+                <th>Telefono2</th>
+                <td>{{ companias_grua.telefono2 }}</td>
+            </tr>
+            <tr>
+                <th>NombreContacto</th>
+                <td>{{ companias_grua.nombreContacto }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ companias_grua.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('companias_grua_index') }}">back to list</a>
+
+    <a href="{{ path('companias_grua_edit', {'id': companias_grua.id}) }}">edit</a>
+
+    {{ include('companias_grua/_delete_form.html.twig') }}
+{% endblock %}

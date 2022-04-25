@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}¡Iniciar Sesión!{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-5">
+            <!-- Basic login form-->
+            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                <div class="card-header justify-content-center"><h3 class="font-weight-light my-4">Inicias sesión</h3></div>
+                <div class="card-body">
+                    <!-- Login form-->
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            Has iniciado sesión como: {{ app.user.username }}, <a href="{{ path('app_logout') }}">Cerrar sesión</a>
+        </div>
+    {% endif %}
+                        <!-- Form Group (email address)-->
+                        <div class="form-group">
+                            <label for="inputUsuario">Usuario</label>
+    <input type="text" value="{{ last_username }}" name="usuario" id="inputUsuario" class="form-control" required autofocus>
+                        </div>
+                        <!-- Form Group (password)-->
+                        <div class="form-group">
+                      <label for="inputPassword">Contraseña</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" required>
+
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+                        </div>
+                        <!-- Form Group (remember password checkbox)-->
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox">
+                                <label class="custom-control-label" for="rememberPasswordCheck">Recordar contraseña</label>
+                            </div>
+                        </div>
+                        <!-- Form Group (login box)-->
+                        <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                            <a class="small" href="auth-password-basic.html">¿Olvidaste contraseña?</a>
+                                <button class="btn btn-lg btn-primary" type="submit">
+                                    Iniciar sesión
+                                </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <div class="small"><a href="auth-register-basic.html">¿Necesitas una cuenta? ¡Registrate!</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock %}

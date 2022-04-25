@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit AgendaRevision{% endblock %}
+
+{% block body %}
+<div class="col-md-12"> 
+    <div class="col-md-6">
+        {{ include('agenda_revision/_form.html.twig', {'button_label': 'Update'}) }}
+
+        <a href="{{ path('agenda_revision_index') }}">Ver mi lista</a>
+    </div>
+</div>
+
+    
+
+
+{% endblock %}

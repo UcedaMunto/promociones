@@ -1,0 +1,186 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contenedores de los últimos 4 meses{% endblock %}
+
+{% block body %}
+<style>
+    .icono{
+        max-width: 25px;
+    }
+    .icono:hover {
+        max-width: 35px;
+        border-style: ridge;
+    }
+</style>
+    <div id="filtroFecha" class="intangible">
+        {{ form_start(form, { 'method': 'POST'} ) }}
+            <div class="row">
+                <div class="col-xxl-4 col-xl-3 mb-4">
+                    Filtrar por fechas:
+                </div>
+                <div class="col-xxl-4 col-xl-3 mb-4">
+                    {{ form_widget(form.fechaInicial) }}
+                </div>
+                <div class="col-xxl-4 col-xl-3 mb-4">
+                    {{ form_widget(form.fechaFinal) }}
+                </div>
+                <div class="col-xxl-4 col-xl-3 mb-4">
+                    <button type="submit" class="btn btn-primary btn-block"> {{ button_label|default('filtrar') }} </button>
+                </div>
+            </div>
+        {{ form_end(form) }}
+    </div>
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <div>
+                    Ocultar columnas:
+                    <a class="toggle-vis" role="button" data-column="12">Fecha enbarcación</a>/
+                    <a class="toggle-vis" role="button" data-column="13">Fecha de zarpe</a>/
+                    <a class="toggle-vis" role="button" data-column="14">Fecha de arribo</a>/
+                    <a class="toggle-vis" role="button" data-column="15">Fecha arribo verificada</a>/
+                    <a class="toggle-vis" role="button" data-column="16">Fecha marcado para descargar</a>/
+                    <a class="toggle-vis" role="button" data-column="17">Fecha descargado</a>/
+                    <a class="toggle-vis" role="button" data-column="18">Fecha pago descarga</a>
+                </div>
+            
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" x-placement="bottom-end" style="position: absolute; transform: translate3d(-159px, 19px, 0px); top: 0px; left: 0px; will-change: transform;">
+                        <div class="dropdown-header">DockReceipt</div>
+                            <a class="dropdown-item" href="{{ path('contenedor_new') }}">+ DockReceipt</a>
+                            <div class="dropdown-divider"></div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-header">Estados, mantenda el cursor encima</div>
+                            <a class="dropdown-item trackcomp1" title="embarcación">ESTADO 1</a>
+                            <a class="dropdown-item trackcomp2" title="zarpe">ESTADO 2</a>
+                            <a class="dropdown-item trackcomp3" title="arribo retrasado, la fecha de arribo estimado ya pasó">ESTADO 3</a>
+                            <a class="dropdown-item trackcomp4" title="por arribar, si se sube la fecha de arribo actualizada">ESTADO 4</a>
+                            <a class="dropdown-item trackcomp5" title="marcado para descarga">ESTADO 5</a>
+                            <a class="dropdown-item trackcomp6" title="descargado">ESTADO 6</a>
+                            <a class="dropdown-item trackcomp7" title="descarga pagada">ESTADO 7</a>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-header">otros</div>
+                            <a class="dropdown-item" id="filtroFechaButton">Filtrar por fecha</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <table class="table" id="tabla_contenedores">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Acciones para un contenedor</th>
+                            <th title="Estado del dockreceipt">E. dock</th>
+                            <th title="Contiene fechas del contenedor">Tracking</th>
+                            <th>Booking</th>
+                            <th title="Código del contenedor">Cod. conte</th>
+                            <th>Invoice</th>
+                            <th>Descargado</th>
+                            <th>Notas flete</th>
+                            <th>Notificación 1</th>
+                            <th>Prevalidado</th>
+                            <th>Válido</th>
+                            <th title="fecha de enbarcación ingresada en dockreceipt">Fech de enbarcación</th>
+                            <th title="fecha de zarpe">Fech de zarpe</th>
+                            <th title="fecha arribo estimada, ingresada en el dockreceipt">Fech de arribo</th>
+                            <th title="fecha de arribo ingresada después del dockreceipt">Fech de arribo verificada</th>
+                            <th title="fecha en la que se marca a descarga que el contenedor esta listo para descargar">Fech marcado descarga</th>
+                            <th title="fecha en la que ya fue descargado en contenedor">Fech descargado</th>
+                            <th title="fecha en la que se pagó la descarga">Fech pago descarga</th>
+                            <th>track</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for contenedor in contenedors %}
+                        <tr>
+                            <td>{{ contenedor.id }}</td>
+                            <td>
+                                <a target="_blank" href="{{ path('contenedor_show', {'id': contenedor.id}) }}">Ver</a>-
+                                <a target="_blank" href="{{ path('contenedor_edit', {'id': contenedor.id}) }}">Editar</a>-
+                                <a target="_blank" href="{{ path('contenedor_dockreceipt_excel', {'contenedor': contenedor.id}) }}">Imprimir y bloquear</a>-
+                                <a target="_blank" href="{{ path('cuadricula_new', {'contenedor': contenedor.id}) }}">Crear cuadricula</a>-
+                                <a target="_blank" href="{{ path('contenedor_desbloquearDock', {'contenedor': contenedor.id}) }}">Desbloquear edición</a>-
+                                <a target="_blank" href="{{ path('contenedor_add_vehiculo', {'id': contenedor.id}) }}">Add auto</a>-
+                                <a target="_blank" href="{{ path('contenedor_add_refaccion', {'id': contenedor.id}) }}">Add refaccion</a>-
+                                <a target="_blank" href="{{ path('comentarios_new_contenedor', {'contenedor': contenedor.id}) }}">Comentario</a>-
+                                <a target="_blank" href="{{ path('contenedor_cuadricula_excel', {'contenedor': contenedor.id}) }}">Download cuadricula</a>-
+                                
+                            </td>
+                            <td>{{ contenedor.dockReceipt.estado.nombre }}</td>
+                            <td>
+                                <img src="{{ asset('images/cargando_contenedor.png') }}"    data-estado="1" data-id_contenedor="{{contenedor.id}}" class="icono" title="cargando">  
+                                <img src="{{ asset('images/barco_en_camino.png') }}"        data-estado="2" data-id_contenedor="{{contenedor.id}}" class="icono" title="en camino">
+                                <img src="{{ asset('images/descargando_contenedor.png') }}" data-estado="3" data-id_contenedor="{{contenedor.id}}" class="icono" title="descargando">
+                                <img src="{{ asset('images/por_descargar.png') }}"          data-estado="4" data-id_contenedor="{{contenedor.id}}" class="icono" title="por descargar">
+                                <img src="{{ asset('images/contenedor_abierto.png') }}"     data-estado="5" data-id_contenedor="{{contenedor.id}}" class="icono" title="descargado">
+                            </td>
+                            <td>{{ contenedor.booking }} / <a target="_blank" class="track_contenedor" href="{{ path('contenedor_tracking', {'contenedor': contenedor.id}) }}">Tracking</a></td>
+                            <td>{{ contenedor.codigo }}</td>
+                            <td>{{ contenedor.invoice }}</td>
+                            <td>{{ contenedor.descargado }}</td>
+                            <td>{{ contenedor.notasFlete }}</td>
+                            <td>{{ contenedor.notificacionUno }}</td>
+                            <td>{{ contenedor.preValidado }}</td>
+                            <td>{{ contenedor.valido }}</td>
+                            <td>{{ contenedor.fechaEnbarcacion ?    contenedor.fechaEnbarcacion |date('Y-m-d H:i:s') : ''  }}</td>
+                            <td>{{ contenedor.fechaZarpe ?          contenedor.fechaZarpe       |date('Y-m-d H:i:s') : ''  }}</td>
+                            <td>{{ contenedor.fechaArribo ?         contenedor.fechaArribo      |date('Y-m-d H:i:s') : ''  }}</td>
+                            <td>{{ contenedor.fechaArriboVerificada ?           contenedor.fechaArriboVerificada      |date('Y-m-d H:i:s') : ''  }}</td>
+                            <td>{{ contenedor.fechaMarcadoDescargar ?           contenedor.fechaMarcadoDescargar      |date('Y-m-d H:i:s') : ''  }}</td>
+                            <td>{{ contenedor.fechaDescargado ?      contenedor.fechaDescargado      |date('Y-m-d H:i:s') : ''  }}</td>
+                            <td>{{ contenedor.fechaPagoDescarga ?    contenedor.fechaPagoDescarga    |date('Y-m-d H:i:s') : ''  }}</td>
+                            <td>{{ contenedor.estadoContenedor }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="31">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gridSystemModal">
+                    Fechas del contendor
+                </button>
+                <div id="gridSystemModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" style="display: none;" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="gridModalLabel">Fechas de contenedor </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row"> 
+                                    <div class="col-md-4">
+                                        <img src="" id="imagenDescriptiva" style="max-width: 100%;">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="container-fluid bd-example-row" id="contenido">
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-primary" id="guardarFechas">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+{% endblock %}
+
+
+{% block js_general %}
+    
+{% endblock %}
+
+{% block js_pantalla %}
+    <script src="{{ asset('js/contenedorIndex.js') }}" ></script>
+{% endblock %}

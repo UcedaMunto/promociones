@@ -1,0 +1,57 @@
+
+{{ form_start(form_edit_acuerdo, { 'attr': {'id': 'form_acuerdo_edit'}} ) }}
+    <div class="FormularioReunion">
+   
+        <div class="form-row">
+            <div class="form-group col-xs-48 col-sm-18 col-md-12 col-lg-12">
+                    <label class="small mb-1" > Reunion: </label>
+                    {{ form_widget(form_edit_acuerdo.discusionJefatura,  {'id': 'reunion_edit'})}}
+                    {{ form_errors(form_edit_acuerdo.discusionJefatura) }}    
+            </div> 
+        </div>   
+
+        <div class="form-row">
+                
+                    <label class="small mb-1" > Titlo: </label>
+                    {{ form_widget(form_edit_acuerdo.nombre, {'id': 'nombre_edit'} )}}
+                    {{ form_errors(form_edit_acuerdo.nombre) }}    
+        </div>    
+        <div class="form-row">
+
+            <div class="form-group col-xs-24 col-sm-12 col-md-6 col-lg-6">
+                    <label class="small mb-1" > Supervisor: </label>
+                    {{ form_widget(form_edit_acuerdo.supervisor,  {'id': 'supervisor_edit'}) }}
+                    {{ form_errors(form_edit_acuerdo.supervisor) }}    
+            </div>
+            <div class="form-group col-xs-24 col-sm-12 col-md-6 col-lg-6">
+                    <label class="small mb-1" > Fecha de inicio acuerdo: </label>
+                    {{ form_widget(form_edit_acuerdo.fechaVigencia, {'id': 'fecha_edit'}) }}
+                    {{ form_errors(form_edit_acuerdo.fechaVigencia) }}    
+            </div>
+        </div>        
+        <div class="form-row">
+                    <label class="small mb-1" > Descripción: </label>
+                    
+                    {{ form_widget(form_edit_acuerdo.descripcion,  {'id': 'des_edit'}) }}
+                    {{ form_errors(form_edit_acuerdo.descripcion) }}    
+                    
+
+        
+           
+        </div>
+        <div class="form-row">
+            <div class="form-group col-xs-48 col-sm-18 col-md-12 col-lg-12">
+            
+                        <label class="small mb-1" > Departamentos que deben cumplirlo: </label>
+                        {{ form_widget(form_edit_acuerdo.departamentEmpresa, {'id': 'dep_edit'} ) }}
+                        {{ form_errors(form_edit_acuerdo.departamentEmpresa) }}   
+                        
+                        {{ form_widget(form_edit_acuerdo) }} 
+            </div>
+        </div>
+        
+
+        <button class="btn" id="btnEditarAcuerdos">{{ button_label|default('Guardar') }}</button>
+    </div>
+    
+{{ form_end(form_edit_acuerdo) }}

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CtlTipoAviso index{% endblock %}
+
+{% block body %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Activo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctl_tipo_aviso in ctl_tipo_avisos %}
+            <tr>
+                <td>{{ ctl_tipo_aviso.id }}</td>
+                <td>{{ ctl_tipo_aviso.nombre }}</td>
+                <td>{{ ctl_tipo_aviso.activo ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('ctl_tipo_aviso_show', {'id': ctl_tipo_aviso.id}) }}">show</a>
+                    <a href="{{ path('ctl_tipo_aviso_edit', {'id': ctl_tipo_aviso.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('ctl_tipo_aviso_new') }}"><i class="fa fa-plus" style="font-size:36px"></i></a>
+{% endblock %}

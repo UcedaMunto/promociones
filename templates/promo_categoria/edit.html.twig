@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit PromoCategoria{% endblock %}
+
+{% block body %}
+    {{ include('promo_categoria/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('promo_categoria_index') }}">back to list</a>
+
+    {{ include('promo_categoria/_delete_form.html.twig') }}
+{% endblock %}

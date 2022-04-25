@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CrearCtlTipoPromocion{% endblock %}
+
+{% block body %}
+    <h1>Create new CtlTipoPromocion</h1>
+
+    {{ include('ctl_tipo_promocion/_form.html.twig') }}
+
+    <a href="{{ path('ctl_tipo_promocion_index') }}">back to list</a>
+{% endblock %}

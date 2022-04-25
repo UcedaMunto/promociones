@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Grueros{% endblock %}
+
+{% block body %}
+    <h1>Grueros</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ gruero.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ gruero.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Creacion</th>
+                <td>{{ gruero.creacion ? gruero.creacion|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>FechaUltimoUso</th>
+                <td>{{ gruero.fechaUltimoUso ? gruero.fechaUltimoUso|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>SaldoFavorDebido</th>
+                <td>{{ gruero.saldoFavorDebido }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('grueros_index') }}">back to list</a>
+
+    <a href="{{ path('grueros_edit', {'id': gruero.id}) }}">edit</a>
+
+    {{ include('grueros/_delete_form.html.twig') }}
+{% endblock %}

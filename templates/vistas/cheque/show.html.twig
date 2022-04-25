@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detalles de cheque{% endblock %}
+
+{% block body %}
+
+    {{ include('cheque/part_show_completo.html.twig') }}
+    <div class="row g-2">
+        <div class="col-6">
+            <div class="p-3 border bg-light">
+                <a href="{{ path('pre_fact_grua_usa_index') }}">ver lista de cheques</a>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

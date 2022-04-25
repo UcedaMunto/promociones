@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nueva cuenta empleado{% endblock %}
+
+{% block body %}
+
+
+
+    <div class="card shadow-lg border-0 rounded-lg mt-1">
+        <div class="card-header justify-content-center"><h3 class="font-weight-light my-4">Crear cuenta de empleado</h3></div>
+            <div class="card-body">
+                {% if bandera['0']!="" %}
+                    <div class="alert alert-danger" role="alert">
+                        <strong>{{ bandera[0] }}</strong>  
+                    </div>
+                {% endif %}
+        
+                {{ form_start(form) }}
+
+                    <!-- Form Group (create account submit)-->
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <label class="small mb-1" >Password</label>
+                            {{ form_widget(form.password) }}                                 
+                        </div>
+                        <div class="col-md-4">
+                            <label class="small mb-1" >Usuario</label>
+                            {{ form_widget(form.usuario) }}    
+                        </div>
+                        <div class="col-md-4">
+                            <label class="small mb-1" >Roles</label>
+                            {{ form_widget(form.rolesEmpleado) }} 
+                        </div>
+                    </div>
+                    <br>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary btn-block"> {{ button_label|default('Guardar') }} </button> 
+                    </div>
+                    
+                {{ form_end(form) }}
+            
+            <div class="card-footer text-center">
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Yardas{% endblock %}
+
+{% block body %}
+    <h1>Lista de yardas</h1>
+    <a href="{{ path('yardas_new') }}">Nueva yarda</a>
+    <table class="table" id="tabla_yardas">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Direccion</th>
+                <th>Correo</th>
+                <th>Correo1</th>
+                <th>NombreEmpresa</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for yarda in yardas %}
+            <tr>
+                <td>{{ yarda.id }}</td>
+                <td>{{ yarda.nombre }}</td>
+                <td>{{ yarda.direccion }}</td>
+                <td>{{ yarda.correo }}</td>
+                <td>{{ yarda.correo1 }}</td>
+                <td>{{ yarda.nombreEmpresa }}</td>
+                <td>{{ yarda.estado }}</td>
+            
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}
+
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit PromoContactoEstablecimiento{% endblock %}
+
+{% block body %}
+    <h1>Edit PromoContactoEstablecimiento</h1>
+
+    {{ include('promo_contacto_establecimiento/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('promo_contacto_establecimiento_index') }}">back to list</a>
+
+    {{ include('promo_contacto_establecimiento/_delete_form.html.twig') }}
+{% endblock %}

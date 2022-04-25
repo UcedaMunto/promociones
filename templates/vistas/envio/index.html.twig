@@ -1,0 +1,171 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ordenes de movimiento(últimos 4 meses por defecto)  {% if yarda is defined %} YARDA: {{ yarda }} {% endif %} {% endblock %}
+
+{% block body %}
+    <div class="form-row col-md-12 alert alert-warning padding05"> 
+        Un movimiento se registra hasta que el gruero ya va en camino con el carro o si ya está en la subasta recogiéndolo, en caso de haber grua falsa también se agrega pero solo con los costos que implicó para la empresa
+    </div>
+    <div class="col-xl-12 col-lg-12">
+        <div id="filtroFecha" class="intangible">
+            {{ form_start(form, { 'method': 'POST'} ) }}
+                <div class="row">
+                    <div class="col-xxl-4 col-xl-3 mb-4">
+                        Filtrar por fechas:
+                    </div>
+                    <div class="col-xxl-4 col-xl-3 mb-4">
+                        {{ form_widget(form.fechaInicial) }}
+                    </div>
+                    <div class="col-xxl-4 col-xl-3 mb-4">
+                        {{ form_widget(form.fechaFinal) }}
+                    </div>
+                    <div class="col-xxl-4 col-xl-3 mb-4">
+                        <button type="submit" class="btn btn-primary btn-block"> {{ button_label|default('filtrar') }} </button>
+                    </div>
+                </div>
+            {{ form_end(form) }}
+        </div>
+         
+        <div class="card shadow mb-4">
+            
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+             
+                <div>
+                    Visibles: 
+
+                    <a class="toggle-vis" role="button" data-column="0">Correlativo ID</a> -
+                    <a class="toggle-vis" role="button" data-column="5">Tracking</a> -
+                    <a class="toggle-vis" role="button" data-column="6">Acciones</a> -
+                    <a class="toggle-vis" role="button" data-column="7">Fecha solvente </a> -
+
+                    <a class="toggle-vis" role="button" data-column="8">Tipo Compra</a> -
+                    <a class="toggle-vis" role="button" data-column="9">Cliente final</a> -
+                    <a class="toggle-vis" role="button" data-column="10">Nombre factura</a> -
+                    <a class="toggle-vis" role="button" data-column="11">Lote</a> -
+
+                    <a class="toggle-vis" role="button" data-column="12">Vin</a> -
+                    <a class="toggle-vis" role="button" data-column="13">Vehiculo</a> -
+                    <a class="toggle-vis" role="button" data-column="14">Ciudad origen</a>
+                    <a class="toggle-vis" role="button" data-column="15">Puerto - Yarda</a> -
+
+                    <a class="toggle-vis" role="button" data-column="16">Aduana</a> -
+                    <a class="toggle-vis" role="button" data-column="17">Precio-Flete</a> -
+                    <a class="toggle-vis" role="button" data-column="18">Grua-Precio</a>
+                    <a class="toggle-vis" role="button" data-column="19">BL</a> -
+                    <a class="toggle-vis" role="button" data-column="20">Storage</a> -
+
+
+                </div>
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" x-placement="bottom-end" style="position: absolute; transform: translate3d(-159px, 19px, 0px); top: 0px; left: 0px; will-change: transform;">
+                        <div class="dropdown-header">Acciones</div>
+                            <a class="dropdown-item" href="{{ path('envio_new') }}">+ Orden</a>
+                            <a class="dropdown-item" href="{{ path('contenedor_new') }}">+ contenedor</a>
+                        <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" id="filtroFechaButton">Filtrar por fecha</a>
+                            <a class="dropdown-item trackcomp1" title="Ingreso de datos al sistema">ESTADO 1</a>
+                            <a class="dropdown-item trackcomp2" title="Recogida - en camino a yarda">ESTADO 2</a>
+                            <a class="dropdown-item trackcomp3" title="Fotos de grua - (subida por app)">ESTADO 3</a>
+                            <a class="dropdown-item trackcomp4" title="Inventario de yarda">ESTADO 4</a>
+                            <a class="dropdown-item trackcomp5" title="Fotos de yarda y título">ESTADO 5</a>
+                            <a class="dropdown-item trackcomp6" title="En Dockreceipt">ESTADO 6</a>
+                            <a class="dropdown-item trackcomp7" title="Enbarcado">ESTADO 7</a>
+                            <a class="dropdown-item trackcomp8" title="En puerto - arribó">ESTADO 8</a>
+                            <a class="dropdown-item trackcomp9" title="En aduana">ESTADO 9</a>
+                            <a class="dropdown-item trackcomp10" title="Descargado">ESTADO 10</a>
+                            <a class="dropdown-item trackcomp11" title="Cobrado">ESTADO 11</a>
+                            <a class="dropdown-item trackcomp20">Grua interna</a>
+                           
+                    </div>
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <table class="table" id="tabla_envios">
+                    <thead>
+                        <tr>
+                            <th>Correlativo ID</th>
+                            <th>Id DetalleCompra</th>
+                            <th>Id Compra</th>
+                            <th>Id Aduana</th>
+                            <th>Id Puerto</th>
+                            <th>Tracking</th>
+                            <th>Acciones</th>  
+                            <th>Fecha solvente</th>
+                            <th>Tipo Compra</th>
+                            <th>Cliente final</th>
+                            <th>Nombre factura</th>
+                            <th>Lote</th>
+                            <th>Vin</th>
+                            <th>Vehiculo</th>
+                            <th>Ciudad origen</th>
+                            <th>Puerto - Yarda</th>
+                            <th>Aduana</th> 
+                            <th>Precio-Flete</th>                            
+                            <th>Grua-Precio</th>
+                            <th>BL</th>
+                            <th>Storage - Costos</th>          
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for envio in envios %}
+                        <tr>
+                            <td>{{ envio.id }}</td>
+                            <td>{{ envio.detalleCompra.id }}</td>
+                            <td>{{ envio.detalleCompra.compra.id }}</td>
+                            <td>{{ envio.aduana.id | default('0') }}</td>
+                            <td>{{ envio.flete.yarda.puerto.id | default('0') }} </td>
+                            <td>{{ envio.detalleCompra.compra.compraEstado }}</td>
+                            <td>
+                                <a href="{{ path('envio_show', {'id': envio.id}) }}">Vehiculo</a>-
+                                {% if envio.detalleCompra.compra.compraEstado < 6 or envio.detalleCompra.compra.compraEstado == 20  %}
+                                    <a href="{{ path('envio_edit', {'id': envio.id}) }}">editar</a>-
+                                {% endif %}
+                                <a href="{{ path('persona_cliente_show', {'id': envio.getClienteFinal[1] }) }}" >Cliente final</a>-
+                                <a href="{{ path('comentarios_new', {'envio': envio.id }) }}" >+Comentario</a>-
+                                {% if envio.detalleCompra.grua %}
+                                    <a href="{{ path('envio_new_movimiento', {'envio': envio.id}) }}">Movimiento</a>
+                                {% endif %}
+                                 
+                                <a href="{{ path('envio_track', {'identificador': envio.detalleCompra.identificador }) }}">track</a>-
+                            </td>
+                            <td>{{ envio.detalleCompra.compra.fechaFacturaCero is empty ? "" : envio.detalleCompra.compra.fechaFacturaCero|date("m/d/Y") }}</td>
+                            <td>{{envio.detalleCompra.compra.tipoCompra.nombre}}</td>
+                            <td  title='{{envio.clienteFinal[1]}}' >{{ envio.clienteFinal[0]}}</td>
+                            <td  title=''>{{ envio.detalleCompra.compra.importador.nombreFactura | default(envio.detalleCompra.compra.dealer | default( 'Sin nombre')) }}</td>
+                            <td >{{ envio.detalleCompra.lote}}</td>
+
+
+                            <td>{{ envio.detalleCompra.vin}}</td>  
+                            <td title="{{envio.detalleCompra.descripcion| default('_')}}" >{{ envio.detalleCompra.modelo.marca.nombre}} {{envio.detalleCompra.modelo.nombre}} {{envio.detalleCompra.subModelo.nombre| default('')}} {{envio.detalleCompra.anio}} </td>   
+                            <td> {{ envio.detalleCompra.zonaSucursal | default( "PARTICULAR  " ~ envio.detalleCompra.direccionParticular ) }}  </td>
+                            <td >{{ envio.flete.yarda.puerto.nombre | default('N.E') }} - {{ envio.flete.yarda.nombre | default('N.E') }}</td>
+                            
+                            <td>{{ envio.aduana | default('N.E') }}</td>                           
+                            <td title="{{ envio.flete.tipo.nombre | default('N.E') }}" >{{ envio.precioFlete | default('N.E') }}</td>                            
+                            <td>{{ envio.GruaPrecio }}</td>
+                            <td>{{ envio.precioBL }}</td>
+                            <td>{{ envio.totalStorage }}</td>
+                            
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            <div>
+        </div>
+        <!--a class="btn btn-outline-primary" href="{{ path('envio_new') }}">+ orden de movimiento</a-->
+        <!--a class="btn btn-outline-warning" href="">+ orden de movimiento</a-->      
+    </div>
+{% endblock %}
+
+{% block js_pantalla %}
+    <script src="{{ asset('js/envioIndex.js') }}" ></script>
+{% endblock %}

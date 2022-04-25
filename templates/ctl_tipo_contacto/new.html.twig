@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crear Contacto{% endblock %}
+
+{% block body %}
+    {{ include('ctl_tipo_contacto/_form.html.twig') }}
+
+    <a href="{{ path('ctl_tipo_contacto_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crear Aviso{% endblock %}
+
+{% block body %}
+    {{ include('promo_aviso/_form.html.twig') }}
+
+    <a href="{{ path('promo_aviso_index') }}">back to list</a>
+{% endblock %}

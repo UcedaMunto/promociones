@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BitacoraSistema index{% endblock %}
+
+{% block body %}
+    <p>Por defecto esta tabla contiene los datos de las últimas dos semanas, debido a que seran demasiados datos, puede pedir un periodo mas largo usando el menú de la tabla</p>
+
+    <table class="table"  id="tabla_Bitacora">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fecha</th>
+                <th>Usuario</th>
+                <th>Ruta</th>
+                <th>Descripcion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for bitacora_sistema in bitacora_sistemas %}
+            <tr>
+                <td>{{ bitacora_sistema.id }}</td>
+                <td>{{ bitacora_sistema.fecha ? bitacora_sistema.fecha|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ bitacora_sistema.usuario }}</td>
+                <td>{{ bitacora_sistema.ruta }}</td>
+                <td>{{ bitacora_sistema.descripcion }}</td>
+                <td>
+                    <a href="{{ path('bitacora_sistema_show', {'id': bitacora_sistema.id}) }}">show</a>
+                </td>
+                <!--td>bitacora_sistema.parametros </td-->
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}
+

@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DetalleCompra{% endblock %}
+
+{% block body %}
+    <h1>DetalleCompra</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ detalle_compra.id }}</td>
+            </tr>
+            <tr>
+                <th>Lote</th>
+                <td>{{ detalle_compra.lote }}</td>
+            </tr>
+            <tr>
+                <th>Piezas</th>
+                <td>{{ detalle_compra.piezas }}</td>
+            </tr>
+            <tr>
+                <th>Extras</th>
+                <td>{{ detalle_compra.extras }}</td>
+            </tr>
+            <tr>
+                <th>Titulo</th>
+                <td>{{ detalle_compra.titulo }}</td>
+            </tr>
+            <tr>
+                <th>Llave</th>
+                <td>{{ detalle_compra.llave }}</td>
+            </tr>
+            <tr>
+                <th>Anio</th>
+                <td>{{ detalle_compra.anio }}</td>
+            </tr>
+            <tr>
+                <th>Vin</th>
+                <td>{{ detalle_compra.vin }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ detalle_compra.descripcion }}</td>
+            </tr>
+            <tr>
+                <th>Costo</th>
+                <td>{{ detalle_compra.costo }}</td>
+            </tr>
+            <tr>
+                <th>VehiculoDescripcion</th>
+                <td>{{ detalle_compra.vehiculoDescripcion }}</td>
+            </tr>
+            <tr>
+                <th>PesoKilogramos</th>
+                <td>{{ detalle_compra.pesoKilogramos }}</td>
+            </tr>
+            <tr>
+                <th>PesoLibras</th>
+                <td>{{ detalle_compra.pesoLibras }}</td>
+            </tr>
+            <tr>
+                <th>Aes</th>
+                <td>{{ detalle_compra.aes }}</td>
+            </tr>
+            <tr>
+                <th>Grua</th>
+                <td>{{ detalle_compra.grua ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('detalle_compra_index') }}">back to list</a>
+
+    <a href="{{ path('detalle_compra_edit', {'id': detalle_compra.id}) }}">edit</a>
+
+    {{ include('detalle_compra/_delete_form.html.twig') }}
+{% endblock %}

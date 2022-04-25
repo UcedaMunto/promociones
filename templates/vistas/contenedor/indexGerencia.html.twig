@@ -1,0 +1,144 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Informe{% endblock %}
+
+{% block body %}
+
+    <div id="filtroFecha" class="intangible">
+        {{ form_start(form, { 'method': 'POST'} ) }}
+            <div class="row">
+                <div class="col-xxl-4 col-xl-3 mb-4">
+                    Filtrar por fechas:
+                </div>
+                <div class="col-xxl-4 col-xl-3 mb-4">
+                    {{ form_widget(form.fechaInicial) }}
+                </div>
+                <div class="col-xxl-4 col-xl-3 mb-4">
+                    {{ form_widget(form.fechaFinal) }}
+                </div>
+                <div class="col-xxl-4 col-xl-3 mb-4">
+                    <button type="submit" class="btn btn-primary btn-block"> {{ button_label|default('filtrar') }} </button>
+                </div>
+            </div>
+        {{ form_end(form) }}
+    </div>
+   
+
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <div>
+                    Visibles: 
+                    <a class="toggle-vis" role="button" data-column="5">XXX</a>
+                </div>
+            
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" x-placement="bottom-end" style="position: absolute; transform: translate3d(-159px, 19px, 0px); top: 0px; left: 0px; will-change: transform;">
+                        <div class="dropdown-header">Acciones</div>
+                            <a class="dropdown-item" href="{{ path('contenedor_new') }}">+ DockReceipt</a>
+
+                        <div class="dropdown-divider">
+                            
+                        </div><a class="dropdown-item" id="filtroFechaButton">Filtrar por fecha</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <table class="table" id="tabla_contenedores">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>FechaArribo</th>
+                            <th>Descripcion</th>
+                            <th>Codigo</th>
+                            <th>Cupos</th>
+                            <th>CostoDescarga</th>
+                            <th>FechaEnbarcacion</th>
+                            <th>CostoEnvioDocumentos</th>
+                            <th>CostoEnvioPago</th>
+                            <th>Invoice</th>
+                            <th>OtrosCostos</th>
+                            <th>PagoEmpresa</th>
+                            <th>Utilidad</th>
+                            <th>Booking</th>
+                            <th>Valido</th>
+                            <th>Descargado</th>
+                            <th>FechaDescargado</th>
+                            <th>Cancelado</th>
+                            <th>Editado</th>
+                            <th>CostoComision</th>
+                            <th>CostoContenedorYarda</th>
+                            <th>CostoTerrestre</th>
+                            <th>CostoYarda</th>
+                            <th>OtrosCostosFlete</th>
+                            <th>NotasFlete</th>
+                            <th>PagoDescargas</th>
+                            <th>FechaPagoDescarga</th>
+                            <th>FechaZarpe</th>
+                            <th>NotificacionUno</th>
+                            <th>PreValidado</th>
+                            <th>actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for contenedor in contenedors %}
+                        <tr>
+                            <td>{{ contenedor.id }}</td>
+                            <td>{{ contenedor.fechaArribo ? contenedor.fechaArribo|date('Y-m-d') : '' }}</td>
+                            <td>{{ contenedor.descripcion }}</td>
+                            <td>{{ contenedor.codigo }}</td>
+                            <td>{{ contenedor.cupos }}</td>
+                            <td>{{ contenedor.costoDescarga }}</td>
+                            <td>{{ contenedor.fechaEnbarcacion ? contenedor.fechaEnbarcacion|date('Y-m-d') : '' }}</td>
+                            <td>{{ contenedor.costoEnvioDocumentos }}</td>
+                            <td>{{ contenedor.costoEnvioPago }}</td>
+                            <td>{{ contenedor.invoice }}</td>
+                            <td>{{ contenedor.otrosCostos }}</td>
+                            <td>{{ contenedor.pagoEmpresa }}</td>
+                            <td>{{ contenedor.utilidad }}</td>
+                            <td>{{ contenedor.booking }}</td>
+                            <td>{{ contenedor.valido }}</td>
+                            <td>{{ contenedor.descargado }}</td>
+                            <td>{{ contenedor.fechaDescargado ? contenedor.fechaDescargado|date('Y-m-d') : '' }}</td>
+                            <td>{{ contenedor.cancelado }}</td>
+                            <td>{{ contenedor.editado }}</td>
+                            <td>{{ contenedor.costoComision }}</td>
+                            <td>{{ contenedor.costoContenedorYarda }}</td>
+                            <td>{{ contenedor.costoTerrestre }}</td>
+                            <td>{{ contenedor.costoYarda }}</td>
+                            <td>{{ contenedor.otrosCostosFlete }}</td>
+                            <td>{{ contenedor.notasFlete }}</td>
+                            <td>{{ contenedor.pagoDescargas }}</td>
+                            <td>{{ contenedor.fechaPagoDescarga ? contenedor.fechaPagoDescarga|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ contenedor.fechaZarpe ? contenedor.fechaZarpe|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ contenedor.notificacionUno }}</td>
+                            <td>{{ contenedor.preValidado }}</td>
+                            <td>
+                                <a href="{{ path('contenedor_show', {'id': contenedor.id}) }}">show</a>
+                                <a href="{{ path('contenedor_edit', {'id': contenedor.id}) }}">edit</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="31">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    
+{% endblock %}
+
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}
+
+{% block js_pantalla %}
+    <script src="{{ asset('js/contenedorIndex.js') }}" ></script>
+{% endblock %}

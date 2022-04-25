@@ -1,0 +1,23 @@
+var tipoCompra= $("#detalle_compra_compra_tipoCompra");
+tipoCompra.change(function(){
+    if(tipoCompra.val()=="1"){
+        $("#importador").removeClass("intangible");
+        $("#dealer").addClass("intangible");
+        $("#subimportador").addClass("intangible");
+    }
+    if(tipoCompra.val()=="2"){
+        $("#dealer").addClass("intangible");
+        $("#subimportador").removeClass("intangible");
+        $("#importador").removeClass("intangible");
+    }
+    if(tipoCompra.val()=="3"){
+        $("#dealer").removeClass("intangible");
+        $("#subimportador").removeClass("intangible");
+        $("#importador").removeClass("intangible");
+    }
+    if(tipoCompra.val()=="4"){
+        $("#dealer").addClass("intangible");
+        $("#subimportador").removeClass("intangible");
+        $("#importador").addClass("intangible");
+    }
+});

@@ -1,0 +1,64 @@
+{% extends 'baseEnBlanco.html.twig' %}
+{% block title %}  {% endblock %}
+
+{% block body %}
+    <script src="/js/html2canvas/html2canvas.min.js"></script>
+    <div class="col-xl-12 col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <div class="dropdown no-arrow">
+                    
+                </div>
+            </div>
+            <div class="card-body">
+                    <div class="form-row" >
+                        <div class="form-group col-md-4" style="background: #edafaf; border-radius: 10px; ">
+                            <h1 style="font-family: fantasy;text-align: -webkit-center;color: darkslategray;"> Step 1 </h1>
+                            {{ form_start(form , { 'attr': {'autocomplete': 'off'}} ) }}
+                            <label class="small mb-1" >Search and select</label><br>
+                            {{ form_widget(form.listaAutos) }}
+                            <br>
+                            {{ form_end(form) }}
+                            <br><h1>OR</h1><br>
+                            <label for="fname">If not found, enter lote or vin here:</label><br>
+                            <input type="text" id="identificador" class="form-control" name="identificador"><br>
+                        </div>
+                        <div class="form-group col-md-4" style="background: #e3edaf;border-radius: 10px;"> 
+                        <h1 style="font-family: fantasy;text-align: -webkit-center;color: darkslategray;"> Step 2 </h1>
+                            <label for="file">Search files (MAX 30):</label> <br>
+                            <div style="text-align-last: center;">
+                                <i class="far fa-file-image fa-3x"></i>
+                            </div>
+                            <input name="file" id="file" class="form-control" type="file" multiple>
+                        </div>
+                        <div class="form-group col-md-4" style="background: #04f26d;border-radius: 10px;text-align: -webkit-center;">
+                            <h1 style="font-family: fantasy;text-align: -webkit-center;color: darkslategray;"> Step 3 </h1>
+                            <br>
+                            <button id="enviar" class="form-control" style="color: currentcolor;width: 50%;height: auto;">
+                            <i class="fas fa-paper-plane fa-3x">
+                            </i> Send </button>
+                            <br>
+                            <p>compressing</p>
+                            <div class="progress">
+                                <div class="progress-bar" id="compresion" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">25%</div>
+                            </div>
+                            <br>
+                            <p>uploading</p>
+                            <div class="progress">
+                                <div class="progress-bar" id="uploading" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">25%</div>
+                            </div>
+                        </div>
+                    </div> 
+            <div>
+            
+            <div  id="file-preview-zone"> 
+            </div>
+            
+            
+        </div>        
+    </div>
+{% endblock %}
+
+{% block js_pantalla %}
+    <script src="{{ asset('js/interfazGruas.js') }}" ></script>
+{% endblock %}

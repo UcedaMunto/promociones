@@ -1,0 +1,28 @@
+{% if mensajes['0']!="" %}
+            <div class="alert alert-danger" role="alert">
+                <strong>{{ mensajes[0] }}</strong>  
+            </div>
+{% endif %}
+
+{{ form_start(form, { 'attr' : { 'id':'form_discusion'}}) }}
+<div class="FormularioDiscusionJefatura">
+
+        <label class="small mb-1" > Titulo de la discusión: </label>
+        {{ form_widget(form.titulo, {'id': 'dj_titulo_add'} )}}
+        {{ form_errors(form.titulo) }}   
+
+        <label class="small mb-1" > Departamentos involucrados: </label>
+        {{ form_widget(form.departamentosEmpresa , {'id': 'dp_estado_new' })}}
+        {{ form_errors(form.departamentosEmpresa) }}  
+        
+        <div class="col-sm-6" ><BR/>
+                <label class="small mb-1" > Temas a tratar: </label>
+                {{ form_widget(form.descripcion, {'id': 'descripccion_add'} ) }}     
+                {{ form_errors(form.descripcion) }}
+                <br/><BR/>
+                <button class="btn" id="btnReunion">{{ button_label|default('Guardar') }}</button>   
+        </div>
+   
+</div>        
+              
+{{ form_end(form) }}

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista grueros{% endblock %}
+
+{% block body %}
+    <div class="form-row col-md-12 alert alert-warning"> 
+        <p>
+            - Esta lista es de grueros, sirve para asignar cheques a un persona a la hora de realizar pagos.
+            - En caso de que entidades externas que no son grueros ni empresas de grua asuman un costo que
+                deberá ser retribuido por la empresa entonces acá debe aparecer la empresa o persona con el 
+                nombre bajo el cual se le asigno el cheque
+            - Todo esto con el objetivo de llevar una cuenta de los saldos a favor que un cheque genera.
+            
+        </p>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Creacion</th>
+                <th>FechaUltimoUso</th>
+                <th>SaldoFavorDebido</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for gruero in grueros %}
+            <tr>
+                <td>{{ gruero.id }}</td>
+                <td>{{ gruero.nombre }}</td>
+                <td>{{ gruero.creacion ? gruero.creacion|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ gruero.fechaUltimoUso ? gruero.fechaUltimoUso|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ gruero.saldoFavorDebido }}</td>
+                <td>
+                    <a href="{{ path('grueros_show', {'id': gruero.id}) }}">ver</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Aviso{% endblock %}
+
+{% block body %}
+
+    {{ include('promo_aviso/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('promo_aviso_index') }}">back to list</a>
+
+    {{ include('promo_aviso/_delete_form.html.twig') }}
+{% endblock %}

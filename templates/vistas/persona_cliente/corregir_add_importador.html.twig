@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Corrección de datos de importador{% endblock %}
+
+{% block body %}
+
+    <div class="col-md-12">
+     <a href="{{ path('persona_cliente_index') }}">Regresar al listado de clientes</a>
+            <!-- Basic registration form-->
+            <div class="card shadow-lg border-0 rounded-lg mt-1">
+                <div class="card-header justify-content-center">
+                    
+                </div>
+                    <p>Estos datos se cruzarán con todas las transacciones futuras por lo que el cambio de subasta de un registro acá podría provocar inconsistencias en varios de los informes y errores en el proceso</p>
+                <strong>
+                    <p>
+                        Si necesita cambiar una subasta válida hacia otra debe comunicarlo con soporte para corregir todas las transacciones enlazadas a este importador
+                    </p>
+                </strong>
+                <div class="card-body">
+                    
+                    <form action="http://www.inbakcar.net/INBAKCAR/vehiculos/index" method="post" target="_blank">
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label class="small mb-1" >nombre </label>
+                                <input type="text" name="nombre" value="{{persona_cliente.nombre}}"  /></p>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <input type="text" name="bandera" value=1 /></p>
+                            </div>
+                        </div>
+                        <button type="submit" />buscar en inbakcar</button>
+                    </form>
+                    {% if mensajes['0']  %}
+                        <div class="alert alert-danger" role="alert">
+                        <strong>{{ mensajes[0] }}</strong>  
+                        </div>
+                    {% endif %}
+                    <strong>
+                        <h2>dueño del buyer.. <br> ----dui:{{ persona_cliente.datos.dui }} ---- nit: {{ persona_cliente.datos.nit | default('SD') }} ----nombre según dui:{{ persona_cliente.datos.nombre }}<h2>
+                    </strong><br>
+                   <p>Una persona puede tener 2 buyer activos como máximo, y ambos deben pertenecer a IAA o a COPART, Si un buyer no pertenece a la persona con el dui o nit de arriba será reasignado</p>
+                    {{ form_start(form2) }}
+                     {% for imp in form2.importador %}
+                        
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label class="small mb-1" >buyer </label>
+                                {{ form_widget(imp.buyer)}}
+                                {{ form_errors(imp.buyer) }} 
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="small mb-1" >nombreFactura </label>
+                                {{ form_widget(imp.nombreFactura)}}
+                                {{ form_errors(imp.nombreFactura) }} 
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label class="small mb-1" > subasta? </label>
+                                {{ form_widget(imp.subasta)}}
+                                {{ form_errors(imp.subasta) }} 
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="small mb-1" > nombre - dui </label>
+                                {{ form_widget(imp.personaCliente)}}
+                                {{ form_errors(imp.personaCliente)}} 
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label class="small mb-1" >Estado</label>
+                                {{ form_widget(imp.estado)}}
+                                {{ form_errors(imp.estado)}} 
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                        <button class="btn">{{ button_label|default('Save') }}</button>
+                        
+                    {{ form_end(form2) }}
+                    
+                </div>
+                <div class="card-footer text-center">
+                   
+                </div>
+            </div>
+        </div>
+        
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

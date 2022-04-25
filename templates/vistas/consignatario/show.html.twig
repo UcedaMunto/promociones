@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Consignatario{% endblock %}
+
+{% block body %}
+    <h1>Consignatario</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ consignatario.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ consignatario.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Direccion</th>
+                <td>{{ consignatario.direccion }}</td>
+            </tr>
+            <tr>
+                <th>Direccion2</th>
+                <td>{{ consignatario.direccion2 }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ consignatario.email }}</td>
+            </tr>
+            <tr>
+                <th>Telefono</th>
+                <td>{{ consignatario.telefono }}</td>
+            </tr>
+            <tr>
+                <th>Encargado</th>
+                <td>{{ consignatario.encargado }}</td>
+            </tr>
+            <tr>
+                <th>Nit</th>
+                <td>{{ consignatario.nit }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('consignatario_index') }}">back to list</a>
+
+    <a href="{{ path('consignatario_edit', {'id': consignatario.id}) }}">edit</a>
+
+    {{ include('consignatario/_delete_form.html.twig') }}
+{% endblock %}

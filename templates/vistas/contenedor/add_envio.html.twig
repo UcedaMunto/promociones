@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuevo DockReceipt{% endblock %}
+
+{% block body %}
+    <a href="{{ path('contenedor_index') }}">Lista de contenedores</a>
+    <p>Recuerda validar el peso después de este cambio</p>
+<label for="cars">Los autos disponibles para la yarda: {{ envio.aduana.nombre | default('NE') }} y aduana:{{ envio.flete.yarda.nombre | default('NE')  }} son:</label>
+
+<select name="contenedor_listaAutos" id="contenedor_listaAutos">
+
+
+</select>
+
+<input type="text" id="contenedor_yarda" value={{ yarda | default('no hay, favor reparar') }} class="intangible" placeholder="">
+<input type="text" id="contenedor_aduana" value={{ aduana | default('no hay, favor reparar') }}  class="intangible" placeholder="">
+  
+
+
+    {% if mensajes['0']!="" %}
+        <div class="alert alert-danger" role="alert">
+            <strong>{{ mensajes[0] }}</strong>  
+        </div>
+    {% endif %}
+
+
+{{ form_start(form) }}
+<table class="table table-hover">
+    <tr>
+        <th width="100px" >Correlativo</th>
+        <th width="150px">Lote</th>
+        <th width="210px">VIN</th>
+        <th width="200px">Vehículo</th>
+        <th width="150px">Sub modelo</th>
+        <th width="100px">Peso</th>
+        <th width="130px">AES</th>
+        <th width="100px">Color</th>
+    </tr>
+    <tr>
+        <th scope="col">
+            {{ form_widget(form.envio) }}
+            {{ form_errors(form.envio) }}
+        </th>
+        <th scope="col">
+            {{ form_widget(form.lote) }}
+            {{ form_errors(form.lote) }}
+        </th>
+        <th scope="col">
+            {{ form_widget(form.vin) }}
+            {{ form_errors(form.vin) }}
+        </th>
+        <th scope="col">
+            {{ form_widget(form.vehiculo) }}
+            {{ form_errors(form.vehiculo) }}
+        </th>
+        <th scope="col">
+            {{ form_widget(form.submodelo) }}
+            {{ form_errors(form.submodelo) }}
+        </th>
+        <th scope="col"> 
+            {{ form_widget(form.peso) }}
+            {{ form_errors(form.peso) }}
+        </th>
+        <th scope="col">
+            {{ form_widget(form.aes) }}
+            {{ form_errors(form.aes) }}
+        </th>
+        <th scope="col">
+            {{ form_widget(form.color) }}
+            {{ form_errors(form.color) }}
+        </th>
+    </tr>        
+</table>
+
+    <button class="btn">{{ button_label|default('Guardar') }}</button>
+{{ form_end(form) }}
+
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}
+
+
+{% block js_pantalla %}
+    <script src="{{ asset('js/addEnvioContenedorDockreceipt.js') }}" ></script>
+{% endblock %}

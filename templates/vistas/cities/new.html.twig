@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nueva ciudad{% endblock %}
+
+{% block body %}
+    <div class="row"> 
+        <div class="col-md-2"> </div>
+            <div class="col-md-6">
+
+            <p>Ojo las ciudades que se usan en el seleccionable para gruas deben llevar su precio default para que el sistema lo pueda sugerir en un futuro</p>
+                {{ include('cities/_form.html.twig') }}
+
+                <a href="{{ path('cities_index', { 'estado': estado }) }}">back to list</a>
+            </div>
+        <div class="col-md-4"> </div>
+    </div>
+{% endblock %}

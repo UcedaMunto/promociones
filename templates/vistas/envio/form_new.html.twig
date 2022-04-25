@@ -1,0 +1,245 @@
+            <div class="card-header justify-content-center"></div>
+            <div class="card-body">
+                <!-- Registration form-->
+                {% if mensajes['0']!="" %}
+                <div class="alert alert-danger" role="alert">
+                    <strong>{{ mensajes[0] }}</strong>  
+                </div>
+                {% endif %}
+                
+              
+                {{ form_start(form , { 'attr': {'id': 'envio_dato' }  } )}}
+                    <div class="form-row backgroundColor1">
+                        <div class="form-group col-md-3">                               
+                            <label class="small mb-1" >En yarda? (Ingresa directo a estado 4 en yarda)</label>
+                            {{ form_widget(form.enYarda) }}   
+                            {{ form_errors(form.enYarda) }}                            
+                        </div>
+                        <div class="form-group col-md-3">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Tipo de servicio</label>
+                            {{ form_widget(form.detalleCompra.compra.tipoCompra) }}
+                            {{ form_errors(form.detalleCompra.compra.tipoCompra) }}                                 
+                        </div>
+                        <div class="form-group col-md-3">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Seleccione aduana</label>
+                            {{ form_widget(form.aduana) }}
+                            {{ form_errors(form.aduana) }}                                  
+                        </div>
+                        <div class="form-group col-md-3">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Requiere grua? <strong>(Lo usaremos para advertir que se necesita grua, despues de X dias de haber ingresado al sistema)</label>
+                            {{ form_widget(form.detalleCompra.grua) }}   
+                            {{ form_errors(form.detalleCompra.grua) }}                            
+                        </div>
+                    </div>
+                    <div class="form-row col-md-12 alert alert-warning"> 
+                        <p>Considerar que el cliente final es por defecto el importador, pero si se selecciona un cliente se tomará al cliente como cliente final, las notificaciones se van a mandar al cliente final solamente</p>
+                    </div>
+
+                    <div class="form-row">
+                        
+                        
+                        <div id="dealer" class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Dealer</label>
+                            {{ form_widget(form.detalleCompra.compra.dealer) }}
+                            {{ form_errors(form.detalleCompra.compra.dealer) }}                            
+                        </div>
+                        <div  id="importador" class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Importador</label>
+                            {{ form_widget(form.detalleCompra.compra.importador) }}
+                            {{ form_errors(form.detalleCompra.compra.importador) }}                                     
+                        </div>
+                        <div id="subimportador" class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >cliente(todos)</label>
+                            {{ form_widget(form.detalleCompra.compra.personaCliente) }}
+                            {{ form_errors(form.detalleCompra.compra.personaCliente) }}                                     
+                        </div>
+                    </div>
+                    <!-- Form Row-->
+                    <div class="form-row backgroundColor2">
+                        <div class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Modelo</label>
+                            {{ form_widget(form.detalleCompra.modelo) }}
+                            {{ form_errors(form.detalleCompra.modelo) }}                                    
+                        </div>
+                        <div class="form-group col-md-4">                     
+                        <label class="small mb-1" >Año</label>
+                        {{ form_widget(form.detalleCompra.anio) }}
+                        {{ form_errors(form.detalleCompra.anio) }}                                     
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="small mb-1" >Vehiculo descripción</label>
+                            {{ form_widget(form.detalleCompra.vehiculoDescripcion) }}
+                            {{ form_errors(form.detalleCompra.vehiculoDescripcion) }}    
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                                <!-- Form Group (first name)-->                                
+                                <label class="small mb-1" >Tipo de título</label>
+                                {{ form_widget(form.detalleCompra.compra.tipoTitulo) }}
+                                {{ form_errors(form.detalleCompra.compra.tipoTitulo) }}                                     
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="small mb-1" >Titulo(ojo, 'no' significa que se debe tramitar)</label>
+                            {{ form_widget(form.detalleCompra.titulo) }}
+                            {{ form_errors(form.detalleCompra.titulo) }}    
+                        </div>
+                        <div class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Llave(Las opciones si y no no son modificables)</label>
+                            {{ form_widget(form.detalleCompra.llave) }} 
+                            {{ form_errors(form.detalleCompra.llave) }}                                    
+                        </div>   
+                    </div>
+
+                    <div class="form-row backgroundColor3">
+                        <div class="form-group col-md-4">
+                            <label class="small mb-1" >Vin</label>
+                            {{ form_widget(form.detalleCompra.vin) }}
+                            {{ form_errors(form.detalleCompra.vin) }}    
+                        </div>
+                        <div class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Lote</label>
+                            {{ form_widget(form.detalleCompra.lote) }}
+                            {{ form_errors(form.detalleCompra.lote) }}                                     
+                        </div>
+                        <div class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >notas?</label>
+                            {{ form_widget(form.detalleCompra.compra.notas) }}
+                            {{ form_errors(form.detalleCompra.compra.notas) }}                                   
+                        </div>                        
+                    </div>                                                          
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <!-- Form Group (first name)-->
+                                <label class="small mb-1" >Factura (no importa si no está a cero)</label>
+                            {{ form_widget(form.detalleCompra.compra.facturas) }}
+                            {{ form_errors(form.detalleCompra.compra.facturas) }}                                                                   
+                        </div>
+                        <div class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Fecha factura cero?</label>
+                            {{ form_widget(form.detalleCompra.compra.fechaFacturaCero) }}
+                            {{ form_errors(form.detalleCompra.compra.fechaFacturaCero) }}                                 
+                        </div>
+                        <div class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Dirección particular (si es necesaria)</label>
+                            {{ form_widget(form.detalleCompra.direccionParticular ) }}
+                            {{ form_errors(form.detalleCompra.direccionParticular) }}                                 
+                        </div>      
+                    </div>
+                 
+                    <div class="form-row backgroundColor4">
+                        
+                        <div class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Copia email?</label>
+                            {{ form_widget(form.detalleCompra.compra.copiaEmail) }}
+                            {{ form_errors(form.detalleCompra.compra.copiaEmail) }}                                 
+                        </div>
+                        <div class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Copia email 2?</label>
+                            {{ form_widget(form.detalleCompra.compra.copiaEmail2) }}
+                            {{ form_errors(form.detalleCompra.compra.copiaEmail2) }}                                  
+                        </div>
+                        <div class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Código para descuentos (opcional)</label>
+                            {{ form_widget(form.codigo) }}
+                            {{ form_errors(form.codigo) }}                             
+                        </div>
+                    </div>
+                    <p>OJO: Este dato es usado para crear el DockReceipt no debe ser editado sin dar seguimiento</p>     
+
+                    <div class="form-row" style="background-color: #9fcfda;">
+                        <div class="form-group col-md-3">
+                            <label class="small mb-1" >Para repuestos?</label> 
+                            {{ form_widget(form.repuestos ) }}
+                            {{ form_errors(form.repuestos ) }}           
+                                        
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="small mb-1" >Sucursal de subasta</label> 
+                            {{ form_widget(form.detalleCompra.zonaSucursal ) }}
+                            {{ form_errors(form.detalleCompra.zonaSucursal ) }}                                                                  
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="small mb-1" >tipo de flete(puerto)</label>
+                            {{ form_widget(form.flete) }}
+                            {{ form_errors(form.flete) }}                                    
+                        </div>
+                         <div class="form-group col-md-3"  style="background: #ffcaca; border-radius: 10px; padding: 10px; text-align: center;">
+                            <label title="OJO ESTO INDICA SI EL AUTO YA ESTA LISTO PARA METERSE EN UN CONTENEDOR, ESTO PUEDE EDITARSE LUEGO" class="small mb-1" >En cola para conbinación( documentación completa )</label>
+                            {{ form_widget(form.enCola) }}
+                            {{ form_errors(form.enCola) }}                                    
+                        </div>
+                      
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                                                   
+                        </div>
+                        <div class="form-group col-md-3">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Precio de grua</label>
+                            {{ form_widget(form.GruaPrecio) }}
+                            {{ form_errors(form.GruaPrecio) }}                                    
+                        </div>
+                        <div class="form-group col-md-3">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Precio flete?</label>
+                            {{ form_widget(form.precioFlete) }}
+                            {{ form_errors(form.precioFlete) }}                                  
+                        </div>
+                        <div class="form-group col-md-3">
+                                                   
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >BL(precio y costo iguales)</label>
+                            {{ form_widget(form.precioBL) }}
+                            {{ form_errors(form.precioBL) }}                                  
+                        </div>
+                        <div class="form-group col-md-3">
+                                            
+                        </div>
+                        <div class="form-group col-md-3">
+                                                         
+                        </div>
+                    </div>
+                   
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        {{ form_widget(form.cantidad) }}
+                        {{ form_errors(form.cantidad) }}
+                    </div>
+                    <div class="form-group col-md-4">
+                            <button type="submit" id='btnenvio' class="btn btn-primary btn-block"> {{ button_label|default('Guardar') }} </button>                 
+                    </div>
+                    <div class="form-group col-md-4">
+                    </div>
+                    
+                </div>
+               
+                {{ form_end(form) }}
+            
+            <div class="card-footer text-center">
+                
+            </div>

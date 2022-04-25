@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista de paises{% endblock %}
+
+{% block body %}
+    <h1>Paises</h1>
+    <a href="{{ path('pais_new') }}">Crear nuevo País</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Codigo area</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pai in pais %}
+            <tr>
+                <td>{{ pai.id }}</td>
+                <td>{{ pai.nombre }}</td>
+                <td>{{ pai.codigoArea }}</td>
+          
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

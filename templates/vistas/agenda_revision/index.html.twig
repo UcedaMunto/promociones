@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista de revisiones{% endblock %}
+
+{% block body %}
+    <p>IMPERATIVO: Es responsabilida de cada empleado solventar en los días en los que la notificación esta activa o en caso contrario, 
+        programar una nueva revisión para continuar el seguimiento </p>
+    <table class="table" id="tabla_revisiones">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descripción</th>
+                <th>Encargado</th>
+                <th>Estado</th>
+                <th>DuracionRecordatorio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for agenda_revision in agenda_revisions %}
+            <tr>
+                <td>{{ agenda_revision.id }}</td>
+                <td>{{ agenda_revision.descripcion }}</td>
+                <td>{{ agenda_revision.encargado }}</td>
+                <td>{{ agenda_revision.estado }}</td>
+                <td>{{ agenda_revision.duracionRecordatorio }}</td>
+                <td>
+                    <a href="{{ path('agenda_revision_show', {'id': agenda_revision.id}) }}">show</a>
+                    <a href="{{ path('agenda_revision_edit', {'id': agenda_revision.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}
+

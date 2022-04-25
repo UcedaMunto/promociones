@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}nuevo cheque de grua{% endblock %}
+
+{% block body %}
+
+    <div class="formularioLista">   
+            {{ include('cheque/part_new.html.twig') }}
+    </div>
+
+    <div class="alert alert-warning" role="alert">
+        <p>OJO Una vez creado un informe tendrá 2 días para completarlo, luego dejará de ser una opción para asignar nuevos cheques</p>
+        <p>Esto con el objetivo de que un informe no pueda ser modificado una vez que se termine su periodo de ingreso de datos</p>
+    </div>
+
+
+    <a href="{{ path('pre_fact_grua_usa_index') }}">back to list</a>
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PromoCategoria{% endblock %}
+
+{% block body %}
+    <h1>PromoCategoria</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ promo_categorium.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ promo_categorium.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ promo_categorium.descripcion }}</td>
+            </tr>
+            <tr>
+                <th>Activo</th>
+                <td>{{ promo_categorium.activo ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('promo_categoria_index') }}">back to list</a>
+
+    <a href="{{ path('promo_categoria_edit', {'id': promo_categorium.id}) }}">edit</a>
+
+    {{ include('promo_categoria/_delete_form.html.twig') }}
+{% endblock %}

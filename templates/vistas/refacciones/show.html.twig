@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ver refacciones{% endblock %}
+
+{% block body %}
+    <h1>Detalles de refacción</h1>
+    <a href="{{ path('refacciones_index') }}">Lista de refacciones</a>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Correlativo</th>
+                <td>{{ refaccione.id }}</td>
+                <th>Nombre</th>
+                <td>{{ refaccione.tipoEmbalaje.nombre }}</td>
+                <th>Cantidad</th>
+                <td>{{ refaccione.cantidad }}</td>
+                <th>Peso</th>
+                <td>{{ refaccione.peso }}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Vehículo</th>
+                <td>{{ refaccione.autoRecipiente.comboAuto | default('Fuera de vehículo')}}</td>
+                <th>Factura</th>
+                <td>{{ refaccione.numeroFactura }}</td>
+                <th>Booking del contenedor</th>
+                <td><a href="{{ path('contenedor_show', { 'id': refaccione.contenedor.id }) }}"> {{ refaccione.contenedor.booking }} </a> </td>
+                <th>Precio</th>
+                <td>{{ refaccione.precio }}</td>
+                <th>BL C</th>
+                <td>{{ refaccione.blCosto }}</td>
+            </tr>
+            <tr>
+                <th>Costo</th>
+                <td>{{ refaccione.costo }}</td>
+                
+                <th>Cliente</th>
+                {% if refaccione.cliente != null %}
+                    <td><a href="{{ path('datos_persona_show', { 'id': refaccione.cliente.id | default(0) }) }}"> {{ refaccione.cliente.cliente }} </a> </td>
+                    {% else %}
+                    <td><a href=""> No hay cliente </a> </td>
+                {% endif %}
+                
+                <th>Descripción</th>
+                <td>{{ refaccione.descripcion }}</td>
+                <th>BL P</th>
+                <td>{{ refaccione.blPrecio }}</td>
+                
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

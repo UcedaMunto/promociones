@@ -1,0 +1,187 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuevo registro de compra{% endblock %}
+
+{% block body %}
+
+    <div class="col-md-12">
+        <!-- Basic registration form-->
+        <div class="card shadow-lg border-0 rounded-lg mt-1">
+            <div class="card-header justify-content-center"></div>
+            <div class="card-body">
+                <!-- Registration form-->
+                {% if mensajes['0']!="" %}
+                <div class="alert alert-danger" role="alert">
+                    <strong>{{ mensajes[0] }}</strong>  
+                </div>
+                {% endif %}
+
+                {{ form_start(form) }}
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Tipo de servicio</label>
+                            {{ form_widget(form.compra.tipoCompra) }}                                 
+                        </div>
+                        
+                    </div>
+
+                    <div class="form-row">
+                        <div id="dealer" class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Dealer</label>
+                            {{ form_widget(form.compra.dealer) }}                        
+                        </div>
+                        <div  id="importador" class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Importador</label>
+                            {{ form_widget(form.compra.importador) }}                                 
+                        </div>
+                        <div id="subimportador" class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >cliente(todos)</label>
+                            {{ form_widget(form.compra.personaCliente) }}                                 
+                        </div>
+                    </div>
+                    <!-- Form Row-->
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Requiere grua?</label>
+                            {{ form_widget(form.grua) }}                           
+                        </div>
+                        <div class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Modelo</label>
+                            {{ form_widget(form.modelo) }}                                 
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Piezas</label>
+                            {{ form_widget(form.piezas) }}                                 
+                        </div>
+
+                        <div class="form-group col-md-4">                     
+                            <label class="small mb-1" >Extras - color</label>
+                            {{ form_widget(form.extras) }}                                 
+                        </div>
+                        
+                        <div class="form-group col-md-4">
+                            <label class="small mb-1" >Titulo</label>
+                            {{ form_widget(form.titulo) }}
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Llave</label>
+                            {{ form_widget(form.llave) }}                                 
+                        </div>
+
+                        <div class="form-group col-md-4">                     
+                            <label class="small mb-1" >Año</label>
+                            {{ form_widget(form.anio) }}                                 
+                        </div>
+                        
+                        <div class="form-group col-md-4">
+                            <label class="small mb-1" >Vin</label>
+                            {{ form_widget(form.vin) }}
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Descripción</label>
+                            {{ form_widget(form.descripcion) }}                                 
+                        </div>
+                        
+                        <div class="form-group col-md-4">
+                            <label class="small mb-1" >Vehiculo descripción</label>
+                            {{ form_widget(form.vehiculoDescripcion) }}
+                        </div>
+                    </div>
+                    
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Peso kilogramos</label>
+                            {{ form_widget(form.pesoKilogramos) }}                                 
+                        </div>
+
+                        <div class="form-group col-md-4">                     
+                            <label class="small mb-1" >Peso libras</label>
+                            {{ form_widget(form.pesoLibras) }}                                 
+                        </div>
+                        
+                        <div class="form-group col-md-4">
+                            <label class="small mb-1" >AES</label>
+                            {{ form_widget(form.aes) }}
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <!-- Form Group (first name)-->
+                                <label class="small mb-1" >Factura (no importa si no está a cero)</label>
+                            {{ form_widget(form.compra.facturas) }}                                                                  
+                        </div>
+                        <div class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Fecha factura cero?</label>
+                            {{ form_widget(form.compra.fechaFacturaCero) }}                                 
+                        </div>
+                        <div class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >notas?</label>
+                            {{ form_widget(form.compra.notas) }}                                 
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Copia email?</label>
+                            {{ form_widget(form.compra.copiaEmail) }}                                 
+                        </div>
+                        <div class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Lote</label>
+                            {{ form_widget(form.lote) }}                                 
+                        </div>
+                        <div class="form-group col-md-4">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >SubModelo</label>
+                            {{ form_widget(form.subModelo.nombre) }}                                 
+                        </div>
+                    </div>
+                
+
+                <button type="submit" class="btn btn-primary btn-block"> {{ button_label|default('Guardar') }} </button>
+                {{ form_end(form) }}
+            
+            <div class="card-footer text-center">
+                
+            </div>
+        </div>
+    </div>
+    
+
+    <a href="{{ path('detalle_compra_index', {'estado': 'CT'} ) }}">back to list</a>
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}
+
+{% block js_pantalla %}
+    <script src="{{ asset('js/newDetalleCompra.js') }}" ></script>
+{% endblock %}
+
+ 

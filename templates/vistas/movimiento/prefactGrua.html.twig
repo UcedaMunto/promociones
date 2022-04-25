@@ -1,0 +1,112 @@
+{% set counter = 0 %}
+{% for form in movimientos %}
+
+    {{ form_start(form, {'attr': {'id': "movimiento_"~ ids[counter] }}) }}   
+    {{ form_errors(form) }}
+
+    {% if mensajes['0']!="" %}
+        <div class="alert alert-danger" role="alert">
+            <strong>{{ mensajes[0] }}</strong>  
+        </div>
+    {% endif %}
+    {% if mensajes['1']!=""  %}
+        <div class="alert alert-success" role="alert">
+            <strong>{{ mensajes[1] }}</strong> 
+            
+        </div>
+    {% endif %}
+
+        <div class="" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="celdaForm">
+                <div class="form-row backgroundColor2">
+                    <div class="form-group col-md-6">
+                        {{ form_label(form.dataEnvio) }}
+                        {{ form_widget(form.dataEnvio, {'id': 'dataEnvio'~ ids[counter]})  }}
+                        {{ form_errors(form.dataEnvio) }}
+                    </div>
+                    <div class="form-group col-md-3">
+                    <label>Estado</label>
+                    {{ form_widget(form.estado, {'id': 'estado'~  ids[counter]} ) }}
+                    {{ form_errors(form.estado) }}
+                    </div>
+                    {{ form_widget(form.id, {'id': 'id'~  ids[counter], attr:{ 'class':'intangible'}} ) }}
+                </div>
+                <div class="form-row backgroundColor1">
+                    <div class="form-group col-md-4">
+                        <label>Fecha de entrega</label>
+                        {{ form_widget(form.fechaEntrega, {'id': 'fechaEntrega'~  ids[counter]} ) }}
+                        {{ form_errors(form.fechaEntrega) }}
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Descripción de pago de gruas</label>
+                        {{ form_widget(form.otraDescripcion, {'id': 'otraDescripcion'~  ids[counter]} ) }}
+                        {{ form_errors(form.otraDescripcion ) }}
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Compañía</label>
+                        {{ form_widget(form.compania, {'id': 'compania'~  ids[counter]}) }}
+                        {{ form_errors(form.compania) }}
+                    </div>
+                    
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label>Costo de grua</label>
+                        {{ form_widget(form.grua, {'id': 'grua'~  ids[counter]}) }}
+                        {{ form_errors(form.grua) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Storage</label>
+                        {{ form_widget(form.storage , {'id': 'storage'~  ids[counter]}  ) }}
+                        {{ form_errors(form.storage) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Otros costos grua</label>
+                        {{ form_widget(form.otrosCostosGrua , {'id': 'otrosCostosGrua'~  ids[counter]}  ) }}
+                        {{ form_errors(form.otrosCostosGrua) }}
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Cheques asociados a este pago</label>
+                        {{ form_widget(form.cheques , {'id': 'cheques'~  ids[counter]} ) }}
+                        {{ form_errors(form.cheques) }}
+                    </div>
+                    
+                </div>
+                 <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label>Grua pagada?</label>
+                        {{ form_widget(form.pagoGrua, {'id': 'pagoGrua'~  ids[counter]}) }}
+                        {{ form_errors(form.pagoGrua) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Storage Pagado?</label>
+                        {{ form_widget(form.pagoStorage , {'id': 'pagoStorage'~  ids[counter]}  ) }}
+                        {{ form_errors(form.pagoStorage) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>otros costos?</label>
+                        {{ form_widget(form.pagoOtrosCostos , {'id': 'pagoOtrosCostos'~  ids[counter]}  ) }}
+                        {{ form_errors(form.pagoOtrosCostos) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        
+                        <strong><label>Detalles del auto</label></strong>
+                        <a  target="_blank" href="{{ path('envio_show', {'id': idEnvios[counter] }) }}" >Ver </a></br>
+
+                        {% if rutas[counter] is defined and rutas[counter]!='' %}
+                            <label><strong>link central: </strong></label>
+                            <a  target="_blank" href="https://www.centraldispatch.com/protected/dispatch/view?dsid={{ rutas[counter] }}" >Ir al post:</a>
+                        {% endif %}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <a class="btn btn-secondary recargarForm" id="recargarMovimiento_{{ ids[counter] }}" data-idmov="{{ ids[counter] }}" data-movimiento="movimiento_{{ ids[counter] }}" role="button">Recargar <i class="fas fa-sync"></i></a>
+                    </div>
+                </div>
+  
+            </div>        
+            </div>
+        <button class="btn recargaForm" id="btnValidar_{{ ids[counter] }}" >{{ button_label|default('guardar y enlazar cheque') }}</button>
+    {{ form_end(form) }}
+    {% set counter = counter + 1  %}
+{% endfor %}

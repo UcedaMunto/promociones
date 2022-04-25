@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WorkOrder {% endblock %}
+
+{% block body %}
+    <h1>Lista de los WorkOrder </h1>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" />
+
+<a  class="btn btn-primary" href="{{ path('work_order_new') }}">
+    <span class="material-icons-outlined">note_add  </span>
+    Agregar nueva Work order
+</a>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table" id="tabla_work_order">
+                <thead>
+                    <tr>
+                        <th>Numero</th>
+                        <th>Descargar </th>
+                        <th>ContactoBodega</th>
+                        <th>DireccionBodega</th>
+                        <th>DiaOrden</th>
+                        <th>DiaRetiro</th>
+                        <th>HoraRetiro</th>
+                        <th>DescripcionOrden</th>
+                        <th>ComentarioExtra</th>
+                        <th>RetiroContenedorVacio</th>
+                        <th>PersonaAutoriza</th>
+                        <th>CargoPersona</th>
+                        <th>TipoContenedor</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for work_order in work_orders %}
+                    <tr>
+                        <td>{{ work_order.id }}</td>
+                        <td>
+                        <a href="{{ path('app_generate_pdf', {'id': work_order.id}) }}">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                <path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                                </svg> 
+                        </a>
+                        </td>
+                        <td>{{ work_order.contactoBodega }}</td>
+                        <td>{{ work_order.direccionBodega }}</td>
+                        <td>{{ work_order.diaOrden ? work_order.diaOrden|date('Y-m-d') : '' }}</td>
+                        <td>{{ work_order.diaRetiro ? work_order.diaRetiro|date('Y-m-d') : '' }}</td>
+                        <td>{{ work_order.horaRetiro ? work_order.horaRetiro|date('H:i') : '' }}</td>
+                        <td>{{ work_order.descripcionOrden }}</td>
+                        <td>{{ work_order.comentarioExtra }}</td>
+                        <td>{{ work_order.retiroContenedorVacio }}</td>
+                        <td>{{ work_order.personaAutoriza }}</td>
+                        <td>{{ work_order.cargoPersona }}</td>
+                        <td>{{ work_order.tipoContenedor }}</td>
+                        <td>
+                            <a href="{{ path('work_order_show', {'id': work_order.id}) }}">+ informacion</a> ||
+                            <a href="{{ path('work_order_edit', {'id': work_order.id}) }}">editar</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="13">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

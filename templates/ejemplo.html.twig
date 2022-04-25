@@ -1,0 +1,47 @@
+{# app/Resources/views/blog/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1> BIENVENIDO </h1>
+
+<div style="width:520px;margin:0px auto;margin-top:30px;height:500px;">
+
+
+  <h2>Select Box with Search Option Jquery Select2.js</h2>
+
+
+  <select class="myselect" style="width:500px;">
+	  <option>Laravel</option>
+	  <option>Laravel ACL</option>
+	  <option>Laravel PDF</option>
+	  <option>Laravel Helper</option>
+	  <option>Laravel API</option>
+	  <option>Laravel CRUD</option>
+	  <option>Laravel Angural JS Crud</option>
+	  <option>C++</option>
+  </select>
+
+  <select  class="myselect"  multiple="multiple" style="width: 300px">
+    <option value="JAN">January</option>
+    <option value="FEB">February</option>
+    <option value="MAR">March</option>
+    <option value="APR">April</option>
+    <option value="MAY">May</option>
+    <option value="JUN">June</option>
+    <option value="JUL">July</option>
+    <option value="AUG">August</option>
+    <option value="SEP">September</option>
+    <option value="OCT">October</option>
+    <option value="NOV">November</option>
+    <option value="DEC">December</option>
+</select>
+
+
+</div>
+
+
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ZonaGrua index{% endblock %}
+
+{% block body %}
+    <h1>Zona-Grua (Sucursales de las subastas)</h1>
+    <p>NOTA: todas las zonas de grua corresponden a una sucursal que debe estar en la lista de sucursales en: https://www.copart.com/content/us/en/landing-page/print-locations-by-state o https://www.iaai.com/es-mx/branchlocations </p>
+    <br>
+    <p>NO DUPLICAR NI INGRESAR DATOS ERRONEOS</p>
+    
+
+    <table  class="table" id="tabla_sucursales">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Zip</th>
+                <th>Direccion</th>
+                <th>Nombre</th>
+                <th>Subasta</th>
+                <th>Precio</th>
+                <th>Costo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for zona_grua in zona_gruas %}
+            <tr>
+                <td>{{ zona_grua.id }}</td>
+                <td>{{ zona_grua.zip }}</td>
+                <td>{{ zona_grua.direccion }}</td>
+                <td>{{ zona_grua.nombre }}</td>
+                <td>{{ zona_grua.subasta.nombre }}</td>
+                <td>{{ zona_grua.precio }}</td>
+                <td>{{ zona_grua.costo }}</td>
+
+                <td>
+                    <a href="{{ path('zona_grua_show', {'id': zona_grua.id}) }}">show</a>
+                    <a href="{{ path('zona_grua_edit', {'id': zona_grua.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('zona_grua_new') }}"><i class="fa fa-plus" style="font-size:36px"></i></a>
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

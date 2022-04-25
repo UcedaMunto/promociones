@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sucursales{% endblock %}
+
+{% block body %}
+    <table class="table"  id="tabla_sucursal">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Activo</th>
+                <th>Direccion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for promo_sucursal in promo_sucursals %}
+            <tr>
+                <td>{{ promo_sucursal.id }}</td>
+                <td>{{ promo_sucursal.nombre }}</td>
+                <td>{{ promo_sucursal.activo ? 'Yes' : 'No' }}</td>
+                <td>{{ promo_sucursal.direccion }}</td>
+                <td>
+                    <a href="{{ path('promo_sucursal_show', {'id': promo_sucursal.id}) }}"><i class="fa fa-eye" style="font-size:36px"></i></a>
+                    <a href="{{ path('promo_sucursal_edit', {'id': promo_sucursal.id}) }}"><i class="fa fa-edit" style="font-size:36px"></i></a>
+                    <a href="{{ path('promo_sucursal_add_contacto', {'id': promo_sucursal.id}) }}">+ Contacto</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('promo_sucursal_new', {'establecimiento': '0' }) }}"><i class="fa fa-plus" style="font-size:36px"></i></a>
+{% endblock %}
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

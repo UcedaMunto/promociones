@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DetalleCompra index{% endblock %}
+
+{% block body %}
+    <h1>DetalleCompra index</h1>
+
+    <div>
+        Visibles: 
+        <a class="toggle-vis" data-column="0">   Id   </a> - 
+        <a class="toggle-vis" data-column="1">   Lote   </a> - 
+        <a class="toggle-vis" data-column="2">   Piezas   </a> -
+        <a class="toggle-vis" data-column="3">   Extras   </a> -
+        <a class="toggle-vis" data-column="4">   Titulo   </a> -
+        <a class="toggle-vis" data-column="5">   Llave   </a> -
+        <a class="toggle-vis" data-column="6">   Anio   </a> -
+        <a class="toggle-vis" data-column="7">   Vin   </a> -
+        <a class="toggle-vis" data-column="8">   Descripcion   </a> -
+        <a class="toggle-vis" data-column="9">   Costo   </a> -
+        <a class="toggle-vis" data-column="10">  VehiculoDescripcion   </a> -
+        <a class="toggle-vis" data-column="11">  PesoKilogramos   </a> -
+        <a class="toggle-vis" data-column="12">  PesoLibras   </a> -
+        <a class="toggle-vis" data-column="13">  Aes   </a> -
+        <a class="toggle-vis" data-column="14">  Grua   </a> -
+        <a class="toggle-vis" data-column="15">  actions   </a> -
+    </div>
+
+    <table class="table" id="tabla_detalle_compra">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Lote</th>
+                <th>Piezas</th>
+
+                <th>Extras</th>
+                <th>Titulo</th>
+                <th>Llave</th>
+
+                <th>Anio</th>
+                <th>Vin</th>
+                <th>Descripcion</th>
+
+                <th>Costo</th>
+                <th>VehiculoDescripcion</th>
+                <th>PesoKilogramos</th>
+
+                <th>PesoLibras</th>
+                <th>Aes</th>
+                <th>Grua</th>
+
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for detalle_compra in detalle_compras %}
+            <tr>
+                <td>{{ detalle_compra.id }}</td>
+                <td>{{ detalle_compra.lote }}</td>
+                <td>{{ detalle_compra.piezas }}</td>
+                <td>{{ detalle_compra.extras }}</td>
+                <td>{{ detalle_compra.titulo }}</td>
+                <td>{{ detalle_compra.llave }}</td>
+                <td>{{ detalle_compra.anio }}</td>
+                <td>{{ detalle_compra.vin }}</td>
+                <td>{{ detalle_compra.descripcion }}</td>
+                <td>{{ detalle_compra.costo }}</td>
+                <td>{{ detalle_compra.vehiculoDescripcion }}</td>
+                <td>{{ detalle_compra.pesoKilogramos }}</td>
+                <td>{{ detalle_compra.pesoLibras }}</td>
+                <td>{{ detalle_compra.aes }}</td>
+                <td>{{ detalle_compra.grua ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('detalle_compra_show', {'id': detalle_compra.id}) }}">show</a>
+                    <a href="{{ path('detalle_compra_edit', {'id': detalle_compra.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+
+                <td></td>
+                <td></td>
+                <td></td>
+
+                <td></td>
+                <td></td>
+                <td></td>
+
+                <td></td>
+                <td></td>
+                <td></td>
+
+                <td></td>
+                <td></td>
+                <td></td>
+
+                <td></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('detalle_compra_new') }}"><i class="fa fa-plus" style="font-size:36px"></i></a>
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

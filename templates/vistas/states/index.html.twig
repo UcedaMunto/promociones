@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista de estados{% endblock %}
+
+{% block body %}
+<div class="col-md-8">
+    <table class="table" id="tabla_estados">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>State</th>
+                <th>State_code</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for state in states %}
+            <tr>
+                <td>{{ state.id }}</td>
+                <td>{{ state.state }}</td>
+                <td>{{ state.stateCode }}</td>
+                <td>
+                    <a href="{{ path('cities_new', {'estado': state.id}) }}"> Agregar ciudad</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+    
+
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

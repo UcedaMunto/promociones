@@ -1,0 +1,161 @@
+<div class="card shadow-lg border-0 rounded-lg mt-1">
+                <div class="card-header justify-content-center"> </div>
+                <div class="card-body">
+                    <!-- Registration form-->
+                    {% if mensajes['0']  %}
+                        <div class="alert alert-danger" role="alert">
+                        <strong>{{ mensajes[0] }}</strong>  
+                        </div>
+                    {% endif %}
+                    <a href="{{ path('persona_cliente_edit', {'id': next }) }}">siguiente</a> 
+                    
+                    {{ form_start(form, { 'attr': {'id': 'form_edit_persona_client'}} ) }}
+                        <div class="form-row">
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputEmailAddress">DUI</label>
+                                {{ form_widget(form.datos.dui) }}
+                                {{ form_errors(form.datos.dui) }}   
+                            </div>
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Estado</label>
+                                {{ form_widget(form.estado) }}
+                                {{ form_errors(form.estado) }}    
+                            </div>
+                            
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Nombres</label>
+                                {{ form_widget(form.datos.nombre ) }}
+                                {{ form_errors(form.datos.nombre ) }}  
+                            </div>
+                             <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Apellidos</label>
+                                {{ form_widget(form.datos.apellido ) }}
+                                {{ form_errors(form.datos.apellido ) }}  
+                            </div>
+                            
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputEmailAddress">Email</label>
+                                {{ form_widget(form.datos.correo1) }}
+                                {{ form_errors(form.datos.correo1) }}   
+                            </div>
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Email 2</label>
+                                {{ form_widget(form.datos.correo2) }}
+                                {{ form_errors(form.datos.correo2) }}    
+                            </div>
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">NIT</label>
+                                {{ form_widget(form.datos.nit) }}
+                                {{ form_errors(form.datos.nit) }}    
+                            </div>
+
+                        </div>
+                            <div class="form-row">
+                                <div class="col-md-6">                            
+                                    <label class="small mb-1" >Documentos</label>
+                                    {{ form_widget(form.datos.file) }}
+                                    {{ form_errors(form.datos.file) }}                              
+                                </div>
+                                <div class="col-md-6">                               
+                                    <label class="small mb-1" >Documentos</label>
+                                    {{ form_widget(form.datos.file1) }}
+                                    {{ form_errors(form.datos.file1) }}                              
+                                </div>
+                                <div class="col-md-6">                              
+                                    <label class="small mb-1" >Documentos</label>
+                                    {{ form_widget(form.datos.file2) }}
+                                    {{ form_errors(form.datos.file2) }}                              
+                                </div>
+                             </div>
+                            <div class="form-row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="small mb-1" >Telefono</label>
+                                    {{ form_widget(form.datos.telefono) }}
+                                    {{ form_errors(form.datos.telefono) }} 
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="small mb-1" >Celular</label>
+                                    {{ form_widget(form.datos.celular) }} 
+                                    {{ form_errors(form.datos.celular) }} 
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="small mb-1" >Registro de IVA</label> 
+                                    {{ form_widget(form.datos.registroIva) }}
+                                    {{ form_errors(form.datos.registroIva) }} 
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="small mb-1" >Nombre de IVA</label> 
+                                    {{ form_widget(form.datos.nombreIva) }}
+                                    {{ form_errors(form.datos.nombreIva) }} 
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Form Group (create account submit)-->
+                        <div class="form-row">
+                            <div class="col-md-3">
+                                <!-- Form Group (first name)-->                                
+                                    <label class="small mb-1" >Fecha de Nacimiento</label>
+                                    {{ form_widget(form.datos.fechaNacimiento) }} 
+                                    {{ form_errors(form.datos.fechaNacimiento) }}                                
+                            </div>
+                            <div class="col-md-3">
+                                <!-- Form Group (last name)-->
+                                <div class="form-group">
+                                    <label class="small mb-1" >Departamento</label>
+                                    {{ form_widget(form.datos.departamento) }} 
+                                    {{ form_errors(form.datos.departamento) }}   
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <!-- Form Group (first name)-->
+                                <div class="form-group">
+                                    <label class="small mb-1" >Pasaporte</label>
+                                    {{ form_widget(form.datos.pasaporte) }}
+                                    {{ form_errors(form.datos.pasaporte) }} 
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <!-- Form Group (last name)-->                                
+                                    <label class="small mb-1" for="inputLastName">Direccion</label>
+                                    {{ form_widget(form.datos.direccion) }}
+                                    {{ form_errors(form.datos.direccion) }}   
+                                </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block"  id="btnEditPersonaCliente" href="{{ path('persona_cliente_edit', {'id': actual }) }}"> {{ button_label|default('Guardar') }} </button>
+                    {{ form_end(form) }}
+                </div>
+                <div class="card-footer text-center">
+                   
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <h1 class="resaltarComentario"> Documentos <h1>
+                {% set counter = 0 %}
+                {% for archivo in archivos %}
+                    {% if archivo != null %}
+                        {% if extensionesDoc[counter] == 2  %}
+                            <img src="{{rutaDoc}}/{{ archivo }}">
+                        {% elseif extensionesDoc[counter] == 1 %}
+                            <embed src="{{rutaDoc}}/{{ archivo }}" type="application/pdf" width="100%" height="600px" />
+                        {% else %}
+                            <a href="{{rutaDoc}}/{{ archivo }}" download="factura{{ archivo }}">Descargar</a>
+                        {% endif %}
+                    {% else %}
+                        <p>No se ha subido</p> 
+                    {% endif %}
+
+                    {% set counter = counter + 1 %}
+                {% endfor %}
+                  
+            </div>

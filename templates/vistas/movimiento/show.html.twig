@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Movimiento{% endblock %}
+
+{% block body %}
+    <h1>Movimiento</h1>
+
+        <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Orden - {{lote}}   </h6>
+            
+        </div>
+        </div>
+                    
+    <div class="collapse show">
+        <div class="card-body">
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label class="small mb-1" >Fecha contrato: </label>
+                    {{ movimiento.fechaContrato ? movimiento.fechaContrato|date('Y-m-d') : '' }}
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="small mb-1" >Fecha recogida: </label>
+                    {{ movimiento.fechaRecogida ? movimiento.fechaRecogida|date('Y-m-d') : '' }}    
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="small mb-1" >Fecha Enttrega: </label>
+                    {{ movimiento.fechaEntrega ? movimiento.fechaEntrega|date('Y-m-d') : '' }}                
+                </div>                
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label class="small mb-1" >grua: </label>
+                    {{ movimiento.grua }}
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="small mb-1" >storage: </label>
+                    {{ movimiento.storage }}
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="small mb-1" >otros: </label>
+                    {{ movimiento.otrosCostosGrua }}
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="small mb-1" >Estado: </label>
+                    {{ movimiento.estado }}
+                </div>      
+            </div>
+        </div>
+    </div>                
+
+    <a href="{{ path('movimiento_index') }}">back to list</a>
+
+    <a href="{{ path('movimiento_edit', {'id': movimiento.id}) }}">edit</a>
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends 'baseEnBlanco.html.twig' %}
+
+{% block body %}
+
+
+<div  class="container">
+    <div class="row align-items-start">
+        <div class="col-6 col-md-4 col-sm-2" style="float:right;">
+        
+            <img src="/images/logos/banner-logo-01.jpeg" class="rounded float-right" style="width: 60%; height: auto;" >
+        </div>
+        <div class="col-6 col-md-4 col-sm-2"  >
+            <div style="color: blue;"> {{ work_order.infoEmpresa.nombreEmpresa }} </div>
+            <div> {{ work_order.infoEmpresa.direccion }} </div>
+            <div> {{ work_order.infoEmpresa.telefono }} </div>
+        </div>
+    </div>
+</div>
+</br>
+<div id= "tabla_work_order">
+    <table class="table table-bordered" id="listaWorkOrder" style="text-align: center; " >
+        <tbody>
+            <tr class="table-dark" > 
+                <th colspan="12">WORK ORDER</th>
+            </tr>
+            <tr>
+                <th >Provider's name </th>
+                <td colspan="3">{{ work_order.proveedor.nombre }}</td>
+                <th >Contact in warehouse</th>
+                <td colspan="5">{{ work_order.contactoBodega }}</td>
+            </tr>
+            <tr>
+                <th >Provider's phone </th>
+                <td colspan="3">{{ work_order.proveedor.telefono }}</td>
+                <th >Warehouse for pick up</th>
+                <td colspan="5">{{ work_order.direccionBodega }}</td>
+            </tr>
+            <tr>
+                <th >Order date</th>
+                <td colspan="2">{{ work_order.diaOrden ? work_order.diaOrden|date('d-m-Y') : '' }}</td>
+                <th >Pick up date</th>
+                <td >{{ work_order.diaRetiro ? work_order.diaRetiro|date('d-m-Y') : '' }}</td>
+                <th colspan="2">Pick up hour</th>
+                <td colspan="2">{{ work_order.horaRetiro ? work_order.horaRetiro|date('H:i') : '' }}</td>
+            </tr>
+            <tr>
+                <th colspan="2">Work description</th>
+                <td colspan="10">{{ work_order.descripcionOrden }}</td>
+            </tr>
+            <tr>
+                <th colspan="2">Additional comments</th>
+                <td colspan="10">{{ work_order.comentarioExtra }}</td>
+            </tr>
+
+            <tr class="table-dark" > 
+                <th colspan="12">DETAILS</th>
+            </tr>
+            <tr>
+                <th>Container tipe</th>
+                <td colspan="2">{{ work_order.tipoContenedor }}</td>
+                <th >Shipping line</th>
+                <td colspan="4">{{ work_order.booking.shippingLine }}</td>
+            </tr>
+            <tr>
+                <th>Empty container</th>
+                <td colspan="2">{{ work_order.retiroContenedorVacio }}</td>
+                <th>Commodity</th>
+                <td colspan="4">
+                    {% for commodity in work_order.cargaTipo %}
+                        {{ commodity.nombreProducto }} --
+                    {% endfor %}                
+                </td>
+            </tr>
+            <tr>
+                <th>Return equip delivery terminal</th>
+                <td colspan="2">{{ work_order.puertoCarga.nombre }} </td>
+                <th>Booking number </th>
+                <td colspan="4">{{ work_order.booking.numero }}</td>
+            </tr>
+            <tr class="table-dark" > 
+                <th colspan="12">BILLING INFORMATION</th>
+            </tr>
+            <tr>
+                <th> Company name </th>
+                <td colspan="2">{{ work_order.infoEmpresa.nombreEmpresa }}</td>
+                <th>Address</th>
+                <td colspan="4">{{ work_order.infoEmpresa.direccion }}</td>
+            <tr>
+            <tr>
+                <th> Provider's phone </th>
+                <td colspan="2">{{ work_order.infoEmpresa.telefono }}</td>
+                <th>Accountant</th>
+                <td colspan="4">{{ work_order.infoEmpresa.nombreContacto }}</td>
+            <tr>
+            <tr>
+                <th> Send bills to </th>
+                <td colspan="10">{{ work_order.infoEmpresa.correo1 }}; {{ work_order.infoEmpresa.correo2 }}; {{ work_order.infoEmpresa.correo3 }}</td>
+            <tr>           
+            <tr>
+                <th>Work authorized by </th>
+                <td colspan="2">{{ work_order.personaAutoriza }}</td>
+                <th>Signature</th>
+                <td colspan="4">{{ work_order.cargoPersona }}</td>
+            </tr>
+            <tr>
+
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+{% endblock %}

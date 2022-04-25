@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}nuevo informe de pagos de grua{% endblock %}
+
+{% block body %}
+   
+
+    {{ include('pre_fact_grua_usa/_form.html.twig') }}
+
+    <a href="{{ path('pre_fact_grua_usa_index') }}">back to list</a>
+{% endblock %}

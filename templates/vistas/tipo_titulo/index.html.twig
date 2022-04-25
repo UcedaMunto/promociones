@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TipoTitulo index{% endblock %}
+
+{% block body %}
+    <div class="row"> 
+        <div class="col-md-6">
+            <table class="table" id="tabla_tipo_titulo">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for tipo_titulo in tipo_titulos %}
+                    <tr>
+                        <td>{{ tipo_titulo.id }}</td>
+                        <td>{{ tipo_titulo.nombre }}</td>
+                        <td>
+                            <a href="{{ path('tipo_titulo_edit', {'id': tipo_titulo.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ path('tipo_titulo_new') }}"><i class="fa fa-plus" style="font-size:36px"></i></a>
+    
+        </div>
+    </div>
+    
+{% endblock %}
+
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

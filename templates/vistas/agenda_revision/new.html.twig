@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Agendar responsable de revisión{% endblock %}
+
+{% block body %}
+
+<div class="col-md-12"> 
+    <div class="col-md-6">
+        {{ include('agenda_revision/_form.html.twig') }}
+
+        <a href="{{ path('agenda_revision_index') }}">back to list</a>
+    </div>
+</div>
+
+
+  
+{% endblock %}
+
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}
+

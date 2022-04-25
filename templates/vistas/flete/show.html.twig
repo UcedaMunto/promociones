@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Flete{% endblock %}
+
+{% block body %}
+    <h1>Flete</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ flete.id }}</td>
+            </tr>
+            <tr>
+                <th>Precio</th>
+                <td>{{ flete.precio }}</td>
+            </tr>
+            <tr>
+                <th>PrecioVenta</th>
+                <td>{{ flete.precioVenta }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('flete_index') }}">back to list</a>
+
+    <a href="{{ path('flete_edit', {'id': flete.id}) }}">edit</a>
+
+    {{ include('flete/_delete_form.html.twig') }}
+{% endblock %}

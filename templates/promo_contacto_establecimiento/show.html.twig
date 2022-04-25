@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PromoContactoEstablecimiento{% endblock %}
+
+{% block body %}
+    <h1>PromoContactoEstablecimiento</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ promo_contacto_establecimiento.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('promo_contacto_establecimiento_index') }}">back to list</a>
+
+    <a href="{{ path('promo_contacto_establecimiento_edit', {'id': promo_contacto_establecimiento.id}) }}">edit</a>
+
+    {{ include('promo_contacto_establecimiento/_delete_form.html.twig') }}
+{% endblock %}

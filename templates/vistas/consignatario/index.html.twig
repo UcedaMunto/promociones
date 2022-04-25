@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Consignatarios{% endblock %}
+
+{% block body %}
+  <a href="{{ path('consignatario_new') }}">Crear nuevo consignatario</a>
+
+    <table id="tabla_consignatario" class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Direccion</th>
+                <th>Direccion2</th>
+                <th>Email</th>
+                <th>Telefono</th>
+                <th>Encargado</th>
+                <th>Nit</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for consignatario in consignatarios %}
+            <tr>
+                <td>{{ consignatario.id }}</td>
+                <td>{{ consignatario.nombre }}</td>
+                <td>{{ consignatario.direccion }}</td>
+                <td>{{ consignatario.direccion2 }}</td>
+                <td>{{ consignatario.email }}</td>
+                <td>{{ consignatario.telefono }}</td>
+                <td>{{ consignatario.encargado }}</td>
+                <td>{{ consignatario.nit }}</td>
+                <td>
+                    <a href="{{ path('consignatario_show', {'id': consignatario.id}) }}">show</a>
+                    <a href="{{ path('consignatario_edit', {'id': consignatario.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>          
+               
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

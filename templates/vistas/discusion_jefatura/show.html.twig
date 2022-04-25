@@ -1,0 +1,33 @@
+
+{% block body %}
+
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ discusion_jefatura.id }}</td>
+            </tr>
+            <tr>
+                <th>Fecha</th>
+                <td>{{ discusion_jefatura.fecha ? discusion_jefatura.fecha|date('d-m-Y H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ discusion_jefatura.descripcion }}</td>
+            </tr>
+                <tr>
+                <th>Departamentos involucrados</th>
+                <td>
+                {% for departamentos in discusion_departamento_agregados  %}
+                    {{ departamentos.departamentoEmpresa.nombre }} - {{ departamentos.departamentoEmpresa.supervisor }}
+                    <br/>
+                {% endfor %}
+                </td>                
+            </tr>
+        </tbody>
+    </table>
+  
+
+    
+{% endblock %}

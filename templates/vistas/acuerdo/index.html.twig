@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Acuerdo index{% endblock %}
+
+{% block body %}
+    <h1>Acuerdo index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descripcion</th>
+                <th>Nombre</th>
+                <th>FechaVigencia</th>
+                <th>Estado</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for acuerdo in acuerdos %}
+            <tr>
+                <td>{{ acuerdo.id }}</td>
+                <td>{{ acuerdo.descripcion }}</td>
+                <td>{{ acuerdo.nombre }}</td>
+                <td>{{ acuerdo.fechaVigencia ? acuerdo.fechaVigencia|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ acuerdo.estado ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('acuerdo_show', {'id': acuerdo.id}) }}">show</a>
+                    <a href="{{ path('acuerdo_edit', {'id': acuerdo.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('acuerdo_new') }}"><i class="fa fa-plus" style="font-size:36px"></i></a>
+{% endblock %}

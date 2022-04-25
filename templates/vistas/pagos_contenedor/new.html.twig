@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CrearPagosContenedor{% endblock %}
+
+{% block body %}
+    <h1>Create new PagosContenedor</h1>
+
+    {{ include('pagos_contenedor/_form.html.twig') }}
+
+    <a href="{{ path('pagos_contenedor_index') }}">back to list</a>
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

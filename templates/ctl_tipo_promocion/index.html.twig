@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CtlTipoPromocion index{% endblock %}
+
+{% block body %}
+    <h1>CtlTipoPromocion index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Activo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctl_tipo_promocion in ctl_tipo_promocions %}
+            <tr>
+                <td>{{ ctl_tipo_promocion.id }}</td>
+                <td>{{ ctl_tipo_promocion.nombre }}</td>
+                <td>{{ ctl_tipo_promocion.activo ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('ctl_tipo_promocion_show', {'id': ctl_tipo_promocion.id}) }}">show</a>
+                    <a href="{{ path('ctl_tipo_promocion_edit', {'id': ctl_tipo_promocion.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('ctl_tipo_promocion_new') }}"><i class="fa fa-plus" style="font-size:36px"></i></a>
+{% endblock %}

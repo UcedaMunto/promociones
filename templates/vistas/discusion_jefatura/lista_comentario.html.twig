@@ -1,0 +1,71 @@
+{% for comentario in comentario_reunions %}
+    {% if comentario.resp is  null %} 
+    <div class="card shadow mb-4">
+        <a href="#collapseCardExample{{ comentario.id }}" class="card-header" data-toggle="collapse" role="button" aria-controls="collapseCardExample{{ comentario.id }}">
+            <h6>
+                Titulo:{{ comentario.tituloComent}}
+                <span style="float:right">
+                {{ comentario.usuario }} 
+                - {{ comentario.fecha is empty ? "" : comentario.fecha|date("Y-m-d H:i:s") }}
+                </span>
+            </h6>
+        </a>
+        <div class="collapse show" id="collapseCardExample{{ comentario.id }}" style=""> 
+            <div class="card-body">
+                <div class="form-group col-xs-48 col-sm-24 col-md-18 col-lg-18"> 
+                    {{ comentario.mensaje }} 
+                   
+                    <span style="float:right" >
+                    
+                    <a class="botonesResponder" data-idcomentario="{{ comentario.id }}" data-discucion="3" href="{{ path('comentario_reunion_new_hijo', {'discuJefatura': comentario.disre , 'comentarioBase': comentario.id } ) }}"    
+                    data-toggle="modal" data-target="#respuestaModal" >Responder</a>
+                    </span>
+                                                     
+                </div>
+                
+                {{ _self.recursiveComentarioR(comentario, comentario_reunions) }}
+            </div>   
+        </div>    
+    </div>
+    
+    {% endif %}  
+{% else %}
+        <tr>
+            <td colspan="5">Sin comentarios</td>
+        </tr>
+{% endfor %}  
+{% macro recursiveComentarioR(comentario, comentarioreunions) %}
+     {% for comentarioN2 in comentarioreunions %}    
+        {% if comentarioN2.resp is not  null %} 
+                 {% if comentarioN2.resp == comentario.id %}
+                    <div class="card shadow mb-4">
+                        <a href="#collapseCardExample{{ comentarioN2.id }}" class="card-header" data-toggle="collapse" role="button" aria-controls="collapseCardExample{{ comentarioN2.id }}">
+                            <h6>
+                                Titulo:{{ comentario.tituloComent}}
+                                <span style="float:right">
+                                {{ comentarioN2.usuario }} 
+                                - {{ comentarioN2.fecha is empty ? "" : comentarioN2.fecha|date("Y-m-d H:i:s") }}
+                                </span>
+                            </h6>
+                        </a>
+                        <div class="collapse show" id="collapseCardExample{{ comentario.id }}" style=""> 
+                            <div class="card-body">
+                                <div class="form-group col-xs-48 col-sm-24 col-md-18 col-lg-18"> 
+                                    {{ comentarioN2.mensaje }} 
+                                
+                                    <span style="float:right" >
+                                    
+                                    <a class="botonesResponder" data-idcomentario="{{ comentarioN2.id }}" data-discucion="3" href="{{ path('comentario_reunion_new_hijo', {'discuJefatura': comentarioN2.disre , 'comentarioBase': comentarioN2.id } ) }}"    
+                                    data-toggle="modal" data-target="#respuestaModal" >Responder</a>
+                                    </span>
+                                                                    
+                                </div>
+                                {{ _self.recursiveComentarioR(comentarioN2, comentarioreunions) }}
+                            </div>   
+                        </div>    
+                    </div>
+                {%  endif %}    
+        {%  endif %}
+    {% endfor %}
+{% endmacro %}
+

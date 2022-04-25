@@ -1,0 +1,52 @@
+{{ form_start(formCheque, {'attr': {'id': "chequesForm" }}) }}
+
+        {% if mensajes['0']!="" %}
+            <div class="alert alert-danger" role="alert">
+                <strong>{{ mensajes[0] }}</strong>
+            </div> 
+        {% endif %}
+        {% if mensajes['1'] !="" %}
+            <div class="alert alert-success" role="alert">
+                <strong>{{ mensajes[1] }}</strong>  : 
+                <a href="{{ path('cheque_edit', {'cheque': cheque.id}) }}" id="editarCheque">Editar</a> /
+                <a href="{{ path('cheque_new') }}" id="nuevoCheque">Nuevo cheque</a>
+            </div>
+        {% endif %}
+        <div class="form-row seccionForm">
+          
+            <div class="form-group col-md-4 navbar-form pull-left">                             
+                <label class="small mb-1" >Correlativo</label>
+                {{ form_widget(formCheque.correlativo) }}
+                {{ form_errors(formCheque.correlativo) }}                                  
+            </div>
+            <div class="form-group col-md-4">                             
+                <label class="small mb-1" >Monto</label>
+                {{ form_widget(formCheque.monto) }}
+                {{ form_errors(formCheque.monto) }}                                  
+            </div>
+            <div class="form-group col-md-4">                             
+                <label class="small mb-1" >Cheque a nombre de persona</label>
+                {{ form_widget(formCheque.gruero) }}
+                {{ form_errors(formCheque.gruero) }}                                  
+            </div>
+        </div>
+
+        <div class="form-row ">           
+            <div class="form-group col-md-4">                             
+                <label class="small mb-1" >Saldo a favor generado</label>
+                {{ form_widget(formCheque.saldoFavorGenerado) }}
+                {{ form_errors(formCheque.saldoFavorGenerado) }}                                  
+            </div>
+             <div class="form-group col-md-3">                             
+                <label class="small mb-1" >Reporte</label>
+                {{ form_widget(formCheque.preFactGruaUsa) }}
+                {{ form_errors(formCheque.preFactGruaUsa) }}                                  
+            </div>
+            <div class="form-group col-md-4">                             
+                <label class="small mb-1" >Descripción para el cheque, ojo hay descripción para cada pago también</label>
+                {{ form_widget(formCheque.descripcionCheque) }}
+                {{ form_errors(formCheque.descripcionCheque) }}                                  
+            </div>
+        </div>
+    <button class="btn" type="submit" id="btnChequesNew" name="cheques[submit]"  >{{ button_label|default('Save') }}</button>
+{{ form_end(formCheque) }}

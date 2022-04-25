@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crear Sucursal{% endblock %}
+
+{% block body %}
+    {{ include('promo_sucursal/_form.html.twig') }}
+
+    <a href="{{ path('promo_sucursal_index') }}">back to list</a>
+{% endblock %}

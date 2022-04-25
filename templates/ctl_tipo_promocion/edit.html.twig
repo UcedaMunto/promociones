@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit CtlTipoPromocion{% endblock %}
+
+{% block body %}
+    <h1>Edit CtlTipoPromocion</h1>
+
+    {{ include('ctl_tipo_promocion/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('ctl_tipo_promocion_index') }}">back to list</a>
+
+    {{ include('ctl_tipo_promocion/_delete_form.html.twig') }}
+{% endblock %}

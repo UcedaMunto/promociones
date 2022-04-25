@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Facturas de carga general{% endblock %}
+
+{% block body %}
+    <h1>Lista de facturas</h1>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" />
+
+<a  class="btn btn-primary" href="{{ path('factura_carga_general_new') }}">
+    <span class="material-icons-outlined">note_add  </span>
+    Agregar nueva factura
+</a>
+<br></br>
+
+{#********Ventana modal nueva factura ******** #}
+<div class="modal fade" id="modalFactura" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Datos factura</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="datoFactura" class="formularioLista">
+                    {{ include('factura_carga_general/new.html.twig') }}  
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="float:right">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>                
+</div>
+
+
+
+
+
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <table class="table" id="tabla_factura_cg">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Numero</th>
+                    <th>DireccionDestino</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for factura_carga_general in factura_carga_generals %}
+                <tr>
+                    <td>{{ factura_carga_general.id }}</td>
+                    <td>{{ factura_carga_general.numero }}</td>
+                    <td>{{ factura_carga_general.direccionDestino }}</td>
+                    <td>
+                        <a href="{{ path('factura_carga_general_show', {'id': factura_carga_general.id}) }}">+ informacion</a> || 
+                        <a href="{{ path('factura_carga_general_edit', {'id': factura_carga_general.id}) }}"> editar</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+    
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

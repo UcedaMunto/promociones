@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Importador index{% endblock %}
+
+{% block body %}
+    <p>Esta lista contiene todos los registros de importador que tenemos en el sistema, incluidos los registros que estan desactivados para conservar el historial</p>
+    <hr>
+    <p>Un usuario puede tener muchos registros de importador </p>
+    <table class="table" id="tabla_importadores">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Subasta</th>
+                <th>Buyer</th>
+                <th>Nombre según factura</th>
+                <th>Estado</th>
+                <th>Nombre(Dui)</th>
+                <th>DUI</th>
+                <th>NIT</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for importador in importadors %}
+            <tr>
+                <td>{{ importador.id }}</td>
+                <td>{{ importador.buyer }}</td>
+                <td>{{ importador.subasta.nombre }}</td>
+                <td>{{ importador.nombreFactura }}</td>
+                <td>{{ importador.estado.nombre | default('ND') }}</td>
+                <td>{{ importador.personaCliente.datos.nombre | default('desenlazado') }} {{ importador.personaCliente.datos.apellido| default('ND') }}</td>
+                <td>{{ importador.personaCliente.datos.dui | default('ND') }}</td>
+                <td>{{ importador.personaCliente.datos.nit | default('ND') }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

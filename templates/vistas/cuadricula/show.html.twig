@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cuadricula{% endblock %}
+
+{% block body %}
+    <h1>Cuadricula</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cuadricula.id }}</td>
+            </tr>
+            <tr>
+                <th>NumeroBl</th>
+                <td>{{ cuadricula.numeroBl }}</td>
+            </tr>
+            <tr>
+                <th>CuaFactura</th>
+                <td>{{ cuadricula.cuaFactura }}</td>
+            </tr>
+            <tr>
+                <th>PaisOrigen</th>
+                <td>{{ cuadricula.paisOrigen }}</td>
+            </tr>
+            <tr>
+                <th>Declaracion</th>
+                <td>{{ cuadricula.declaracion }}</td>
+            </tr>
+            <tr>
+                <th>Aduana</th>
+                <td>{{ cuadricula.aduana }}</td>
+            </tr>
+            <tr>
+                <th>Fecha</th>
+                <td>{{ cuadricula.fecha ? cuadricula.fecha|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>EmpresaSeguridad</th>
+                <td>{{ cuadricula.empresaSeguridad }}</td>
+            </tr>
+            <tr>
+                <th>Dm</th>
+                <td>{{ cuadricula.dm }}</td>
+            </tr>
+            <tr>
+                <th>CuadriculaFecha</th>
+                <td>{{ cuadricula.cuadriculaFecha ? cuadricula.cuadriculaFecha|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Permiso</th>
+                <td>{{ cuadricula.permiso }}</td>
+            </tr>
+            <tr>
+                <th>País expedición</th>
+                <td>{{ cuadricula.paisExpedicion }}</td>
+            </tr>
+            <tr>
+                <th>Observaciones</th>
+                <td>{{ cuadricula.observaciones }}</td>
+            </tr>
+            <tr>
+                <th>FechaSolicitud</th>
+                <td>{{ cuadricula.fechaSolicitud ? cuadricula.fechaSolicitud|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>FechaIngreso</th>
+                <td>{{ cuadricula.fechaIngreso ? cuadricula.fechaIngreso|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Autoriza</th>
+                <td>{{ cuadricula.autoriza }}</td>
+            </tr>
+            <tr>
+                <th>SoliMovimiento</th>
+                <td>{{ cuadricula.soliMovimiento }}</td>
+            </tr>
+            <tr>
+                <th>FechaTrack</th>
+                <td>{{ cuadricula.fechaTrack ? cuadricula.fechaTrack|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>NotificacionA</th>
+                <td>{{ cuadricula.notificacionA }}</td>
+            </tr>
+            <tr>
+                <th>NotiTelefono</th>
+                <td>{{ cuadricula.notiTelefono }}</td>
+            </tr>
+            <tr>
+                <th>TrackMensaje</th>
+                <td>{{ cuadricula.trackMensaje }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('cuadricula_index') }}">back to list</a>
+
+    <a href="{{ path('cuadricula_edit', {'id': cuadricula.id, 'contenedor': cuadricula.contenedor.id }) }}">edit</a>
+
+    {{ include('cuadricula/_delete_form.html.twig') }}
+{% endblock %}

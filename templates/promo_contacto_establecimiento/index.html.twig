@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PromoContactoEstablecimiento index{% endblock %}
+
+{% block body %}
+    <h1>PromoContactoEstablecimiento index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for promo_contacto_establecimiento in promo_contacto_establecimientos %}
+            <tr>
+                <td>{{ promo_contacto_establecimiento.id }}</td>
+                <td>
+                    <a href="{{ path('promo_contacto_establecimiento_show', {'id': promo_contacto_establecimiento.id}) }}">show</a>
+                    <a href="{{ path('promo_contacto_establecimiento_edit', {'id': promo_contacto_establecimiento.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

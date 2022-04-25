@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuevo Comentario {% endblock %}
+
+{% block body %}
+
+
+
+    <div class="row col-md-12">
+
+        <div class="col-md-6">
+            {{ include('comentarios/_form.html.twig') }}
+        </div>
+        <div class="col-md-6 alert alert-warning">
+            </p>- Usar urgente cuando algo debe ser resuelto o discutido en ese mismo instante </p>
+            </p>- Usar critico cuando es un problema que traer cargos o penalizaciones pero hay almenos un dia para resolver </p>
+            </p>- Usar cliente para comentarios que se muestran en el tracking del cliente</p>
+            </p>- TODO CONTRATIEMPO O PROBLEMA DEBE SER COMENTADO</p>
+            
+        </div>
+        
+    </div>
+{% endblock %}
+
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}
+{% block js_pantalla %}
+    <script src="{{ asset('js/comentariosEnvioNew.js') }}" ></script>
+{% endblock %}
+

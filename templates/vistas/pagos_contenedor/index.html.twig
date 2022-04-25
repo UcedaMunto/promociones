@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PagosContenedor index{% endblock %}
+
+{% block body %}
+    <h1>PagosContenedor index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Monto</th>
+                <th>Descripcion</th>
+                <th>Validar</th>
+                <th>FechaSubida</th>
+                <th>FechaValidacion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pagos_contenedor in pagos_contenedors %}
+            <tr>
+                <td>{{ pagos_contenedor.id }}</td>
+                <td>{{ pagos_contenedor.monto }}</td>
+                <td>{{ pagos_contenedor.descripcion }}</td>
+                <td>{{ pagos_contenedor.validar ? 'Yes' : 'No' }}</td>
+                <td>{{ pagos_contenedor.fechaSubida ? pagos_contenedor.fechaSubida|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ pagos_contenedor.fechaValidacion ? pagos_contenedor.fechaValidacion|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('pagos_contenedor_show', {'id': pagos_contenedor.id}) }}">show</a>
+                    <a href="{{ path('pagos_contenedor_edit', {'id': pagos_contenedor.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('pagos_contenedor_new') }}"><i class="fa fa-plus" style="font-size:36px"></i></a>
+{% endblock %}

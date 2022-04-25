@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Precios y costos de flete{% endblock %}
+
+{% block body %}
+    <a href="{{ path('flete_new') }}">Crear nuevo flete</a>
+    <table class="table" id="tabla_fletes" >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Puerto</th>
+                <th>Tipo</th>
+
+                <th>Costo</th>
+                <th>Precio de venta</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for flete in fletes %}
+            <tr>
+                <td>{{ flete.id }}</td>
+                <td> 
+                    {% if flete.yarda is not defined or flete.yarda is null  %}
+                        Grua interna
+                    {% else  %}
+                        {{ flete.yarda.puerto }}
+                    {% endif %}" 
+                </td>
+                <td>{{ flete.tipo }}</td>
+                <td>{{ flete.costo }}</td>
+                <td>{{ flete.precioVenta }}</td>
+                <td>
+                    <a href="{{ path('flete_show', {'id': flete.id}) }}">show</a>
+                    <a href="{{ path('flete_edit', {'id': flete.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

@@ -1,0 +1,242 @@
+
+<!-- bloc-noticias -->
+<div class="bloc none full-width-bloc l-bloc" id="bloc-promociones">
+    <div class="container shadow-index bloc-sm shortcut-caption">
+        <a href="#" class="row justify-content-center pulse-hvr lazyloaded hideMe">
+            <div>
+                <div class="row">
+                    <div class="col my-auto">
+                        <h4 class="text-white text-center text-nowrap section-title">Promociones(cupones)</h4>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<!-- bloc-4 END  categorias_estab -->
+<div class="container-fluid">
+    <div class="card-group vertical-gobsvpostinfo-style">
+        <div class="col-md-12 row" style="padding: 0px 0px 0px 0px;">
+            {% set count = 0 %}
+            {% for promocion in promociones %}
+                {% if count == 0 %}
+                <div class="card-deck col-md-12 row lineaAvisos" style="padding: 18px 0px 1px 23px;width: 100%;margin: 0px 0px 30px 0px">
+                {% endif %}
+                {% set count = count + 1 %}
+                    <div class="col-xs-12 col-sm-6 col-md-3 col-xl-3 bodyAviso">
+                        <div class="card cardText">
+                            <img class="card-img-top" src="{{promocion.promocionSucursals[0].idSucursal.idEstablecimiento.archivoLogo.ruta}}" alt="Card image cap">
+                            <div class="card-body cardText">
+                                <p class="card-text">{{ promocion.promocionSucursals[0].idSucursal.idEstablecimiento.nombre ~ 'suc: ' ~ promocion.promocionSucursals[0].idSucursal.nombre }}</p>
+                                <h5 class="card-title">{{ promocion.nombre }}</h5>
+                                <p class="card-text">{{ promocion.descripcion }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% if count == 4 or count == promociones|length %}
+                {% set count = 0  %}
+            </div>
+            {% endif %}
+            {% else %}
+            <div>
+                <h1>Sin avisos</h1>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
+<!-- bloc-1 -->
+<div class="bloc full-width-bloc l-bloc" id="bloc-1">
+    <div class="container ">
+        <div class="row voffset-clear-xs no-gutters">
+            <div class="col-12 l-bloc">
+                <div class="text-center">
+                    <div id="carrusel-principal" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carrusel-principal" data-slide-to="0" class="active">
+                            </li>
+                            <li data-target="#carrusel-principal" data-slide-to="1" class="">
+                            </li>
+                        </ol>
+                        <div class="carousel-inner" role="listbox">
+                            <div class="carousel-item gradiente">
+                                <img class="d-inline-block w-100" alt="slide 1" src="minsal_files/carruselPrincipal.jpg">
+                            </div>
+                            <img class="d-inline-block w-100" alt="slide 1" src="minsal_files/carruselPrincipal.jpg">
+                        </div>
+                    </div>
+                    <a class="carousel-nav-controls carousel-control-prev" href="#carrusel-principal" role="button" data-slide="prev">
+                    <span class="fa fa-chevron-left"></span><span class="sr-only">Anterior</span></a>
+                    <a class="carousel-nav-controls carousel-control-next" href="#carrusel-principal" role="button" data-slide="next">
+                    <span class="fa fa-chevron-right"></span><span class="sr-only">Siguiente</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- bloc-1 END -->
+<!-- ScrollToTop Button -->
+<a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1',this)"><span class="fa fa-chevron-up"></span></a>
+<div class="bloc none full-width-bloc l-bloc" id="bloc-2">
+    <div class="container shadow-index bloc-sm shortcut-caption">
+        <a href="#" style="visibility: visible;" class="row justify-content-center pulse-hvr lazyloaded animated">
+            <div>
+                <div class="row">
+                    <div class="col mt-2 mb-2">
+                        <img src="minsal_files/Servicios.svg" data-src="#" alt="Nombre de la Sección" id="NombreSeccion" data-appear-anim-style="puffIn" style="visibility: visible;" class="img-fluid mx-auto d-block img-icono-avisos-style pulse-hvr lazyloaded float-md-right animated">
+                    </div>
+                    <div class="col my-auto">
+                        <h4 class="text-white text-center text-nowrap section-title">AVISOS</h4>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<!-- bloc-4 END -->
+<div class="container-fluid">
+    <div class="card-group vertical-gobsvpostinfo-style">
+        <div class="col-md-12 row" style="padding: 0px 0px 0px 0px;">
+            <div clas="row" style="width: 100%;">
+                <img src="minsal_files/avisos.jpg" class="img-fluid" alt="Responsive image" style="padding: 0px 0px 0px 0px; width: 100%;">
+            </div>
+            {% set count = 0 %}
+            {% for aviso in avisos %}
+            {% if count == 0 %}
+            <div class="card-deck col-md-12 row lineaAvisos" style="padding: 18px 0px 1px 23px;width: 100%;margin: 0px 0px 30px 0px">
+                {% endif %}
+                {% set count = count + 1 %}
+                <div class="col-xs-12 col-sm-6 col-md-3 col-xl-3 bodyAviso">
+                    <div class="card cardText">
+                        <img class="card-img-top" src="{{aviso.archivoLogo.ruta}}" alt="Card image cap">
+                        <div class="card-body cardText">
+                            <h5 class="card-title">{{ aviso.nombre }}</h5>
+                            <p class="card-text">{{ aviso.descripcion }}</p>
+                            <p class="card-text"><small class="text-muted">{{ count }}</small></p>
+                        </div>
+                    </div>
+                </div>
+                {% if count == 4 or count == avisos|length %}
+                {% set count = 0  %}
+            </div>
+            {% endif %}
+            {% else %}
+            <div>
+                <h1>Sin avisos</h1>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="card-group">
+</div>
+</div>
+<!-- bloc-noticias -->
+<div class="bloc none full-width-bloc l-bloc" id="bloc-3">
+    <div class="container shadow-index bloc-sm shortcut-caption">
+        <a href="#" class="row justify-content-center pulse-hvr lazyloaded hideMe">
+            <div>
+                <div class="row">
+                    <div class="col mt-2 mb-2">
+                        <img src="minsal_files/Noticias.svg" data-src="https://www.salud.gob.sv/wp-content/themes/instituciones/img/Noticias.svg" alt="Noticias" id="Sección" 
+                            data-appear-anim-style="puffIn" class="img-fluid mx-auto d-block img-icono-noticias-style pulse-hvr lazyloaded hideMe" style="visibility: visible;">
+                    </div>
+                    <div class="col my-auto">
+                        <h4 class="text-white text-center text-nowrap section-title">Establecimientos</h4>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<!-- bloc-4 END -->
+<div class="container-fluid">
+    <div class="card-group vertical-gobsvpostinfo-style">
+        <div class="col-md-12 row" style="padding: 0px 0px 0px 0px;">
+            <div clas="row" style="width: 100%;text-align-last: center;">
+                <img id="establecimiento_imagen" src="{{ establecimiento.archivoBanner.ruta }}" class="img-fluid" alt="Responsive image" style="border-radius: 30px;padding: 0px 0px 0px 0px; width: 90%;max-height: 300px;">
+            </div>
+            <div style="padding: 0px 39px 0px;margin: 31px 5% 0px 5%;width: 100%;background-color: white;">
+                <h3 id="establecimiento_nombre" style="margin: 15px;">{{ establecimiento.nombre }}</h3>
+                <!--a></a-->
+                <p id="establecimiento_telefono">{{ establecimiento.telefono }}</p>
+                <a id="establecimiento_direccion" href="#">{{ establecimiento.direccion }}</a>
+                <div id="establecimiento_cupones">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 row" style="padding: 0px 0px 0px 0px;">
+            {% set count = 0 %}
+            {% for establecimiento in establecimientos %}
+            {% if count == 0 %}
+            <div class="card-deck col-md-12 row lineaAvisos" style="padding: 18px 0px 1px 23px;width: 100%;margin: 0px 0px 30px 0px">
+                {% endif %}
+                {% set count = count + 1 %}
+                <div class="col-xs-12 col-sm-6 col-md-3 col-xl-3 bodyAviso">
+                    <div class="card cardText">
+                        <img class="card-img-top" src="{{establecimiento.archivoBanner.ruta}}" alt="Card image cap">
+                        <div class="card-body cardText">
+                            <h5 class="card-title">{{ establecimiento.nombre }}</h5>
+                        </div>
+                    </div>
+                </div>
+                {% if count == 3 or count == establecimiento|length %}
+                {% set count = 0  %}
+            </div>
+            {% endif %}
+            {% else %}
+            <div>
+                <h1>Sin establecimientos</h1>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- bloc-noticias -->
+<div class="bloc none full-width-bloc l-bloc" id="bloc-categorias">
+    <div class="container shadow-index bloc-sm shortcut-caption">
+        <a href="#" class="row justify-content-center pulse-hvr lazyloaded hideMe">
+            <div>
+                <div class="row">
+                    <div class="col my-auto">
+                        <h4 class="text-white text-center text-nowrap section-title">Categorias</h4>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<!-- bloc-4 END  categorias_estab -->
+<div class="container-fluid">
+    <div class="card-group vertical-gobsvpostinfo-style">
+        <div class="col-md-12 row" style="padding: 0px 0px 0px 0px;">
+            {% set count = 0 %}
+            {% for categoria in categorias_estab %}
+            {% if count == 0 %}
+            <div class="card-deck col-md-12 row lineaAvisos" style="padding: 18px 0px 1px 23px;width: 100%;margin: 0px 0px 30px 0px">
+                {% endif %}
+                {% set count = count + 1 %}
+                <div class="col-xs-12 col-sm-6 col-md-3 col-xl-3 bodyAviso">
+                    <div class="card cardText">
+                        <img class="card-img-top" src="{{categoria.archivoLogo.ruta}}" alt="Card image cap">
+                        <div class="card-body cardText">
+                            <h5 class="card-title">{{ categoria.nombre }}</h5>
+                        </div>
+                    </div>
+                </div>
+                {% if count == 4 or count == categoria|length %}
+                {% set count = 0  %}
+            </div>
+            {% endif %}
+            {% else %}
+            <div>
+                <h1>Sin avisos</h1>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

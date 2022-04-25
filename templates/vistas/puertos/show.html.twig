@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Puertos{% endblock %}
+
+{% block body %}
+    <h1>Puertos</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Numero</th>
+                <td>{{ puerto.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ puerto.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Tipo Puerto</th>
+                <td>{{ puerto.tipoPuerto }}</td>
+            </tr>
+            <tr>
+                <th>Tipo de uso de puerto</th>
+                <td>
+                {% for usosTipos in tipo_usos_puertos  %}
+                {{ usosTipos.nombre }}  - 
+                {% endfor %} 
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <a href="{{ path('puertos_index') }}">back to list</a>
+
+    <a href="{{ path('puertos_edit', {'id': puerto.id}) }}">edit</a>
+
+    {{ include('puertos/_delete_form.html.twig') }}
+{% endblock %}

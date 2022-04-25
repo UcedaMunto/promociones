@@ -1,0 +1,11 @@
+{% if mensajes['0']!="" %}
+            <div class="alert alert-danger" role="alert">
+                <strong>{{ mensajes[0] }}</strong>  
+            </div>
+{% endif %}
+
+
+{{ form_start(form, { 'attr' : { 'id':'form_proveedor'}}  ) }}
+    {{ form_widget(form) }}
+    <button class="btn" id="proveedorSave">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

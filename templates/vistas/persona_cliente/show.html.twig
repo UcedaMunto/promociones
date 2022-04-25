@@ -1,0 +1,183 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PersonaCliente{% endblock %}
+
+{% block body %}
+    <h1>Datos del cliente( VISTA DE EMPLEADOS )</h1>     
+    <a href="{{ path('persona_cliente_index') }}">Lista de clientes</a> -
+    <a href="{{ path('persona_cliente_edit', {'id': persona_cliente.id}) }}">Editar</a>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ persona_cliente.id }}</td>
+                <th>Tipo de cliente</th>
+                <td>{{ persona_cliente.tipoCliente.nombre }}</td>
+                <th>Representante</th>
+                <td>{{ persona_cliente.representante | default('SD') }}</td>
+                <th>Token de registro</th>
+                <td>{{ persona_cliente.tokenRegistro }}</td>
+            </tr>
+        </tbody>
+    </table>
+<p>Datos personales</p>
+     <table class="table">
+        <tbody>
+            <tr>
+                <th>Nombres</th>
+                <td>{{ persona_cliente.datos.nombre }}</td>
+                <th>Apellidos</th>
+                <td>{{ persona_cliente.datos.apellido }}</td>
+                <th>DUI</th>
+                <td>{{ persona_cliente.datos.dui }}</td>
+                <th>Pasaporte</th>
+                <td>{{ persona_cliente.datos.pasaporte }}</td>
+                </tr>
+        </tbody>
+    </table>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>NIT</th>
+                <td>{{ persona_cliente.datos.nit }}</td>
+                <th>Direccion</th>
+                <td>{{ persona_cliente.datos.direccion }}</td>
+                <th>Telefono</th>
+                <td>{{ persona_cliente.datos.telefono }}</td>
+                <th>Celular</th>
+                <td>{{ persona_cliente.datos.celular }}</td>
+                </tr>
+        </tbody>
+    </table>
+
+    <p>Otros datos</p>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Fecha de Nacimiento</th>
+                <td>
+                    {{ persona_cliente.datos.fechaNacimiento is empty ? "" : persona_cliente.datos.fechaNacimiento|date("m/d/Y") }}
+                </td>
+                <th>Email 1</th>
+                <td>{{ persona_cliente.datos.correo1 }}</td>
+                <th>Email 2</th>
+                <td>{{ persona_cliente.datos.correo2 }}</td>
+                <th>Estado</th>
+                <td>{{ persona_cliente.datos.estado }}</td>
+                <th>foto</th>
+                <td>{{ persona_cliente.datos.foto }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>------</p>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Giro</th>
+                <td>
+                    {{ persona_cliente.datos.giro | default('SD') }}
+                </td>
+                <th>NCR</th>
+                <td>{{ persona_cliente.datos.registroIva }}</td>
+                <th>Nombre IVA</th>
+                <td>{{ persona_cliente.datos.nombreIva }}</td>
+                </tr>
+        </tbody>
+    </table>
+    <p>Archivos</p>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Documentos</th>
+                <td>{{ persona_cliente.datos.documentos }}</td>
+                <th>Documentos 2</th>
+                <td>{{ persona_cliente.datos.documentos2 }}</td>
+                <th>Documentos 3</th>
+                <td>{{ persona_cliente.datos.documentos3 }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    <main>
+        <p>Clic para mostrar y clic para ocultar</p>
+        <p>
+            <a class="btn btn-primary" data-toggle="collapse" href="#collapseUno" role="button" aria-expanded="false" aria-controls="collapseUno">
+                Documentos 
+            </a>
+            <a class="btn btn-primary" data-toggle="collapse" href="#collapseDos" role="button" aria-expanded="false" aria-controls="collapseDos">
+                Ordenes
+            </a>
+            <a class="btn btn-primary" data-toggle="collapse" href="#collapseTres" role="button" aria-expanded="false" aria-controls="collapseTres">
+                Otros
+            </a>
+        </p>
+
+        <div class="collapse" id="collapseUno">
+            <div class="col-md-12">
+                <h1 class="resaltarComentario"> Documentos <h1>
+                {% set counter = 0 %}
+                {% for archivo in archivos %}
+                    {% if archivo != null %}
+                        {% if extensionesDoc[counter] == 2  %}
+                            <img src="{{rutaDoc}}/{{ archivo }}">
+                        {% elseif extensionesDoc[counter] == 1 %}
+                            <embed src="{{rutaDoc}}/{{ archivo }}" type="application/pdf" width="100%" height="600px" />
+                        {% else %}
+                            <a href="{{rutaDoc}}/{{ archivo }}" download="factura{{ archivo }}">Descargar</a>
+                        {% endif %}
+                    {% else %}
+                        <p>No se ha subido</p> 
+                    {% endif %}
+
+                    {% set counter = counter + 1 %}
+                {% endfor %}
+                  
+            </div>
+        </div>
+
+        <div class="collapse" id="collapseDos">
+            <h1 class="resaltarComentario">Ordenes de movimiento</h1>
+            <table class="table" id="tabla_ordenes_cliente">
+                <thead>
+                    <tr>
+                        {% for data in columnasCliente %}
+                            <th>{{ data }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                {% for data in resultCliente %}
+                    <tr>
+                        {% for key,value in  data %}
+                            <td>{{ value|e }}</td>
+                            
+                        {% endfor %}
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="collapse" id="collapseTres">
+            <h1 class="resaltarComentario">FOTOS DE GRUA<h1>
+            
+        </div>
+
+    </main>
+
+
+
+
+
+    
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

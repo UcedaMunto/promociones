@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PreFactura - informe de pagos de grua{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('pre_fact_grua_usa_index') }}">back to list</a>
+    
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ pre_fact_grua_usa.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ pre_fact_grua_usa.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Creacion</th>
+                <td>{{ pre_fact_grua_usa.creacion ? pre_fact_grua_usa.creacion|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+<br>
+<p>Lista de pagos enlazados a este informe</p>
+    {{include('pre_fact_grua_usa/informeGruas.html.twig')}}
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

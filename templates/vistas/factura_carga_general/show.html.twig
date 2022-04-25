@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FacturaCargaGeneral{% endblock %}
+
+{% block body %}
+    <h1>FacturaCargaGeneral</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ factura_carga_general.id }}</td>
+            </tr>
+            <tr>
+                <th>Numero</th>
+                <td>{{ factura_carga_general.numero }}</td>
+            </tr>
+            <tr>
+                <th>DireccionDestino</th>
+                <td>{{ factura_carga_general.direccionDestino }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('factura_carga_general_index') }}">back to list</a>
+
+    <a href="{{ path('factura_carga_general_edit', {'id': factura_carga_general.id}) }}">edit</a>
+
+    {{ include('factura_carga_general/_delete_form.html.twig') }}
+{% endblock %}

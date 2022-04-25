@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista de cuadriculas{% endblock %}
+
+{% block body %}
+    <h1>Lista de cuadriculas</h1>
+
+    <table id="tabla_cuadricula"  class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>actions</th>
+                <th>NumeroBl</th>
+                <th>CuaFactura</th>
+                <th>PaisOrigen</th>
+                <th>Declaracion</th>
+                <th>Aduana</th>
+                <th>Fecha</th>
+                <th>EmpresaSeguridad</th>
+                <th>Dm</th>
+                <th>CuadriculaFecha</th>
+                <th>Permiso</th>
+                <th>QuaPaisEx</th>
+                <th>Observaciones</th>
+                <th>FechaSolicitud</th>
+                <th>FechaIngreso</th>
+                <th>Autoriza</th>
+                <th>SoliMovimiento</th>
+                <th>FechaTrack</th>
+                <th>NotificacionA</th>
+                <th>NotiTelefono</th>
+                <th>TrackMensaje</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cuadricula in cuadriculas %}
+            <tr>
+                <td>{{ cuadricula.id }}</td>
+                <td>
+                    <a href="{{ path('cuadricula_show', {'id': cuadricula.id}) }}">Ver detalles </a> /
+                    <a href="{{ path('cuadricula_edit', {'id': cuadricula.id}) }}">Editar</a>
+                </td>
+                <td>{{ cuadricula.numeroBl }}</td>
+                <td>{{ cuadricula.cuaFactura }}</td>
+                <td>{{ cuadricula.paisOrigen }}</td>
+                <td>{{ cuadricula.declaracion }}</td>
+                <td>{{ cuadricula.aduana }}</td>
+                <td>{{ cuadricula.fecha ? cuadricula.fecha|date('Y-m-d') : '' }}</td>
+                <td>{{ cuadricula.empresaSeguridad }}</td>
+                <td>{{ cuadricula.dm }}</td>
+                <td>{{ cuadricula.cuadriculaFecha ? cuadricula.cuadriculaFecha|date('Y-m-d') : '' }}</td>
+                <td>{{ cuadricula.permiso }}</td>
+                <td>{{ cuadricula.paisExpedicion }}</td>
+                <td>{{ cuadricula.observaciones }}</td>
+                <td>{{ cuadricula.fechaSolicitud ? cuadricula.fechaSolicitud|date('Y-m-d') : '' }}</td>
+                <td>{{ cuadricula.fechaIngreso ? cuadricula.fechaIngreso|date('Y-m-d') : '' }}</td>
+                <td>{{ cuadricula.autoriza }}</td>
+                <td>{{ cuadricula.soliMovimiento }}</td>
+                <td>{{ cuadricula.fechaTrack ? cuadricula.fechaTrack|date('Y-m-d') : '' }}</td>
+                <td>{{ cuadricula.notificacionA }}</td>
+                <td>{{ cuadricula.notiTelefono }}</td>
+                <td>{{ cuadricula.trackMensaje }}</td>
+                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="22">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modelos{% endblock %}
+
+{% block body %}
+    <div class="col-md-11">
+        <table class="table" id="tabla_modelos">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Marca</th>
+                    <th>Nombre</th>
+                    <th>Codigo</th>                    
+                    <th>Peso KM</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for modelo in modelos %}
+                <tr>
+                    <td>{{ modelo.id }}</td>
+                    <td>{{ modelo.marca.nombre }}</td>
+                    <td>{{ modelo.nombre }}</td>
+                    <td>{{ modelo.codigo }}</td>
+                    <td>{{ modelo.pesokm }}</td>
+                    <td>
+                        <a href="{{ path('modelo_edit', {'id': modelo.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('modelo_new') }}"><i class="fa fa-plus" style="font-size:36px"></i></a>
+    </div>
+   
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

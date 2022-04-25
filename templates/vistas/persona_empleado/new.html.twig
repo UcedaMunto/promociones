@@ -1,0 +1,211 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CrearPersonaEmpleado{% endblock %}
+
+{% block body %}
+
+<div class="col-md-12">
+    <!-- Basic registration form-->
+    <div class="card shadow-lg border-0 rounded-lg mt-1">
+        <div class="card-header justify-content-center"><h3 class="font-weight-light my-4">Create Account</h3></div>
+        <div class="card-body">
+    
+        {% if mensajes['0']!="" %}
+            <div class="alert alert-danger" role="alert">
+                <strong>{{ mensajes[0] }}</strong>
+            </div>
+        {% endif %}
+        {% if mensajes['1'] !="" %}
+            <div class="alert alert-success" role="alert">
+                <strong>{{ mensajes[1] }}</strong>  : 
+                <a href="{{ path('cheque_edit', {'cheque': cheque.id}) }}" id="editarCheque">Editar</a> /
+                <a href="{{ path('cheque_new') }}" id="nuevoCheque">Nuevo cheque</a>
+            </div>
+        {% endif %}
+        
+            {{ form_start(form) }}
+                      
+                <div class="form-row">
+                    <div class="col-md-3">
+                        <!-- Form Group (first name)-->
+                        <div class="form-group">
+                            <label class="small mb-1" for="inputFirstName">Nombres</label>
+                            {{ form_widget(form.datos.nombre) }}
+                            {{ form_errors(form.datos.nombre) }}     
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <!-- Form Group (last name)-->
+                        <div class="form-group">
+                            <label class="small mb-1" for="inputLastName">Apellidos</label>
+                            {{ form_widget(form.datos.apellido) }}
+                            {{ form_errors(form.datos.apellido) }}  
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <!-- Form Group (first name)-->
+                        <div class="form-group">
+                            <label class="small mb-1" >NIT</label>
+                            {{ form_widget(form.datos.nit) }}
+                            {{ form_errors(form.datos.nit) }}    
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <!-- Form Group (last name)-->
+                        <div class="form-group">
+                            <label class="small mb-1" >DUI</label>
+                            {{ form_widget(form.datos.dui) }}
+                            {{ form_errors(form.datos.dui) }}    
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="inputEmailAddress">Email</label>
+                        {{ form_widget(form.datos.correo1) }}
+                        {{ form_errors(form.datos.correo1) }}    
+                    </div>
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="inputFirstName">Email 2</label>
+                            {{ form_widget(form.datos.correo2) }}
+                            {{ form_errors(form.datos.correo2) }}    
+                    </div>
+             
+                </div>
+                    <div class="form-row">
+                        <div class="col-md-3">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Documentos1</label>
+                            {{ form_widget(form.datos.file) }}
+                            {{ form_errors(form.datos.file) }}                                 
+                        </div>
+                        <div class="col-md-3">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Documentos2</label>
+                            {{ form_widget(form.datos.file1) }}
+                            {{ form_errors(form.datos.file1) }}                                 
+                        </div>
+                        <div class="col-md-3">
+                            <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Documentos3</label>
+                            {{ form_widget(form.datos.file2) }}
+                            {{ form_errors(form.datos.file2) }}                                 
+                        </div>
+                        <div class="col-md-3">
+                            <label class="small mb-1" >Departamento</label>
+                            {{ form_widget(form.datos.departamento) }}
+                            {{ form_errors(form.datos.departamento) }}  
+                        </div>
+                                           
+                        <div class="col-md-6">
+                        <!-- Form Group (last name)-->                                
+                            <label class="small mb-1" for="inputLastName">Direccion</label>
+                            {{ form_widget(form.datos.direccion) }}
+                            {{ form_errors(form.datos.direccion) }}    
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-3">
+                            <!-- Form Group (first name)-->
+                            <div class="form-group">
+                                <label class="small mb-1" >Telefono</label>
+                                {{ form_widget(form.datos.telefono) }}
+                                {{ form_errors(form.datos.telefono) }}    
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <!-- Form Group (last name)-->
+                            <div class="form-group">
+                                <label class="small mb-1" >Celular</label>
+                                {{ form_widget(form.datos.celular) }}
+                                {{ form_errors(form.datos.celular) }}    
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <!-- Form Group (last name)-->
+                            <div class="form-group">
+                                <label class="small mb-1" >Registro de IVA</label> 
+                                {{ form_widget(form.datos.registroIva) }}
+                                {{ form_errors(form.datos.registroIva) }}    
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <!-- Form Group (last name)-->
+                            <div class="form-group">
+                                <label class="small mb-1" >Nombre de IVA</label> 
+                                {{ form_widget(form.datos.nombreIva) }}
+                                {{ form_errors(form.datos.nombreIva) }}    
+                            </div>
+                        </div>
+                    </div>
+                <!-- Form Group (create account submit)-->
+                <div class="form-row">
+                    <div class="col-md-3">
+                        <!-- Form Group (first name)-->                                
+                            <label class="small mb-1" >Fecha de Nacimiento</label>
+                            {{ form_widget(form.datos.fechaNacimiento) }}
+                            {{ form_errors(form.datos.fechaNacimiento) }}                                  
+                    </div>
+                    <div class="col-md-3">
+                        <!-- Form Group (first name)-->
+                        <div class="form-group">
+                            <label class="small mb-1" >Pasaporte</label>
+                            {{ form_widget(form.datos.pasaporte) }} 
+                            {{ form_errors(form.datos.pasaporte) }}  
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="form-row">
+                    <div class="col-md-3">
+                        <!-- Form Group (last name)-->
+                        <div class="form-group">
+                            <label class="small mb-1" >ISSS</label>
+                            {{ form_widget(form.isss) }}
+                            {{ form_errors(form.isss) }}      
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <!-- Form Group (first name)-->
+                        <div class="form-group">
+                            <label class="small mb-1" >AFP</label>
+                            {{ form_widget(form.afp) }}
+                            {{ form_errors(form.afp) }}    
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="for-row"> 
+                    <div class="col-md-3">
+                        <div class="form-group">
+                        <label class="small mb-1" > PASSWORD </label>
+                        ---
+                        </div>  
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                        <label class="small mb-1">SALARIO</label>
+                        {{ form_widget(form.salario)}} 
+                        {{ form_errors(form.salario) }}    
+                        </div>
+                    </div> 
+                    
+                </div>
+
+                
+                <button type="submit" class="btn btn-primary btn-block"> {{ button_label|default('Guardar') }} </button>
+            {{ form_end(form) }}
+        </div>
+
+       
+
+        <div class="card-footer text-center">
+           
+        </div>
+    </div>
+</div>
+
+ 
+{% endblock %}
+ 

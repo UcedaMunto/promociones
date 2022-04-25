@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}Activo{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="{{ asset('css/ligthbox/lightbox.css') }}">
+<script src="{{ asset('js/lightbox/lightbox-plus-jquery.js') }} "></script>
+
+<script>
+    lightbox.option({
+      'resizeDuration': 200,
+      'wrapAround': true
+    })
+</script>
+    <h1>Activo</h1>
+    <a href="{{ path('activo_show', {'id': activoSig }) }}">Siguiente</a>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ activo.id }}</td>
+            </tr>
+            <tr>
+                <th>CodigoBarra</th>
+                <td>{{ activo.codigoBarra }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ activo.descripcion }}</td>
+            </tr>
+            <tr>
+                <th>tipo</th>
+                <td>{{ activo.tipo.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Encargado</th>
+                <td>{{ activo.responsable.usuario | default('nd') }} <br>
+                    {{ activo.departamento.nombre | default('nd') }}</td>
+            </tr>
+            <tr>
+                <th>Costo</th>
+                <td>{{ activo.costo }}</td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                <td>{{ activo.estado.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Departamento</th>
+                <td>{{ activo.departamento.nombre | default('ND') }}</td>
+            </tr>
+            <tr>
+                <th>Costo</th>
+                <td>{{ activo.costo }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id='fotosactivos' class='row' >{{rutaActivo}}</div>
+
+    <a href="{{ path('activo_index') }}">back to list</a>
+
+    <a href="{{ path('activo_edit', {'id': activo.id}) }}">edit</a>
+
+    {{ include('activo/_delete_form.html.twig') }}
+
+    {% endblock %}
+    {% block js_pantalla %}
+    <script src="{{ asset('js/activoShow.js') }}" ></script>
+{% endblock %}
+

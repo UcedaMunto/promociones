@@ -1,0 +1,49 @@
+
+    
+    
+    {{ form_start(form, { 'attr': {'id': 'form_fechas'}} ) }}
+        <div title="Dockreceipt creado" class="row trackcomp1">
+            <div  class="col-md-2">- </div><div class="col-md-6">Fecha dockreceipt</div><div class="col-md-4">
+                {{ form_widget(form.dockreceipt.creacion) }}
+                {{ form_errors(form.dockreceipt.creacion) }}
+            </div>
+        </div>
+        <div title="fecha en la que fue embarcado el contenedor" class="row trackcomp2">
+            <div class="col-md-2">1 </div><div class="col-md-6">Fecha de enbarcación</div><div class="col-md-4">
+                {{ form_widget(form.fechaEnbarcacion) }}
+                {{ form_errors(form.fechaEnbarcacion) }} 
+            </div>
+        </div>
+        <div title="fecha en la que zarpó el contenedor" class="row trackcomp3">
+            <div class="col-md-2">2  </div><div class="col-md-6">Fecha de zarpe </div><div class="col-md-4">
+                {{ form_widget(form.fechaZarpe) }}
+                {{ form_errors(form.fechaZarpe) }} 
+            </div>
+        </div>
+        <div title="Fecha estimada de arribo creada en el dockreceipt" class="row trackcomp4">
+            <div class="col-md-2">3 </div><div class="col-md-6">Fecha estimada de arribo </div><div class="col-md-4">
+                {{ form_widget(form.fechaArribo) }}
+                {{ form_errors(form.fechaArribo) }} 
+            </div>
+        </div>
+        <div title="fecha de arribo corregida, puede actualizarla las veces que quiera" class="row trackcomp5">
+            <div class="col-md-2">4 </div><div class="col-md-6">Fecha de arrivo actualizada </div><div class="col-md-4">
+                {{ form_widget(form.fechaArriboVerificada) }}
+                {{ form_errors(form.fechaArriboVerificada) }} 
+            </div>
+        </div>
+        <div title="fecha en la que se marcó el contenedor para ser descargado" class="row trackcomp6">
+            <div class="col-md-2">5  </div><div class="col-md-6">Fecha listo para descarga </div><div class="col-md-4">
+                {{ form_widget(form.fechaMarcadoDescargar) }}
+                {{ form_errors(form.fechaMarcadoDescargar) }} 
+            </div>
+        </div>
+        <div title="Fecha en la que se descargó" class="row trackcomp7">
+            <div class="col-md-2">6 </div><div class="col-md-6">Fecha descargado </div><div class="col-md-4">
+                {{ form_widget(form.fechaDescargado) }}
+                {{ form_errors(form.fechaDescargado) }} 
+            </div>
+        </div>
+        
+    {{ form_end(form) }}
+

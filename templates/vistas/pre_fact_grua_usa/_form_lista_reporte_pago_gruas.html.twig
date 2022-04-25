@@ -1,0 +1,23 @@
+<div class="row col-md-12">
+    <div class="col-md-9">
+        {{ form_start(formReporte, {'attr': {'id':'reporte_pago_gruas', 'class':''}})}}
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    {{ form_widget(formReporte.preFactGruaUsa) }}
+                </div>
+                <div class="form-group col-md-4">
+                    <button type="submit" id="getFormularioShow" class="btn btn-primary btn-block"> 
+                    {{ button_label|default('Reporte en base a gruas') }} </button>
+                </div>
+                <div class="form-group col-md-4">
+                    <button type="submit" id="getReporteDinamico" class="btn btn-primary btn-block"> 
+                    {{ button_label|default('Reporte dinámico') }} </button>
+                </div>
+            </div>
+        {{ form_end(formReporte) }}
+    </div>
+    <div class="col-md-3">
+        <button type="submit" id="downloadReporte" class="btn btn-primary btn-block">
+        Descargar este reporte</button>
+    </div>
+</div>

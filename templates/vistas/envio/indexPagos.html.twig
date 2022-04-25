@@ -1,0 +1,220 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reporte para verificación de pagos de grua, storage y otros costos de movimientos{% if yarda is defined %} YARDA: {{ yarda }} {% endif %} {% endblock %}
+ 
+{% block body %}
+    <link href="{{ asset('css/pivotTable/pivot.css') }}"  rel="stylesheet" />
+    <script src="{{ asset('js/pivotTable/pivot.js') }}" crossorigin="anonymous"></script>
+
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a class="nav-link " id="paso0-tab" data-toggle="tab" href="#paso0" role="tab" aria-controls="paso0" aria-selected="true">Crear cheques</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link active" id="paso1-tab" data-toggle="tab" href="#paso1" role="tab" aria-controls="paso1" aria-selected="true">Selecciona</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="paso2-tab" data-toggle="tab" href="#paso2" role="tab" aria-controls="paso2" aria-selected="false">Ingresa costos</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="paso3-tab" data-toggle="tab" href="#paso3" role="tab" aria-controls="paso3" aria-selected="false">ver reportes </a>
+  </li>
+</ul>
+
+
+
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade" id="paso0" role="tabpanel" aria-labelledby="paso0-tab">
+        <div class="alert alert-warning" role="alert">
+            <p>Para que los cheques nuevos aparezcan en los movimientos de grua puede guardar sin haber hecho cambios, esto equivale a refrescar<br>
+            <strong>
+                IMPERATIVO: cambiar la compañía de un movimiento que ya tiene cheques puede provocar inconsistencias(en reportes generados) que bloquearan la generación de Excel, recuerde que todos sus cambios se registran en bitacora 
+            </strong></p>
+        </div>
+        <div id="cheques" class="formularioLista">
+            {{ include('cheque/part_new.html.twig') }}
+        </div>
+
+        <div id="tablax_cheques" class="tablaCheques">
+            
+        </div>
+
+    </div>
+
+    <div class="tab-pane fade show active" id="paso1" role="tabpanel" aria-labelledby="paso1-tab">
+        <div class="">
+        <div class="alert alert-warning padding05" role="alert">
+            <p>
+                - Por razones de rendimiento solo se muestran movimientos de los ultimos 6 meses si llega un cobro de aun más tiempo deberá pedir a informatica que se habilite<br>
+                - Ojo no dejar un rango muy grande para que la pantalla cargue rápido, regresar a 6 meses o menos cuando ya no se necesita<br>
+                - Solo los autos marcados como llegados a yarda se muestran en esta lista, si necesita pagar solicite a logistica que entre a actualizar a: <a class="nav-link" href="{{ path('envio_index_track') }}">Actualizar estados de track</a>
+            </p>
+        </div>
+            <div id="filtroFecha" class="intangible">
+                {{ form_start(form, { 'method': 'POST'} ) }}
+                    <div class="row">
+                        <div class="col-xxl-4 col-xl-3 mb-4">
+                            Filtrar por fechas:
+                        </div>
+                        <div class="col-xxl-4 col-xl-3 mb-4">
+                            {{ form_widget(form.fechaInicial) }}
+                        </div>
+                        <div class="col-xxl-4 col-xl-3 mb-4">
+                            {{ form_widget(form.fechaFinal) }}
+                        </div>
+                        <div class="col-xxl-4 col-xl-3 mb-4">
+                            <button type="submit"  class="btn btn-primary btn-block"> {{ button_label|default('filtrar') }} </button>
+                        </div>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <div>
+                        Visibles: 
+                        <a class="toggle-vis" role="button" data-column="0">estado</a> -
+                        <a class="toggle-vis" role="button" data-column="5">movimiento</a> -
+                        <a class="toggle-vis" role="button" data-column="6">envio</a> -
+                        <a class="toggle-vis" role="button" data-column="7">lote </a> -
+
+                        <a class="toggle-vis" role="button" data-column="8">compania </a> -
+                        <a class="toggle-vis" role="button" data-column="9">tracking/ central </a> -
+                        <a class="toggle-vis" role="button" data-column="10">Estado grua </a> -
+                        <a class="toggle-vis" role="button" data-column="11">flete</a> -
+
+                        <a class="toggle-vis" role="button" data-column="12">yarda</a> -
+                        <a class="toggle-vis" role="button" data-column="13">vin</a> -
+                        
+                    </div>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" x-placement="bottom-end" style="position: absolute; transform: translate3d(-159px, 19px, 0px); top: 0px; left: 0px; will-change: transform;">
+                            <div class="dropdown-header">Acciones</div>
+                                <a class="dropdown-item" href="{{ path('pre_fact_grua_usa_index') }}">Lista de reportes</a>
+                                <a class="dropdown-item" href="{{ path('pre_fact_grua_usa_new') }}">+ reporte</a>
+                                <a class="dropdown-item" id="validar" href="">Ver y asignar pagos</a>
+                                <a class="dropdown-item" id="filtroFechaButton">Filtrar por fecha</a>
+                                <a class="dropdown-item trackcomp1" title="Ingreso de datos al sistema">ESTADO 1</a>
+                                <a class="dropdown-item trackcomp2" title="Recogida - en camino a yarda">ESTADO 2</a>
+                                <a class="dropdown-item trackcomp3" title="Fotos de grua - (subida por app)">ESTADO 3</a>
+                                <a class="dropdown-item trackcomp4" title="Inventario de yarda">ESTADO 4</a>
+                                <a class="dropdown-item trackcomp5" title="Fotos de yarda y título">ESTADO 5</a>
+                                <a class="dropdown-item trackcomp6" title="En Dockreceipt">ESTADO 6</a>
+                                <a class="dropdown-item trackcomp7" title="Enbarcado">ESTADO 7</a>
+                                <a class="dropdown-item trackcomp8" title="En puerto - arribó">ESTADO 8</a>
+                                <a class="dropdown-item trackcomp9" title="En aduana">ESTADO 9</a>
+                                <a class="dropdown-item trackcomp10" title="Descargado">ESTADO 10</a>
+                                <a class="dropdown-item trackcomp11" title="Cobrado">ESTADO 11</a>
+                                <a class="dropdown-item trackcomp20">Grua interna</a>
+                            </div>
+                        </div>
+                </div>
+                <div class="card-body">
+                    
+                    <table class="table" id="tabla_envios">
+                        <thead>
+                            <tr>
+                                <th>estado</th>
+                                <th>movimiento</th>
+                                <th>envio</th>
+                                <th>lote</th>
+
+                                <th>compania</th>
+                                <th>tracking/ central</th>
+                                <th>Estado grua</th>
+                                <th>flete</th>
+                                
+
+                                <th>yarda</th>
+                                <th>vin</th> 
+                                 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% set counter = 1 %}
+                            {% for movimiento in movimientos %}
+                                <tr>
+                                    <td>{{ movimiento['estado'] }}</td>
+                                    <td>{{ movimiento['movimiento'] }}</td>
+                                    <td>{{ movimiento['envio'] }}</td>
+                                    <td>{{ movimiento['lote'] }}</td>
+                                    <td>{{ movimiento['compania'] }}</td>
+                                    <td>
+                                        <a href="{{ path('envio_track', {'identificador': movimiento['lote'] }) }}">track</a>  / 
+                                        {% if movimiento['linkCentralDispatch'] !='' %} 
+                                            <a href="{{ movimiento['linkCentralDispatch'] }}">post central</a> </td>  
+                                        {% endif %}
+                                    <td>{{ movimiento.estadoMov }}</td>
+                                    <td>{{ movimiento['flete'] }}</td>
+                                    <td>{{ movimiento['yarda'] }}</td>
+                                    <td>{{ movimiento['vin'] }}</td> 
+                                </tr>
+                                {% set counter = counter + 1 %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="7">no records found</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <a class="nav-link" id="validar" data-toggle="tab" href="#paso2" role="tab" aria-controls="paso2" aria-selected="false">Ingresa costos</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="tab-pane fade" id="paso2" role="tabpanel" aria-labelledby="paso2-tab">
+        <div class="alert alert-warning padding05" role="alert">
+            -   Cada linea es un movimiento de grua, agregue los datos necesarios<br>
+            -   Cada cheque debe asignarse dentro de los 2 días siguientes a su creación, y cada informe debe finalizarse también en máximo 2 días</br>
+            -   En caso de <strong> otros costos </strong>pago doble de grua<br>
+            -   En caso de <strong> gruas falsas </strong>ingresa informatica en pagos extraordinarios<br>
+            -   En caso de pagos extraordinarios  son storage dobles, ingresados solo por informatica.
+            -   Pago de cheques a grueros <strong>Deben definirse la hora de crear el cheque, en caso de error editar el cheque, OJO todos los pagos de ese cheque pasarán a ser pagos al gruero en lugar de pagos a la empresa de cada movimiento</strong><br>
+            <strong>
+            -   IMPERATIVO: cambiar la compañía de un movimiento que ya tiene cheques puede provocar inconsistencias(en reportes generados) que bloquearan la generación de Excel, recuerde que todos sus cambios se registran en bitacora 
+            </strong>
+        </div>
+        <div id="formulario" class="formularioLista">
+        </div>
+        <div class="alert alert-warning padding05" role="alert">
+            <p>OJO, solo se muestran los cheques de los últimos 2 días</p>
+            <p>
+                <strong>
+                    IMPERATIVO: Ojo cualquier corrección de parte de informática deberá ser presentada con la impresión de los reportes que fueron modificados, cambios en cheques, costos de movimientos, 
+                                cambios en las asignaciones de los cheques o agregación de cheques. El SISTEMA NO PUEDE CUADRAR DATOS QUE SE INGRESAN DIRECTO A LAS TABLAS
+                </strong>
+            </p>
+        </div>
+        
+    </div>
+
+    <div class="tab-pane fade" id="paso3" role="tabpanel" aria-labelledby="paso3-tab">
+        <div id="formulario_reporte" class="row" 
+            data-cheques_show="{{ rutasEspeciales[0] }}" 
+            data-cheques_validar="{{ rutasEspeciales[1] }}"  
+            data-cheques_no_cobrado="{{ rutasEspeciales[2] }}"  >
+            {{include('pre_fact_grua_usa/_form_lista_reporte_pago_gruas.html.twig')}}
+        </div>
+
+        <div class="dropdown-divider"></div>
+        <div id="reporteActual" style="background-color: #d4d2d2;">
+           
+        </div>
+    </div>
+
+
+</div>
+
+
+{% endblock %}
+
+
+
+{% block js_pantalla %}
+    <script src="{{ asset('js/envioIndexPagos.js') }}" ></script>
+{% endblock %}

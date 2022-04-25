@@ -1,0 +1,19 @@
+{% block body %}
+    <div id="Nueva_dep_acuerdo" class="FormularioDep">
+        <div class="form-row">
+            <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                    <label class="small mb-1" > Departamento: </label>
+                    {{ form_widget(form_ejecucion.departamentoEmpresa) }}
+            </div>
+            <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                    <label class="small mb-1" > Acuerdo: </label>
+                    {{ form_widget(form_ejecucion.acuerdo) }}
+            </div>
+        </div>
+        <button class="btn">{{ button_label|default('Save') }}</button>
+    </div>
+
+   
+
+    
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuevo consignatario{% endblock %}
+
+{% block body %}
+    <h1>Nuevo consignatario</h1>
+    <a href="{{ path('consignatario_index') }}">Lista de consignatarios</a>
+    {{ include('consignatario/_form.html.twig') }}
+
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nueva orden de movimiento{% endblock %}
+
+{% block body %}
+    <div class="col-md-12">
+        <!-- Basic registration form-->
+        <div class="card shadow-lg border-0 rounded-lg mt-1" id="formularioNewEnvio">
+           {{ include('envio/form_new.html.twig') }}
+        </div>
+    </div>
+
+    <a href="{{ path('envio_index') }}">back to list</a>
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}
+
+{% block js_pantalla %}
+    <script src="{{ asset('js/newEnvioDetalleCompra.js') }}" ></script>
+{% endblock %}

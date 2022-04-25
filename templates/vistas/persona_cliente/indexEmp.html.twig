@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listado de clientes del sistema{% endblock %}
+
+{% block body %}
+    <a href="{{ path('persona_cliente_new_empresa') }}">Nuevo cliente</a>
+    <div>
+        Visibles: 
+        <a class="toggle-vis" role="button" data-column="0">Id</a> -
+    </div>
+    <table id="tabla_persona_cliente" style="padding-left: 1rem;" >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Estado</th>
+                <th>Correo</th>
+                <th>Dui</th>
+                <th>Buyer- importadores</th>
+                <th>Acciones</th>
+                <th>Pais</th>
+                <th>Celular</th>
+                <th>Teléfono</th>
+                <th>Nit</th>
+                <th>Usuario</th>
+                <th>Token de registro</th>
+                <th>Documentos</th>
+                <th>Tipo Cliente</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for persona_cliente in lista %}
+            <tr>
+                <td>{{ persona_cliente['id'] }}</td>
+                <td>{{ persona_cliente['nombre'] | default('SD') }}</td>
+                <td>{{ persona_cliente['apellido']| default('SD') }}</td>
+                <td>{{ persona_cliente['estado'] | default('SD') }}</td>
+                <td>{{ persona_cliente['correo1'] | default('SD') }}</td> 
+                <td>{{ persona_cliente['dui']| default('SD') }}</td>
+                <td><strong> {{ persona_cliente['importadores'] }} </strong></td>
+                <td>
+                    - <a href="{{ path('persona_cliente_show', {'id': persona_cliente['id'] }) }}" target="_blank">Más datos</a>
+                   
+                    {% if persona_cliente['idTc'] == 5 %}
+                    - <a href="{{ path('persona_cliente_edit_empresa', {'id': persona_cliente['id'] }) }}" target="_blank">Editar</a>   
+                    {% endif %}
+
+                     {% if persona_cliente['idTc'] == 6 %}
+                    - <a href="{{ path('persona_cliente_edit_empresa2', {'id': persona_cliente['id'] }) }}" target="_blank">Editar</a>   
+                    {% endif %}
+
+                    {% if persona_cliente['idTc'] == 5 %}
+                    - <a href="{{ path('persona_cliente_new_empresa2', {'id': persona_cliente['id']}) }}" target="_blank">+Empresa</a>
+                    {% endif %} 
+                                  
+                </td>
+                <td>{{ persona_cliente['celular'] | default('SD') }}</td>
+                <td>{{ persona_cliente['pais'] | default('SD') }}</td>
+                <td>{{ persona_cliente['telefono']| default('SD') }}</td>
+            
+                <td>{{ persona_cliente['nit'] | default('SD') }}</td>
+                <td>{{ persona_cliente['usuario'] | default('SIN USUARIO')}}</td>
+                <td>{{ persona_cliente['tokenRegistro'] | default('SIN USUARIO')}}</td>
+                <td> 
+                {% if persona_cliente['documentos'] != null %}
+                    <a download  href="/uploads/documents/jjkdlerlskror/{{ persona_cliente['documentos'] }}" >
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                        <path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                        </svg> 
+                    <a>
+                {% endif %}
+
+                {% if persona_cliente['documentos2'] != null %}
+                    <a download  href="/uploads/documents/jjkdlerlskror/{{ persona_cliente['documentos2'] }}" >
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                        <path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                        </svg> 
+                    <a> 
+                {% endif %}
+
+                {% if persona_cliente['documentos3'] != null %}
+                    <a download  href="/uploads/documents/jjkdlerlskror/{{ persona_cliente['documentos3'] }}" >
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                        <path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                        </svg> 
+                    <a>
+                {% endif %}
+                </td>
+                <td>{{ persona_cliente['tipoCliente']| default('SD') }}</td>
+                
+                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+
+{% block js_general %}
+    <script src="{{ asset('js/personaClienteIndex.js') }}" ></script>
+{% endblock %}

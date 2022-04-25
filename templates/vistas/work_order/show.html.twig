@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WorkOrder{% endblock %}
+
+{% block body %}
+    <h1>WorkOrder</h1>
+
+    <table class="table" id="listaWorkOrder">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ work_order.id }}</td>
+            </tr>
+            <tr>
+                <th>ContactoBodega</th>
+                <td>{{ work_order.contactoBodega }}</td>
+            </tr>
+            <tr>
+                <th>DireccionBodega</th>
+                <td>{{ work_order.direccionBodega }}</td>
+            </tr>
+            <tr>
+                <th>DiaOrden</th>
+                <td>{{ work_order.diaOrden ? work_order.diaOrden|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DiaRetiro</th>
+                <td>{{ work_order.diaRetiro ? work_order.diaRetiro|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>HoraRetiro</th>
+                <td>{{ work_order.horaRetiro ? work_order.horaRetiro|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DescripcionOrden</th>
+                <td>{{ work_order.descripcionOrden }}</td>
+            </tr>
+            <tr>
+                <th>ComentarioExtra</th>
+                <td>{{ work_order.comentarioExtra }}</td>
+            </tr>
+            <tr>
+                <th>RetiroContenedorVacio</th>
+                <td>{{ work_order.retiroContenedorVacio }}</td>
+            </tr>
+            <tr>
+                <th>PersonaAutoriza</th>
+                <td>{{ work_order.personaAutoriza }}</td>
+            </tr>
+            <tr>
+                <th>CargoPersona</th>
+                <td>{{ work_order.cargoPersona }}</td>
+            </tr>
+            <tr>
+                <th>TipoContenedor</th>
+                <td>{{ work_order.tipoContenedor }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('work_order_index') }}">back to list</a>
+
+    <a href="{{ path('work_order_edit', {'id': work_order.id}) }}">edit</a>
+
+    {{ include('work_order/_delete_form.html.twig') }}
+{% endblock %}
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

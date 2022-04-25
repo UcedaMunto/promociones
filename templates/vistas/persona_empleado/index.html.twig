@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Empleados{% endblock %}
+
+{% block body %}
+<a href="{{ path('persona_empleado_new') }}">Nuevo empleado</a>
+<div>
+    Visibles: 
+    <a class="toggle-vis" data-column="0">Correlativo</a> -
+
+</div>
+<div> este es solo un div </div>
+
+    <table class="table" id="tabla_empleados">
+        <thead>
+            <tr>
+                <th>Correlativo</th>
+                <th>Salario</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+
+                <th>Correo1</th>
+                <th>Fecha de creacion</th>
+                <th>Usuario de sistema</th>
+                <th>FechaUpdate</th>
+
+                <th>Última sesión en el sistema</th>
+                <th>Activacion</th>
+                <th>Color</th>
+                <th>ISS</th>
+
+                <th>AFP</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for persona_empleado in persona_empleados %}
+            <tr>
+                <td>{{ persona_empleado.id }}</td>
+                <td>{{ persona_empleado.salario }}</td>
+                <td>{{ persona_empleado.datos.nombre }}</td>
+                <td>{{ persona_empleado.datos.apellido }}</td>
+
+                <td>{{ persona_empleado.datos.correo1 }}</td>
+                <td>{{ persona_empleado.fechaCreacion ? persona_empleado.fechaCreacion|date('Y-m-d') : '' }}</td>
+                <td>{{ persona_empleado.usuariosStr }}</td>
+                <td>{{ persona_empleado.fechaUpdate ? persona_empleado.fechaUpdate|date('Y-m-d') : '' }}</td>
+
+                <td>{{ persona_empleado.lastSesion ? persona_empleado.lastSesion|date('Y-m-d') : '' }}</td>
+                <td>{{ persona_empleado.activacion }}</td>
+                <td>{{ persona_empleado.color }}</td>
+                <td>{{ persona_empleado.isss }}</td>
+
+                <td>{{ persona_empleado.afp }}</td>
+                <td>
+                    -<a class="btnShow" href="{{ path('persona_empleado_show', {'id': persona_empleado.id}) }}">ver perfil</a>
+                    -<a class="btnEdit"  href="{{ path('persona_empleado_edit', {'id': persona_empleado.id}) }}">edit</a>
+                    -<a  class="btnEdit"  href="{{ path('persona_empleado_edit_add_user', {'id': persona_empleado.id}) }}">+User?</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+ 
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

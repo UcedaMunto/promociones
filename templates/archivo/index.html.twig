@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Archivo index{% endblock %}
+
+{% block body %}
+    <h1>Archivo index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Ruta</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for archivo in archivos %}
+            <tr>
+                <td>{{ archivo.id }}</td>
+                <td>{{ archivo.ruta }}</td>
+                <td>
+                    <a href="{{ path('archivo_show', {'id': archivo.id}) }}">show</a>
+                    <a href="{{ path('archivo_edit', {'id': archivo.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('archivo_new') }}"><i class="fa fa-plus" style="font-size:36px"></i></a>
+{% endblock %}

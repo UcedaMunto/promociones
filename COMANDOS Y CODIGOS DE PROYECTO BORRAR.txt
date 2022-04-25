@@ -1,0 +1,36 @@
+
+
+
+                            ///***  COMANDOS PARA PROYECTO SYMSONY  ///***
+
+crea la base de datos
+    php bin/console doctrine:database:create
+    php bin/console make:migration
+    php bin/console doctrine:migrations:migrate
+
+    php bin/console make:entity 
+
+js general 
+{% block javascriptsLogica %}
+    <script src="{{ asset('js/logistica.js') }}" ></script>
+{% endblock %}
+
+
+/carsmagazine/wp-content/themes/motors
+
+
+LA MERA HOSTIA TIO PARA HACER DEBUG:
+			dump($request);
+            die;
+
+
+<div class="col-md-12"> 
+		<div class="col-md-6">
+			
+		</div>
+</div>
+
+.
+
+
+

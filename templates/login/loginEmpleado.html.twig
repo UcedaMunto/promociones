@@ -1,0 +1,53 @@
+{# app/Resources/views/blog/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Inicio de sesión - EMPLEADOS{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-lg-5">
+        <!-- Basic login form-->
+        <div class="card shadow-lg border-0 rounded-lg mt-5">
+            <div class="card-header justify-content-center"><h3 class="font-weight-light my-4">Login</h3></div>
+            <div class="card-body">
+            {% if bandera == 2 %}
+                <ul>
+                  ERROR DE CREDENCIALES
+                </ul>
+            {% endif %}
+                <!-- Login form-->
+                {{ form_start(form) }}
+                    <!-- Form Group (email address)-->
+                    <div class="form-group">
+                        <label class="small mb-1" for="inputEmailAddress">Usuario</label>
+                        {{ form_widget(form.user) }}
+                    </div>
+                    <!-- Form Group (password)-->
+                    <div class="form-group">
+                        <label class="small mb-1" for="inputPassword">Password</label>
+                        {{ form_widget(form.pass) }}
+                        
+                    </div>
+                    <!-- Form Group (remember password checkbox)-->
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox">
+                            <label class="custom-control-label" for="rememberPasswordCheck">Remember password</label>
+                        </div>
+                    </div>
+                 
+                {{ form_end(form) }}
+            </div>
+            <div class="card-footer text-center">
+                <div class="small"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}

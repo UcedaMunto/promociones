@@ -1,0 +1,16 @@
+.cantidades{
+    width: 6%;
+}
+
+.ides {
+    width: 5%;
+}
+
+.datosbasicos {
+    width: 13%;
+}
+
+#contenedor{
+    padding-left: 0;
+    padding-right: 0;
+}

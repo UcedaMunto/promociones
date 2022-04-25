@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Promociones por sucursal {% endblock %}
+
+{% block body %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Activo</th>
+                <th>Sucursal</th>
+                <th>Promoción</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for promocion_sucursal in promocion_sucursals %}
+            <tr>
+                <td>{{ promocion_sucursal.id }}</td>
+                <td>{{ promocion_sucursal.activo ? 'Yes' : 'No' }}</td>
+                <td>{{ promocion_sucursal.idSucursal.nombre }}</td>
+                <td>{{ promocion_sucursal.idPromocion.nombre }}</td>
+                <td>
+                    <a href="{{ path('promocion_sucursal_show', {'id': promocion_sucursal.id}) }}">show</a>
+                    <a href="{{ path('promocion_sucursal_edit', {'id': promocion_sucursal.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('promocion_sucursal_new') }}"><i class="fa fa-plus" style="font-size:36px"></i></a>
+{% endblock %}

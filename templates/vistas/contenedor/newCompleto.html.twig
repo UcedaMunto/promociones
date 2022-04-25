@@ -1,0 +1,277 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuevo DockReceipt{% endblock %}
+
+{% block body %}
+    <a href="{{ path('contenedor_index') }}">back to list</a>
+
+    <div class="card shadow-lg border-0 rounded-lg mt-1">
+        <div class="card-header justify-content-center"></div>
+        <div class="card-body">
+               
+
+                {{ form_start(form) }}
+                    <div class="form-row">
+                        <div class="form-group col-md-3">                             
+                            <label class="small mb-1" >Consignatario</label>
+                            {{ form_widget(form.consignatario) }}
+                            {{ form_errors(form.consignatario) }}                                  
+                        </div>
+                        <div class="form-group col-md-3">                             
+                            <label class="small mb-1" >Forwarder Licencia</label>
+                            {{ form_widget(form.dockreceipt.forwarderLicencia) }}
+                            {{ form_errors(form.dockreceipt.forwarderLicencia) }}                                  
+                        </div>
+                        <div class="form-group col-md-3">                             
+                            <label class="small mb-1" >Naviera</label>
+                            {{ form_widget(form.dockreceipt.naviera) }}
+                            {{ form_errors(form.dockreceipt.naviera) }}                                  
+                        </div>
+                        <div class="form-group col-md-3">                             
+                            <label class="small mb-1" >Tipo contenedor</label>
+                            {{ form_widget(form.tipoContenedor) }}
+                            {{ form_errors(form.tipoContenedor) }}                                  
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-3">                             
+                            <label class="small mb-1" >carrier</label>
+                            {{ form_widget(form.dockreceipt.carrier) }}
+                            {{ form_errors(form.dockreceipt.carrier) }}                                  
+                        </div>
+                        <div class="form-group col-md-3">                             
+                            <label class="small mb-1" >instructions</label>
+                            {{ form_widget(form.dockreceipt.instructions) }}
+                            {{ form_errors(form.dockreceipt.instructions) }}                                  
+                        </div>
+                        <div class="form-group col-md-3">                             
+                            <label class="small mb-1" >Notas flete</label>
+                            {{ form_widget(form.notasFlete) }}
+                            {{ form_errors(form.notasFlete) }}                                  
+                        </div>
+                        <div class="form-group col-md-3">                             
+                            <label class="small mb-1" >descripcion</label>
+                            {{ form_widget(form.descripcion) }}
+                            {{ form_errors(form.descripcion) }}                                  
+                        </div>
+                        
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-3">                             
+                            <label class="small mb-1" >pier</label>
+                            {{ form_widget(form.dockreceipt.pier) }}
+                            {{ form_errors(form.dockreceipt.pier) }}                                  
+                        </div>
+                        <div class="form-group col-md-3">                             
+                            <label class="small mb-1" >portLoading</label>
+                            {{ form_widget(form.dockreceipt.portLoading) }}
+                            {{ form_errors(form.dockreceipt.portLoading) }}                                  
+                        </div>
+                        <div class="form-group col-md-3">                             
+                            <label class="small mb-1" >sear</label>
+                            {{ form_widget(form.dockreceipt.sear) }}
+                            {{ form_errors(form.dockreceipt.sear) }}                                  
+                        </div>
+                       <div class="form-group col-md-3">                             
+                            <label class="small mb-1" >onward</label>
+                            {{ form_widget(form.dockreceipt.onward) }}
+                            {{ form_errors(form.dockreceipt.onward) }}                                  
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">                             
+                            <label class="small mb-1" >capacidadKg</label>
+                            {{ form_widget(form.dockreceipt.capacidadKg) }}
+                            {{ form_errors(form.dockreceipt.capacidadKg) }}                                  
+                        </div>
+                       
+                        <div class="form-group col-md-3">                             
+                            <label class="small mb-1" >pesoKg</label>
+                            {{ form_widget(form.dockreceipt.pesoKg) }}
+                            {{ form_errors(form.dockreceipt.pesoKg) }}                                  
+                        </div>
+                        <div class="form-group col-md-3">                             
+                            <label class="small mb-1" >Puerto de descarga</label>
+                            {{ form_widget(form.dockreceipt.puertoDescarga) }}
+                            {{ form_errors(form.dockreceipt.puertoDescarga) }}                                
+                        </div>
+                        <div class="form-group col-md-3">                             
+                            <label class="small mb-1" >Cupos</label>
+                            {{ form_widget(form.cupos) }}
+                            {{ form_errors(form.cupos) }}                                  
+                        </div>
+                    </div>
+                    <div class="">
+                        <h2>Fechas</h2>
+                        <div class="form-row">
+                            <div class="form-group col-md-3">                             
+                                <label class="small mb-1" >Fecha enbarcación</label>
+                                {{ form_widget(form.fechaEnbarcacion) }}
+                                {{ form_errors(form.fechaEnbarcacion) }}                                  
+                            </div>
+                            <div class="form-group col-md-3">                             
+                                <label class="small mb-1" >fechaZarpe</label>
+                                {{ form_widget(form.fechaZarpe) }}
+                                {{ form_errors(form.fechaZarpe) }}                                  
+                            </div>
+                        <div class="form-group col-md-3">                             
+                                <label class="small mb-1" >Fecha arribo</label>
+                                {{ form_widget(form.fechaArribo) }}
+                                {{ form_errors(form.fechaArribo) }}                                  
+                            </div>
+                            <div class="form-group col-md-3">                             
+                                <label class="small mb-1" >Fecha descargado</label>
+                                {{ form_widget(form.fechaDescargado) }}
+                                {{ form_errors(form.fechaDescargado) }}                                  
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-3">                             
+                            <label class="small mb-1" >Fecha pago descarga</label>
+                            {{ form_widget(form.fechaPagoDescarga) }}
+                            {{ form_errors(form.fechaPagoDescarga) }}                                  
+                        </div>
+                        
+                    </div>
+                    <h2>COSTOS </h2>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">                             
+                            <label class="small mb-1" >Descarga</label>
+                            {{ form_widget(form.costoDescarga) }}
+                            {{ form_errors(form.costoDescarga) }}                                  
+                        </div>
+                        <div class="form-group col-md-2">                             
+                            <label class="small mb-1" >Envio de documentos</label>
+                            {{ form_widget(form.costoEnvioDocumentos) }}
+                            {{ form_errors(form.costoEnvioDocumentos) }}                                  
+                        </div>
+                        <div class="form-group col-md-2">                             
+                            <label class="small mb-1" >Envio de pago</label>
+                            {{ form_widget(form.costoEnvioPago) }}
+                            {{ form_errors(form.costoEnvioPago) }}                                  
+                        </div>
+                        <div class="form-group col-md-2">                             
+                            <label class="small mb-1" >Otros costos</label>
+                            {{ form_widget(form.otrosCostos) }}
+                            {{ form_errors(form.otrosCostos) }}                                  
+                        </div>
+                        <div class="form-group col-md-2">                             
+                            <label class="small mb-1" >Comisión</label>
+                            {{ form_widget(form.costoComision) }}
+                            {{ form_errors(form.costoComision) }}                                  
+                        </div>
+                        <div class="form-group col-md-2">                             
+                            <label class="small mb-1" >Contenedor en Yarda</label>
+                            {{ form_widget(form.costoContenedorYarda) }}
+                            {{ form_errors(form.costoContenedorYarda) }}                                  
+                        </div>
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-2">                             
+                            <label class="small mb-1" >Costo yarda</label>
+                            {{ form_widget(form.costoYarda) }}
+                            {{ form_errors(form.costoYarda) }}                                  
+                        </div>
+                       <div class="form-group col-md-2">                             
+                            <label class="small mb-1" >Otros costos flete</label>
+                            {{ form_widget(form.otrosCostosFlete) }}
+                            {{ form_errors(form.otrosCostosFlete) }}                                  
+                        </div>
+                       
+                        <div class="form-group col-md-2">                             
+                            <label class="small mb-1" >costoTerrestre</label>
+                            {{ form_widget(form.costoTerrestre) }}
+                            {{ form_errors(form.costoTerrestre) }}                                  
+                        </div>
+                        <div class="form-group col-md-2">                             
+                            <label class="small mb-1" >pagoEmpresa</label>
+                            {{ form_widget(form.pagoEmpresa) }}
+                            {{ form_errors(form.pagoEmpresa) }}                                  
+                        </div>
+                        <div class="form-group col-md-2">                             
+                            <label class="small mb-1" >utilidad</label>
+                            {{ form_widget(form.utilidad) }}
+                            {{ form_errors(form.utilidad) }}                                  
+                        </div>
+                    </div>
+                   
+                    <div class="form-row">
+                        <div class="form-group col-md-2">                             
+                            <label class="small mb-1" >booking</label>
+                            {{ form_widget(form.booking) }}
+                            {{ form_errors(form.booking) }}                                  
+                        </div>
+                        <div class="form-group col-md-2">                             
+                            <label class="small mb-1" >invoice</label>
+                            {{ form_widget(form.invoice) }}
+                            {{ form_errors(form.invoice) }}                                  
+                        </div>
+                        <div class="form-group col-md-2">                             
+                            <label class="small mb-1" >origen</label>
+                            {{ form_widget(form.dockreceipt.origen) }}
+                            {{ form_errors(form.dockreceipt.origen) }}                                  
+                        </div>
+                        <div class="form-group col-md-2">                             
+                            <label class="small mb-1" >aes</label>
+                            {{ form_widget(form.dockreceipt.aes) }}
+                            {{ form_errors(form.dockreceipt.aes) }}                                  
+                        </div>
+                        <div class="form-group col-md-2">                             
+                            <label class="small mb-1" >Bill</label>
+                            {{ form_widget(form.dockreceipt.bill) }}
+                            {{ form_errors(form.dockreceipt.bill) }}                                  
+                        </div>
+                        <div class="form-group col-md-2">                             
+                            <label class="small mb-1" >codigo</label>
+                            {{ form_widget(form.codigo) }}
+                            {{ form_errors(form.codigo) }}                                  
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-3">                             
+                            <label class="small mb-1" >Yarda partida</label>
+                            {{ form_widget(form.yarda) }}
+                            {{ form_errors(form.yarda) }}                                  
+                        </div>
+                        <div class="form-group col-md-3">                             
+                            <label class="small mb-1" >Puerto destino</label>
+                            {{ form_widget(form.puerto) }}
+                            {{ form_errors(form.puerto) }}                                  
+                        </div>
+                        <div class="form-group col-md-3">                             
+                            <label class="small mb-1" >Aduana destino</label>
+                            {{ form_widget(form.aduana) }}
+                            {{ form_errors(form.aduana) }}                                  
+                        </div>
+                    </div>
+
+
+                    <button class="btn">{{ button_label|default('Save') }}</button>
+                {{ form_end(form) }}
+                 
+                  
+        </div>
+        <div class="card-footer text-center">
+        </div>
+    </div>
+
+
+
+   
+
+{% endblock %}
+
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
+{% endblock %}
+
+{% block js_pantalla %}
+    <script src="{{ asset('js/newContenedorDockreceipt.js') }}" ></script>
+{% endblock %}

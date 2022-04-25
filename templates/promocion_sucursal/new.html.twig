@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crear Promoción{% endblock %}
+
+{% block body %}
+
+    {{ include('promocion_sucursal/_form.html.twig') }}
+
+    <a href="{{ path('promocion_sucursal_index') }}">back to list</a>
+{% endblock %}

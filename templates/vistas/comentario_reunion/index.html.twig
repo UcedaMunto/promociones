@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ComentarioReunion index{% endblock %}
+
+{% block body %}
+    <h1>ComentarioReunion index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Mensaje</th>
+                <th>Fecha</th>
+                <th>TituloComent</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comentario_reunion in comentario_reunions %}
+            <tr>
+                <td>{{ comentario_reunion.id }}</td>
+                <td>{{ comentario_reunion.mensaje }}</td>
+                <td>{{ comentario_reunion.fecha ? comentario_reunion.fecha|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ comentario_reunion.tituloComent }}</td>
+                <td>
+                    <a href="{{ path('comentario_reunion_show', {'id': comentario_reunion.id}) }}">show</a>
+                    <a href="{{ path('comentario_reunion_edit', {'id': comentario_reunion.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('comentario_reunion_new') }}"><i class="fa fa-plus" style="font-size:36px"></i></a>
+{% endblock %}

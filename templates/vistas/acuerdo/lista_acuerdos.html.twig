@@ -1,0 +1,40 @@
+              <div id=  class="card shadow mb-4">
+                <div class="card-body">
+                    
+                    <table class="table" id='listaAcuerdos'>
+                        <thead>
+                            <tr>
+                                <th>Numero</th>
+                                <th>Titulo</th>
+                                <th>Descripcion</th>
+                                <th>FechaVigencia</th>
+                                <th>Estado</th>
+                                <th>actions</th>
+                                <th>Desactivar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for acuerdo in acuerdos %}
+                            <tr>
+                                <td>{{ acuerdo.id }}</td>
+                                <td >{{ acuerdo.nombre }}</td>
+                                <td>{{ acuerdo.descripcion }}</td>
+                                <td>{{ acuerdo.fechaVigencia ? acuerdo.fechaVigencia|date('d-m-Y ') : '' }}</td>
+                                <td>{{ acuerdo.estado ? 'Activo' : 'inactivo' }}</td>
+                                <td>
+                                    <a class="mostrarAcuerdo" href="{{ path('acuerdo_show', {'id': acuerdo.id}) }}" data-toggle="modal" data-target="#mostarInfoAcuerdo">Mostrar</a> --
+                                    <a class="editarAcuerdo" href="{{ path('acuerdo_edit', {'acuerdo': acuerdo.id}) }}" data-toggle="modal" data-target="#editarInfoAcuerdo">Editar</a>
+                                </td>
+                                <td></td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="6">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
