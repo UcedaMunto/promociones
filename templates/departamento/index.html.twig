@@ -3,9 +3,8 @@
 {% block title %}Departamento index{% endblock %}
 
 {% block body %}
-    <h1>Departamento index</h1>
 
-    <table class="table">
+    <table class="table" id="tabla_">
         <thead>
             <tr>
                 <th>Id</th>
@@ -32,4 +31,7 @@
     </table>
 
     <a href="{{ path('departamento_new') }}">Create new</a>
+{% endblock %}
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
 {% endblock %}

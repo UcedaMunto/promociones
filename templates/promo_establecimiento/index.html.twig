@@ -3,7 +3,7 @@
 {% block title %}Establecimientos{% endblock %}
 
 {% block body %}
-    <table class="table" id="tabla_">
+    <table class="table" id="tabla_" id="tabla_">
         <thead>
             <tr>
                 <th>Id</th>
@@ -35,6 +35,7 @@
 
     <a href="{{ path('promo_establecimiento_new') }}"><i class="fa fa-plus" style="font-size:36px"></i></a>
 {% endblock %}
+
 {% block js_general %}
     <script src="{{ asset('js/general.js') }}" ></script>
 {% endblock %}

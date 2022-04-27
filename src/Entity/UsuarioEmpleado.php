@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity(repositoryClass=UsuarioEmpleadoRepository::class)
+ * @ORM\Entity()
  * @ORM\HasLifecycleCallbacks()
 */
 class UsuarioEmpleado implements UserInterface

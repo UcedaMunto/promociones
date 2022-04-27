@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New DatosPersona2{% endblock %}
+
+{% block body %}
+    <h1>Create new DatosPersona2</h1>
+
+    {{ include('datos_persona2/_form.html.twig') }}
+
+    <a href="{{ path('datos_persona2_index') }}">back to list</a>
+{% endblock %}

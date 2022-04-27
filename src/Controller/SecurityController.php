@@ -16,7 +16,7 @@ class SecurityController extends AbstractController
     public function loginEmpleados(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()!=null) {
-             return $this->redirectToRoute('envio_index');
+             return $this->redirectToRoute('promocion_sucursal_index');
         }
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();

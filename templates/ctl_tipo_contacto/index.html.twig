@@ -3,12 +3,11 @@
 {% block title %}CtlTipoContacto index{% endblock %}
 
 {% block body %}
-    <h1>CtlTipoContacto index</h1>
-
-    <table class="table">
+    <table class="table" id="tabla_">
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Nombre</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -16,6 +15,7 @@
         {% for ctl_tipo_contacto in ctl_tipo_contactos %}
             <tr>
                 <td>{{ ctl_tipo_contacto.id }}</td>
+                <td>{{ ctl_tipo_contacto.nombre }}</td>
                 <td>
                     <a href="{{ path('ctl_tipo_contacto_show', {'id': ctl_tipo_contacto.id}) }}">show</a>
                     <a href="{{ path('ctl_tipo_contacto_edit', {'id': ctl_tipo_contacto.id}) }}">edit</a>
@@ -30,4 +30,7 @@
     </table>
 
     <a href="{{ path('ctl_tipo_contacto_new') }}"><i class="fa fa-plus" style="font-size:36px"></i></a>
+{% endblock %}
+{% block js_general %}
+    <script src="{{ asset('js/general.js') }}" ></script>
 {% endblock %}
